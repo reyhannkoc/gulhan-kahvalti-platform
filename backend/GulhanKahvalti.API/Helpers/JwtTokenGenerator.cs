@@ -10,10 +10,29 @@ public class JwtTokenGenerator(IConfiguration configuration)
 {
     public string GenerateToken(User user)
     {
-        var key = configuration["Jwt:Key"]
-            ?? throw new InvalidOperationException("JWT key is missing.");
+        var key = configuration["Jwt:Key"];
         var issuer = configuration["Jwt:Issuer"];
         var audience = configuration["Jwt:Audience"];
+
+        if (string.IsNullOrWhiteSpace(key))
+        {
+            throw new InvalidOperationException("JWT key is missing. Set Jwt:Key or JWT__Key.");
+        }
+
+        if (Encoding.UTF8.GetByteCount(key) < 32)
+        {
+            throw new InvalidOperationException("JWT key is too short. Set a secret with at least 32 bytes.");
+        }
+
+        if (string.IsNullOrWhiteSpace(issuer))
+        {
+            throw new InvalidOperationException("JWT issuer is missing. Set Jwt:Issuer or JWT__Issuer.");
+        }
+
+        if (string.IsNullOrWhiteSpace(audience))
+        {
+            throw new InvalidOperationException("JWT audience is missing. Set Jwt:Audience or JWT__Audience.");
+        }
 
         var claims = new[]
         {

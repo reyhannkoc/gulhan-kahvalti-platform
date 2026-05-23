@@ -218,6 +218,35 @@ Do not use development seed credentials in production.
 - Database tables missing: apply EF Core migrations to the production Neon database.
 - Demo data appears in production: set `DemoSeed__Enabled=false` and verify `ASPNETCORE_ENVIRONMENT=Production`.
 
+### Production Login 500 Troubleshooting
+
+If login reaches the backend but returns:
+
+```json
+{
+  "message": "An unexpected error occurred.",
+  "errors": []
+}
+```
+
+check Render logs first. The API logs safe server-side details for unhandled exceptions, including exception type, exception message, HTTP method, and request path.
+
+Common causes:
+
+- Invalid stored password hash: manually inserted users with plain text or malformed `PasswordHash` values cannot login. The backend only accepts BCrypt hashes and should return `401` for invalid credentials.
+- Missing JWT env vars: verify `JWT__Key`, `JWT__Issuer`, and `JWT__Audience`.
+- Short JWT key: `JWT__Key` must be at least 32 bytes.
+- Frontend origin mismatch: verify `Frontend__BaseUrl` exactly matches the deployed frontend origin, for example `https://<frontend-service>.onrender.com`.
+- Frontend API mismatch: verify `VITE_API_BASE_URL=https://<backend-service>.onrender.com/api` and rebuild the frontend after changing it.
+
+Admin-only config check:
+
+```text
+GET /health/config
+```
+
+This endpoint returns booleans only and requires an Admin JWT. It never returns actual secrets.
+
 ## 9. Rollback Guidance
 
 1. In Render, use the previous successful deploy from the service deploy history.

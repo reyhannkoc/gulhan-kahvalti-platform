@@ -90,7 +90,12 @@ var jwtAudience = builder.Configuration["Jwt:Audience"]
 
 if (string.IsNullOrWhiteSpace(jwtKey))
 {
-    throw new InvalidOperationException("JWT key is missing. Set Jwt:Key in configuration.");
+    throw new InvalidOperationException("JWT key is missing. Set Jwt:Key or JWT__Key in configuration.");
+}
+
+if (Encoding.UTF8.GetByteCount(jwtKey) < 32)
+{
+    throw new InvalidOperationException("JWT key is too short. Set a secret with at least 32 bytes.");
 }
 
 if (isProduction && jwtKey.Contains("CHANGE_ME", StringComparison.OrdinalIgnoreCase))
@@ -166,5 +171,14 @@ app.UseAuthorization();
 
 app.MapControllers();
 app.MapGet("/health", () => Results.Ok(new { status = "ok" }));
+app.MapGet("/health/config", (IConfiguration configuration, IWebHostEnvironment environment) => Results.Ok(new
+{
+    hasDatabaseConnectionString = !string.IsNullOrWhiteSpace(configuration.GetConnectionString("GulhanDatabase")),
+    hasJwtKey = !string.IsNullOrWhiteSpace(configuration["Jwt:Key"]),
+    hasJwtIssuer = !string.IsNullOrWhiteSpace(configuration["Jwt:Issuer"]),
+    hasJwtAudience = !string.IsNullOrWhiteSpace(configuration["Jwt:Audience"]),
+    hasFrontendBaseUrl = !string.IsNullOrWhiteSpace(configuration["Frontend:BaseUrl"]),
+    environment = environment.EnvironmentName
+})).RequireAuthorization(policy => policy.RequireRole("Admin"));
 
 app.Run();
