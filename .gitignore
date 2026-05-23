@@ -1,0 +1,35 @@
+# OS / Editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Logs
+*.log
+logs/
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# Node / Frontend
+frontend/gulhan-kahvalti-client/node_modules/
+frontend/gulhan-kahvalti-client/dist/
+frontend/gulhan-kahvalti-client/.vite/
+frontend/gulhan-kahvalti-client/coverage/
+
+# .NET / Backend
+backend/GulhanKahvalti.API/bin/
+backend/GulhanKahvalti.API/obj/
+backend/GulhanKahvalti.API/*.user
+backend/GulhanKahvalti.API/*.suo
+backend/GulhanKahvalti.API/TestResults/
+
+# Secrets and production configs
+**/appsettings.Production.json
+**/appsettings.Development.json
+**/secrets.json
+
+# Docker temp files
+*.pid

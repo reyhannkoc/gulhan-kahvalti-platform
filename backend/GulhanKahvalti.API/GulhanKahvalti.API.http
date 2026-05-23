@@ -1,0 +1,6 @@
+@GulhanKahvalti.API_HostAddress = http://localhost:5064
+
+GET {{GulhanKahvalti.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
