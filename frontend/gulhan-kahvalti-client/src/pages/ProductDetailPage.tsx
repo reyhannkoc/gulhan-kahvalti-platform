@@ -38,7 +38,7 @@ export function ProductDetailPage() {
         }
       } catch (err) {
         if (isMounted) {
-          setError(getApiErrorMessage(err, 'Urun yuklenemedi.'))
+          setError(getApiErrorMessage(err, 'Ürün yüklenemedi.'))
         }
       } finally {
         if (isMounted) {
@@ -69,24 +69,24 @@ export function ProductDetailPage() {
       setError(null)
       setMessage(null)
       await cartService.addItem({ productId: product.id, quantity: 1 })
-      setMessage('Urun sepete eklendi.')
+      setMessage('Ürün sepete eklendi.')
     } catch (err) {
-      setError(getApiErrorMessage(err, 'Urun sepete eklenemedi.'))
+      setError(getApiErrorMessage(err, 'Ürün sepete eklenemedi.'))
     } finally {
       setAdding(false)
     }
   }
 
   if (loading) {
-    return <LoadingSpinner label="Urun yukleniyor" />
+    return <LoadingSpinner label="Ürün yükleniyor" />
   }
 
   if (error && !product) {
-    return <EmptyState description={error} title="Urun getirilemedi" />
+    return <EmptyState description={error} title="Ürün getirilemedi" />
   }
 
   if (!product) {
-    return <EmptyState title="Urun bulunamadi" />
+    return <EmptyState title="Ürün bulunamadı" />
   }
 
   return (
@@ -95,19 +95,19 @@ export function ProductDetailPage() {
         {product.imageUrl ? (
           <img alt={product.name} className="h-full w-full object-cover" src={product.imageUrl} />
         ) : (
-          <div className="flex h-full items-center justify-center text-stone-500">Urun gorseli</div>
+          <div className="flex h-full items-center justify-center text-stone-500">Ürün görseli</div>
         )}
       </div>
       <div className="space-y-5">
         <Link className="text-sm font-semibold text-emerald-700 hover:text-emerald-800" to="/menu">
-          Menuye don
+          Menüye dön
         </Link>
         <div>
           <p className="text-sm font-medium uppercase tracking-wide text-emerald-700">{product.categoryName || 'Kategori'}</p>
           <h1 className="mt-2 text-2xl font-bold text-stone-950 sm:text-3xl">{product.name}</h1>
         </div>
         <p className="text-xl font-bold text-stone-900 sm:text-2xl">{formatPrice(product.price)}</p>
-        <p className="leading-7 text-stone-600">{product.description || 'Bu urun icin aciklama henuz eklenmedi.'}</p>
+        <p className="leading-7 text-stone-600">{product.description || 'Bu ürün için açıklama henüz eklenmedi.'}</p>
         <p className={product.stock > 0 ? 'text-sm text-emerald-700' : 'text-sm text-red-700'}>
           {product.stock > 0 ? `Stokta ${product.stock} adet var` : 'Stokta yok'}
         </p>
@@ -115,7 +115,7 @@ export function ProductDetailPage() {
         {error ? <p className="rounded-lg bg-red-50 p-3 text-sm text-red-700">{error}</p> : null}
         {isAdmin ? (
           <Link className="inline-flex rounded-lg bg-stone-900 px-4 py-2 text-sm font-semibold text-white transition hover:bg-stone-800" to="/admin">
-            Admin panele don
+            Admin panele dön
           </Link>
         ) : (
           <Button disabled={adding || product.stock <= 0} onClick={addToCart}>

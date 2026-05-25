@@ -26,7 +26,7 @@ export function AdminOrdersPage() {
       setError(null)
       setOrders(await orderService.getAdminOrders())
     } catch (err) {
-      setError(getApiErrorMessage(err, 'Admin siparisleri yuklenemedi.'))
+      setError(getApiErrorMessage(err, 'Admin siparişleri yüklenemedi.'))
     } finally {
       setLoading(false)
     }
@@ -41,9 +41,9 @@ export function AdminOrdersPage() {
       setOrders((current) =>
         current.map((currentOrder) => (currentOrder.id === order.id ? updatedOrder : currentOrder)),
       )
-      setMessage(`Siparis #${order.id} durumu guncellendi.`)
+      setMessage(`Sipariş #${order.id} durumu güncellendi.`)
     } catch (err) {
-      setError(getApiErrorMessage(err, 'Siparis durumu guncellenemedi.'))
+      setError(getApiErrorMessage(err, 'Sipariş durumu güncellenemedi.'))
     } finally {
       setUpdatingId(null)
     }
@@ -52,15 +52,15 @@ export function AdminOrdersPage() {
   return (
     <section className="space-y-6">
       <div>
-        <h1 className="text-xl font-bold text-stone-950 sm:text-2xl">Siparis Yonetimi</h1>
-        <p className="mt-1 text-sm text-stone-600">Tum siparisleri goruntuleyin ve durumlarini guncelleyin.</p>
+        <h1 className="text-xl font-bold text-stone-950 sm:text-2xl">Sipariş Yönetimi</h1>
+        <p className="mt-1 text-sm text-stone-600">Tüm siparişleri görüntüleyin ve durumlarını güncelleyin.</p>
       </div>
 
       {message ? <Toast message={message} type="success" /> : null}
       {error ? <Toast message={error} type="error" /> : null}
-      {loading ? <LoadingSpinner label="Siparisler yukleniyor" /> : null}
+      {loading ? <LoadingSpinner label="Siparişler yükleniyor" /> : null}
 
-      {!loading && orders.length === 0 ? <EmptyState title="Henuz siparis yok" /> : null}
+      {!loading && orders.length === 0 ? <EmptyState title="Henüz sipariş yok" /> : null}
 
       {!loading && orders.length > 0 ? (
         <div className="grid gap-4">
@@ -69,7 +69,7 @@ export function AdminOrdersPage() {
               <div className="grid min-w-0 gap-4 lg:grid-cols-[minmax(0,1fr)_180px] lg:items-start">
                 <div className="space-y-3">
                   <div className="min-w-0">
-                    <h2 className="font-semibold text-stone-950">Siparis #{order.id}</h2>
+                    <h2 className="font-semibold text-stone-950">Sipariş #{order.id}</h2>
                     <p className="text-sm text-stone-600">{order.customerName} - {order.customerPhone}</p>
                     <p className="text-sm text-stone-500">{order.customerAddress}</p>
                   </div>

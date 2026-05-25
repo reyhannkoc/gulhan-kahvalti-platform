@@ -34,7 +34,7 @@ export function CheckoutPage() {
         setError(null)
         setCartItems(await cartService.getCart())
       } catch (err) {
-        setError(getApiErrorMessage(err, 'Sepet yuklenemedi.'))
+        setError(getApiErrorMessage(err, 'Sepet yüklenemedi.'))
       } finally {
         setLoading(false)
       }
@@ -59,14 +59,14 @@ export function CheckoutPage() {
       setOrder(createdOrder)
       setCartItems([])
     } catch (err) {
-      setError(getApiErrorMessage(err, 'Siparis olusturulamadi.'))
+      setError(getApiErrorMessage(err, 'Sipariş oluşturulamadı.'))
     } finally {
       setSubmitting(false)
     }
   }
 
   if (loading) {
-    return <LoadingSpinner label="Checkout hazirlaniyor" />
+    return <LoadingSpinner label="Ödeme hazırlanıyor" />
   }
 
   if (order) {
@@ -74,11 +74,11 @@ export function CheckoutPage() {
       <EmptyState
         action={
           <Link to="/menu">
-            <Button>Menuye don</Button>
+            <Button>Menüye dön</Button>
           </Link>
         }
-        description={`Siparis #${order.id} olusturuldu. Durum: ${order.status}`}
-        title="Siparis alindi"
+        description={`Sipariş #${order.id} oluşturuldu. Durum: ${order.status}`}
+        title="Sipariş alındı"
       />
     )
   }
@@ -88,11 +88,11 @@ export function CheckoutPage() {
       <EmptyState
         action={
           <Link to="/menu">
-            <Button>Menuye git</Button>
+            <Button>Menüye git</Button>
           </Link>
         }
-        description="Checkout icin once sepete urun ekleyin."
-        title="Sepet bos"
+        description="Ödeme için önce sepete ürün ekleyin."
+        title="Sepet boş"
       />
     )
   }
@@ -101,8 +101,8 @@ export function CheckoutPage() {
     <section className="grid min-w-0 gap-5 lg:grid-cols-[minmax(0,1fr)_320px] lg:gap-6">
       <form className="space-y-4 rounded-lg border border-stone-200 bg-white p-4 sm:p-5" onSubmit={handleSubmit}>
         <div>
-          <h1 className="text-2xl font-bold text-stone-950 sm:text-3xl">Checkout</h1>
-          <p className="mt-2 text-stone-600">Demo siparis icin teslimat bilgilerini girin.</p>
+          <h1 className="text-2xl font-bold text-stone-950 sm:text-3xl">Ödeme</h1>
+          <p className="mt-2 text-stone-600">Demo sipariş için teslimat bilgilerini girin.</p>
         </div>
 
         {error ? <p className="rounded-lg bg-red-50 p-3 text-sm text-red-700">{error}</p> : null}
@@ -126,12 +126,12 @@ export function CheckoutPage() {
           <Input id="note" onChange={(event) => setNote(event.target.value)} value={note} />
         </FormField>
         <Button disabled={submitting} type="submit">
-          {submitting ? 'Siparis olusturuluyor' : 'Siparisi olustur'}
+          {submitting ? 'Sipariş oluşturuluyor' : 'Siparişi oluştur'}
         </Button>
       </form>
 
       <aside className="h-fit rounded-lg border border-stone-200 bg-white p-4 sm:p-5 lg:sticky lg:top-24">
-        <h2 className="text-lg font-semibold text-stone-950">Siparis ozeti</h2>
+        <h2 className="text-lg font-semibold text-stone-950">Sipariş özeti</h2>
         <div className="mt-4 space-y-3">
           {cartItems.map((item) => (
             <div className="flex flex-wrap justify-between gap-3 text-sm" key={item.id}>

@@ -34,7 +34,7 @@ export function Footer() {
               className="inline-flex min-h-11 items-center justify-center rounded-full border border-cyan-300/70 px-5 text-sm font-semibold text-cyan-50 transition hover:bg-cyan-400/10 focus:outline-none focus:ring-2 focus:ring-cyan-200 focus:ring-offset-2 focus:ring-offset-slate-950"
               href={siteSettings.contact.emailHref}
             >
-              E-mail
+              E-Mail
             </a>
           </div>
         </section>

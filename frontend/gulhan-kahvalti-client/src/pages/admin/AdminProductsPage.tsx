@@ -57,7 +57,7 @@ export function AdminProductsPage() {
       setProducts(nextProducts)
       setCategories(nextCategories)
     } catch (err) {
-      setError(getApiErrorMessage(err, 'Admin urun verileri yuklenemedi.'))
+      setError(getApiErrorMessage(err, 'Admin ürün verileri yüklenemedi.'))
     } finally {
       setLoading(false)
     }
@@ -101,16 +101,16 @@ export function AdminProductsPage() {
     try {
       if (isEditing && form.id) {
         await productService.update(form.id, payload)
-        setMessage('Urun guncellendi.')
+        setMessage('Ürün güncellendi.')
       } else {
         await productService.create(payload)
-        setMessage('Urun olusturuldu.')
+        setMessage('Ürün oluşturuldu.')
       }
 
       resetForm()
       await loadData()
     } catch (err) {
-      setError(getApiErrorMessage(err, 'Urun kaydedilemedi.'))
+      setError(getApiErrorMessage(err, 'Ürün kaydedilemedi.'))
     } finally {
       setSaving(false)
     }
@@ -127,25 +127,25 @@ export function AdminProductsPage() {
       setError(null)
       setMessage(null)
       await productService.remove(product.id)
-      setMessage('Urun silindi.')
+      setMessage('Ürün silindi.')
       await loadData()
     } catch (err) {
-      setError(getApiErrorMessage(err, 'Urun silinemedi.'))
+      setError(getApiErrorMessage(err, 'Ürün silinemedi.'))
     }
   }
 
   return (
     <section className="space-y-6">
       <div>
-        <h1 className="text-xl font-bold text-stone-950 sm:text-2xl">Urun Yonetimi</h1>
-        <p className="mt-1 text-sm text-stone-600">Admin urun ekleme, duzenleme ve silme.</p>
+        <h1 className="text-xl font-bold text-stone-950 sm:text-2xl">Ürün Yönetimi</h1>
+        <p className="mt-1 text-sm text-stone-600">Admin ürün ekleme, düzenleme ve silme.</p>
       </div>
 
       {message ? <p className="rounded-lg bg-emerald-50 p-3 text-sm text-emerald-800">{message}</p> : null}
       {error ? <p className="rounded-lg bg-red-50 p-3 text-sm text-red-700">{error}</p> : null}
 
       <form className="grid gap-4 rounded-lg border border-stone-200 bg-stone-50 p-3 sm:p-4 lg:grid-cols-2" onSubmit={handleSubmit}>
-        <FormField htmlFor="productName" label="Urun adi">
+        <FormField htmlFor="productName" label="Ürün adı">
           <Input
             id="productName"
             onChange={(event) => setForm((current) => ({ ...current, name: event.target.value }))}
@@ -161,7 +161,7 @@ export function AdminProductsPage() {
             required
             value={form.categoryId}
           >
-            <option value="">Kategori secin</option>
+            <option value="">Kategori seçin</option>
             {categories.map((category) => (
               <option key={category.id} value={category.id}>
                 {category.name}
@@ -190,7 +190,7 @@ export function AdminProductsPage() {
             value={form.stock}
           />
         </FormField>
-        <FormField htmlFor="imageUrl" label="Gorsel URL">
+        <FormField htmlFor="imageUrl" label="Görsel URL">
           <Input
             id="imageUrl"
             onChange={(event) => setForm((current) => ({ ...current, imageUrl: event.target.value }))}
@@ -206,7 +206,7 @@ export function AdminProductsPage() {
           Aktif
         </label>
         <div className="lg:col-span-2">
-          <FormField htmlFor="description" label="Aciklama">
+          <FormField htmlFor="description" label="Açıklama">
             <textarea
               className="min-h-24 w-full rounded-lg border border-stone-300 bg-white px-3 py-2 text-sm text-stone-900 outline-none focus:border-emerald-700 focus:ring-2 focus:ring-emerald-100"
               id="description"
@@ -217,25 +217,25 @@ export function AdminProductsPage() {
         </div>
         <div className="grid gap-2 sm:flex sm:flex-wrap lg:col-span-2">
           <Button className="w-full sm:w-auto" disabled={saving || categories.length === 0} type="submit">
-            {saving ? 'Kaydediliyor' : isEditing ? 'Urunu guncelle' : 'Urun ekle'}
+            {saving ? 'Kaydediliyor' : isEditing ? 'Ürünü güncelle' : 'Ürün ekle'}
           </Button>
           {isEditing ? (
             <Button className="w-full sm:w-auto" onClick={resetForm} variant="ghost">
-              Vazgec
+              Vazgeç
             </Button>
           ) : null}
         </div>
       </form>
 
-      {loading ? <LoadingSpinner label="Urunler yukleniyor" /> : null}
-      {!loading && products.length === 0 ? <EmptyState title="Henuz urun yok" /> : null}
+      {loading ? <LoadingSpinner label="Ürünler yükleniyor" /> : null}
+      {!loading && products.length === 0 ? <EmptyState title="Henüz ürün yok" /> : null}
       {!loading && products.length > 0 ? (
         <div className="overflow-hidden rounded-lg border border-stone-200">
           <div className="hidden grid-cols-[minmax(0,1fr)_120px_100px_160px] bg-stone-100 px-4 py-3 text-sm font-semibold text-stone-700 md:grid">
-            <span>Urun</span>
+            <span>Ürün</span>
             <span>Fiyat</span>
             <span>Stok</span>
-            <span className="text-right">Islem</span>
+            <span className="text-right">İşlem</span>
           </div>
           <div className="divide-y divide-stone-200 bg-white">
             {products.map((product) => (
@@ -248,7 +248,7 @@ export function AdminProductsPage() {
                 <span className="text-sm text-stone-700">{product.stock}</span>
                 <div className="grid gap-2 sm:flex md:justify-end">
                   <Button className="w-full sm:w-auto" onClick={() => editProduct(product)} variant="ghost">
-                    Duzenle
+                    Düzenle
                   </Button>
                   <Button className="w-full sm:w-auto" onClick={() => deleteProduct(product)} variant="danger">
                     Sil

@@ -11,7 +11,7 @@ export const siteSettings = {
     phoneDisplay: '0539 290 39 09',
     phoneHref: 'https://wa.me/905392903909',
     email: 'fgulhanergin@gmail.com',
-    emailHref: 'mailto:fgulhanergin@gmail.com',
+    emailHref: 'mailto:fgulhanergin@gmail.com?subject=G%C3%BClhan%20Kahvalt%C4%B1%20%C4%B0leti%C5%9Fim',
   },
   social: {
     facebook: 'https://www.facebook.com/share/1MDpJ1LRdt/?mibextid=wwXIfr',

@@ -33,12 +33,12 @@ export function Navbar() {
           </Link>
           <button
             aria-expanded={isOpen}
-            aria-label="Menuyu ac veya kapat"
+            aria-label="Menüyü aç veya kapat"
             className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-stone-200 text-stone-700 md:hidden"
             onClick={() => setIsOpen((current) => !current)}
             type="button"
           >
-            <span className="sr-only">Menu</span>
+            <span className="sr-only">Menü</span>
             <span className="flex flex-col gap-1">
               <span className="block h-0.5 w-5 bg-current" />
               <span className="block h-0.5 w-5 bg-current" />

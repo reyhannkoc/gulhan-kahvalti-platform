@@ -28,7 +28,7 @@ export function ProductCard({ adding = false, onAddToCart, product }: ProductCar
             />
           ) : (
             <div className="flex h-full items-center justify-center text-sm text-stone-500">
-              Urun gorseli
+              Ürün görseli
             </div>
           )}
         </div>

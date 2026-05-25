@@ -30,7 +30,7 @@ export function CartPage() {
       setError(null)
       setCartItems(await cartService.getCart())
     } catch (err) {
-      setError(getApiErrorMessage(err, 'Sepet yuklenemedi.'))
+      setError(getApiErrorMessage(err, 'Sepet yüklenemedi.'))
     } finally {
       setLoading(false)
     }
@@ -49,7 +49,7 @@ export function CartPage() {
         current.map((cartItem) => (cartItem.id === item.id ? updatedItem : cartItem)),
       )
     } catch (err) {
-      setError(getApiErrorMessage(err, 'Sepet miktari guncellenemedi.'))
+      setError(getApiErrorMessage(err, 'Sepet miktarı güncellenemedi.'))
     } finally {
       setUpdatingId(null)
     }
@@ -61,9 +61,9 @@ export function CartPage() {
       setError(null)
       await cartService.removeItem(item.id)
       setCartItems((current) => current.filter((cartItem) => cartItem.id !== item.id))
-      setMessage('Urun sepetten kaldirildi.')
+      setMessage('Ürün sepetten kaldırıldı.')
     } catch (err) {
-      setError(getApiErrorMessage(err, 'Urun sepetten kaldirilamadi.'))
+      setError(getApiErrorMessage(err, 'Ürün sepetten kaldırılamadı.'))
     } finally {
       setUpdatingId(null)
     }
@@ -85,22 +85,22 @@ export function CartPage() {
     <section className="space-y-6">
       <div>
         <h1 className="text-2xl font-bold text-stone-950 sm:text-3xl">Sepet</h1>
-        <p className="mt-2 text-stone-600">Sepet urunlerinizi yonetin.</p>
+        <p className="mt-2 text-stone-600">Sepet ürünlerinizi yönetin.</p>
       </div>
 
       {message ? <p className="rounded-lg bg-emerald-50 p-3 text-sm text-emerald-800">{message}</p> : null}
       {error ? <p className="rounded-lg bg-red-50 p-3 text-sm text-red-700">{error}</p> : null}
-      {loading ? <LoadingSpinner label="Sepet yukleniyor" /> : null}
+      {loading ? <LoadingSpinner label="Sepet yükleniyor" /> : null}
 
       {!loading && cartItems.length === 0 ? (
         <EmptyState
           action={
             <Link to="/menu">
-              <Button>Menuye git</Button>
+              <Button>Menüye git</Button>
             </Link>
           }
-          description="Sepete urun ekledigide burada gorunecek."
-          title="Sepet bos"
+          description="Sepete ürün eklediğinizde burada görünecek."
+          title="Sepet boş"
         />
       ) : null}
 
@@ -136,14 +136,14 @@ export function CartPage() {
           </div>
 
           <aside className="h-fit rounded-lg border border-stone-200 bg-white p-4 sm:p-5 lg:sticky lg:top-24">
-            <h2 className="text-lg font-semibold text-stone-950">Sepet ozeti</h2>
+            <h2 className="text-lg font-semibold text-stone-950">Sepet özeti</h2>
             <div className="mt-4 flex items-center justify-between text-sm">
               <span>Toplam</span>
               <span className="text-lg font-bold">{formatPrice(total)}</span>
             </div>
             <div className="mt-5 grid gap-2">
               <Link to="/checkout">
-                <Button fullWidth>Checkout</Button>
+                <Button fullWidth>Ödemeye geç</Button>
               </Link>
               <Button fullWidth onClick={clearCart} variant="ghost">
                 Sepeti temizle

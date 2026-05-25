@@ -19,7 +19,7 @@ export function MyOrdersPage() {
         setError(null)
         setOrders(await orderService.getMyOrders())
       } catch (err) {
-        setError(getApiErrorMessage(err, 'Siparisler yuklenemedi.'))
+        setError(getApiErrorMessage(err, 'Siparişler yüklenemedi.'))
       } finally {
         setLoading(false)
       }
@@ -31,15 +31,15 @@ export function MyOrdersPage() {
   return (
     <section className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold text-stone-950 sm:text-3xl">Siparislerim</h1>
-        <p className="mt-2 text-stone-600">Onceki demo siparislerinizi goruntuleyin.</p>
+        <h1 className="text-2xl font-bold text-stone-950 sm:text-3xl">Siparişlerim</h1>
+        <p className="mt-2 text-stone-600">Önceki demo siparişlerinizi görüntüleyin.</p>
       </div>
 
       {error ? <Toast message={error} type="error" /> : null}
-      {loading ? <LoadingSpinner label="Siparisler yukleniyor" /> : null}
+      {loading ? <LoadingSpinner label="Siparişler yükleniyor" /> : null}
 
       {!loading && orders.length === 0 ? (
-        <EmptyState description="Checkout yaptiginizda siparisler burada listelenecek." title="Henuz siparis yok" />
+        <EmptyState description="Ödeme yaptığınızda siparişler burada listelenecek." title="Henüz sipariş yok" />
       ) : null}
 
       {!loading && orders.length > 0 ? (
@@ -48,7 +48,7 @@ export function MyOrdersPage() {
             <article className="rounded-lg border border-stone-200 bg-white p-4 shadow-sm sm:p-5" key={order.id}>
               <div className="flex flex-col gap-3 border-b border-stone-100 pb-4 sm:flex-row sm:items-center sm:justify-between">
                 <div>
-                  <h2 className="font-semibold text-stone-950">Siparis #{order.id}</h2>
+                  <h2 className="font-semibold text-stone-950">Sipariş #{order.id}</h2>
                   <p className="text-sm text-stone-500">{new Date(order.createdAt).toLocaleString('tr-TR')}</p>
                 </div>
                 <div className="flex flex-wrap items-center gap-3">

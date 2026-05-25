@@ -39,7 +39,7 @@ export function AdminCategoriesPage() {
       setError(null)
       setCategories(await categoryService.getAll())
     } catch (err) {
-      setError(getApiErrorMessage(err, 'Kategoriler yuklenemedi.'))
+      setError(getApiErrorMessage(err, 'Kategoriler yüklenemedi.'))
     } finally {
       setLoading(false)
     }
@@ -73,10 +73,10 @@ export function AdminCategoriesPage() {
     try {
       if (isEditing && form.id) {
         await categoryService.update(form.id, payload)
-        setMessage('Kategori guncellendi.')
+        setMessage('Kategori güncellendi.')
       } else {
         await categoryService.create(payload)
-        setMessage('Kategori olusturuldu.')
+        setMessage('Kategori oluşturuldu.')
       }
 
       resetForm()
@@ -109,15 +109,15 @@ export function AdminCategoriesPage() {
   return (
     <section className="space-y-6">
       <div>
-        <h1 className="text-xl font-bold text-stone-950 sm:text-2xl">Kategori Yonetimi</h1>
-        <p className="mt-1 text-sm text-stone-600">Kategori ekleme, duzenleme ve silme.</p>
+        <h1 className="text-xl font-bold text-stone-950 sm:text-2xl">Kategori Yönetimi</h1>
+        <p className="mt-1 text-sm text-stone-600">Kategori ekleme, düzenleme ve silme.</p>
       </div>
 
       {message ? <p className="rounded-lg bg-emerald-50 p-3 text-sm text-emerald-800">{message}</p> : null}
       {error ? <p className="rounded-lg bg-red-50 p-3 text-sm text-red-700">{error}</p> : null}
 
       <form className="grid gap-4 rounded-lg border border-stone-200 bg-stone-50 p-3 sm:p-4 md:grid-cols-2" onSubmit={handleSubmit}>
-        <FormField htmlFor="categoryName" label="Kategori adi">
+        <FormField htmlFor="categoryName" label="Kategori adı">
           <Input
             id="categoryName"
             onChange={(event) => setForm((current) => ({ ...current, name: event.target.value }))}
@@ -125,7 +125,7 @@ export function AdminCategoriesPage() {
             value={form.name}
           />
         </FormField>
-        <FormField htmlFor="categoryDescription" label="Aciklama">
+        <FormField htmlFor="categoryDescription" label="Açıklama">
           <Input
             id="categoryDescription"
             onChange={(event) => setForm((current) => ({ ...current, description: event.target.value }))}
@@ -134,29 +134,29 @@ export function AdminCategoriesPage() {
         </FormField>
         <div className="grid gap-2 sm:flex sm:flex-wrap md:col-span-2">
           <Button className="w-full sm:w-auto" disabled={saving} type="submit">
-            {saving ? 'Kaydediliyor' : isEditing ? 'Kategoriyi guncelle' : 'Kategori ekle'}
+            {saving ? 'Kaydediliyor' : isEditing ? 'Kategoriyi güncelle' : 'Kategori ekle'}
           </Button>
           {isEditing ? (
             <Button className="w-full sm:w-auto" onClick={resetForm} variant="ghost">
-              Vazgec
+              Vazgeç
             </Button>
           ) : null}
         </div>
       </form>
 
-      {loading ? <LoadingSpinner label="Kategoriler yukleniyor" /> : null}
-      {!loading && categories.length === 0 ? <EmptyState title="Henuz kategori yok" /> : null}
+      {loading ? <LoadingSpinner label="Kategoriler yükleniyor" /> : null}
+      {!loading && categories.length === 0 ? <EmptyState title="Henüz kategori yok" /> : null}
       {!loading && categories.length > 0 ? (
         <div className="grid gap-3">
           {categories.map((category) => (
             <article className="flex flex-col gap-3 rounded-lg border border-stone-200 bg-white p-4 sm:flex-row sm:items-center sm:justify-between" key={category.id}>
               <div className="min-w-0">
                 <h2 className="font-semibold text-stone-900">{category.name}</h2>
-                <p className="text-sm text-stone-600">{category.description || 'Aciklama yok'}</p>
+                <p className="text-sm text-stone-600">{category.description || 'Açıklama yok'}</p>
               </div>
               <div className="grid gap-2 sm:flex">
                 <Button className="w-full sm:w-auto" onClick={() => editCategory(category)} variant="ghost">
-                  Duzenle
+                  Düzenle
                 </Button>
                 <Button className="w-full sm:w-auto" onClick={() => deleteCategory(category)} variant="danger">
                   Sil
