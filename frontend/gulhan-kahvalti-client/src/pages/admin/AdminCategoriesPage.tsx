@@ -109,14 +109,14 @@ export function AdminCategoriesPage() {
   return (
     <section className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold text-stone-950">Kategori Yonetimi</h1>
+        <h1 className="text-xl font-bold text-stone-950 sm:text-2xl">Kategori Yonetimi</h1>
         <p className="mt-1 text-sm text-stone-600">Kategori ekleme, duzenleme ve silme.</p>
       </div>
 
       {message ? <p className="rounded-lg bg-emerald-50 p-3 text-sm text-emerald-800">{message}</p> : null}
       {error ? <p className="rounded-lg bg-red-50 p-3 text-sm text-red-700">{error}</p> : null}
 
-      <form className="grid gap-4 rounded-lg border border-stone-200 bg-stone-50 p-4 md:grid-cols-2" onSubmit={handleSubmit}>
+      <form className="grid gap-4 rounded-lg border border-stone-200 bg-stone-50 p-3 sm:p-4 md:grid-cols-2" onSubmit={handleSubmit}>
         <FormField htmlFor="categoryName" label="Kategori adi">
           <Input
             id="categoryName"
@@ -132,12 +132,12 @@ export function AdminCategoriesPage() {
             value={form.description}
           />
         </FormField>
-        <div className="flex flex-wrap gap-2 md:col-span-2">
-          <Button disabled={saving} type="submit">
+        <div className="grid gap-2 sm:flex sm:flex-wrap md:col-span-2">
+          <Button className="w-full sm:w-auto" disabled={saving} type="submit">
             {saving ? 'Kaydediliyor' : isEditing ? 'Kategoriyi guncelle' : 'Kategori ekle'}
           </Button>
           {isEditing ? (
-            <Button onClick={resetForm} variant="ghost">
+            <Button className="w-full sm:w-auto" onClick={resetForm} variant="ghost">
               Vazgec
             </Button>
           ) : null}
@@ -150,15 +150,15 @@ export function AdminCategoriesPage() {
         <div className="grid gap-3">
           {categories.map((category) => (
             <article className="flex flex-col gap-3 rounded-lg border border-stone-200 bg-white p-4 sm:flex-row sm:items-center sm:justify-between" key={category.id}>
-              <div>
+              <div className="min-w-0">
                 <h2 className="font-semibold text-stone-900">{category.name}</h2>
                 <p className="text-sm text-stone-600">{category.description || 'Aciklama yok'}</p>
               </div>
-              <div className="flex gap-2">
-                <Button onClick={() => editCategory(category)} variant="ghost">
+              <div className="grid gap-2 sm:flex">
+                <Button className="w-full sm:w-auto" onClick={() => editCategory(category)} variant="ghost">
                   Duzenle
                 </Button>
-                <Button onClick={() => deleteCategory(category)} variant="danger">
+                <Button className="w-full sm:w-auto" onClick={() => deleteCategory(category)} variant="danger">
                   Sil
                 </Button>
               </div>

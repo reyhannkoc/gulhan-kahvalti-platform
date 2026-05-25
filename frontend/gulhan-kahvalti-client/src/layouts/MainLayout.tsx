@@ -9,7 +9,7 @@ export function MainLayout() {
   return (
     <div className="flex min-h-screen flex-col bg-stone-50">
       <Navbar />
-      <main className="mx-auto w-full max-w-6xl flex-1 px-4 py-8">
+      <main className="mx-auto w-full max-w-6xl flex-1 px-3 py-5 sm:px-4 sm:py-8">
         <motion.div
           animate={{ opacity: 1, y: 0 }}
           initial={{ opacity: 0, y: 8 }}

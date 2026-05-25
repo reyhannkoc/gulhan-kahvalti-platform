@@ -7,6 +7,7 @@ import { AdminProductsPage } from '../pages/admin/AdminProductsPage'
 import { AdminOrdersPage } from '../pages/admin/AdminOrdersPage'
 import { LoginPage } from '../pages/auth/LoginPage'
 import { RegisterPage } from '../pages/auth/RegisterPage'
+import { AccountPage } from '../pages/AccountPage'
 import { CartPage } from '../pages/CartPage'
 import { CheckoutPage } from '../pages/CheckoutPage'
 import { HomePage } from '../pages/HomePage'
@@ -14,6 +15,7 @@ import { MenuPage } from '../pages/MenuPage'
 import { MyOrdersPage } from '../pages/MyOrdersPage'
 import { NotFoundPage } from '../pages/NotFoundPage'
 import { ProductDetailPage } from '../pages/ProductDetailPage'
+import { SettingsPage } from '../pages/SettingsPage'
 import { AdminRoute } from './AdminRoute'
 import { ProtectedRoute } from './ProtectedRoute'
 
@@ -31,6 +33,8 @@ export function AppRoutes() {
           <Route element={<CartPage />} path="cart" />
           <Route element={<CheckoutPage />} path="checkout" />
           <Route element={<MyOrdersPage />} path="my-orders" />
+          <Route element={<AccountPage />} path="account" />
+          <Route element={<SettingsPage />} path="settings" />
         </Route>
 
         <Route element={<AdminRoute />}>

@@ -31,7 +31,7 @@ export function MyOrdersPage() {
   return (
     <section className="space-y-6">
       <div>
-        <h1 className="text-3xl font-bold text-stone-950">Siparislerim</h1>
+        <h1 className="text-2xl font-bold text-stone-950 sm:text-3xl">Siparislerim</h1>
         <p className="mt-2 text-stone-600">Onceki demo siparislerinizi goruntuleyin.</p>
       </div>
 
@@ -45,21 +45,21 @@ export function MyOrdersPage() {
       {!loading && orders.length > 0 ? (
         <div className="grid gap-4">
           {orders.map((order) => (
-            <article className="rounded-lg border border-stone-200 bg-white p-5 shadow-sm" key={order.id}>
+            <article className="rounded-lg border border-stone-200 bg-white p-4 shadow-sm sm:p-5" key={order.id}>
               <div className="flex flex-col gap-3 border-b border-stone-100 pb-4 sm:flex-row sm:items-center sm:justify-between">
                 <div>
                   <h2 className="font-semibold text-stone-950">Siparis #{order.id}</h2>
                   <p className="text-sm text-stone-500">{new Date(order.createdAt).toLocaleString('tr-TR')}</p>
                 </div>
-                <div className="flex items-center gap-3">
+                <div className="flex flex-wrap items-center gap-3">
                   <span className="rounded-full bg-emerald-50 px-3 py-1 text-sm font-medium text-emerald-800">{order.status}</span>
                   <span className="font-bold text-stone-950">{formatPrice(order.totalPrice)}</span>
                 </div>
               </div>
               <div className="mt-4 space-y-2">
                 {order.items.map((item) => (
-                  <div className="flex justify-between gap-4 text-sm" key={item.id}>
-                    <span className="text-stone-700">{item.productName} x {item.quantity}</span>
+                  <div className="flex flex-wrap justify-between gap-4 text-sm" key={item.id}>
+                    <span className="min-w-0 text-stone-700">{item.productName} x {item.quantity}</span>
                     <span className="font-medium text-stone-900">{formatPrice(item.lineTotal)}</span>
                   </div>
                 ))}

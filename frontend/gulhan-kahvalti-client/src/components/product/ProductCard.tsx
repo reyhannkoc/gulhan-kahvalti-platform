@@ -42,7 +42,7 @@ export function ProductCard({ adding = false, onAddToCart, product }: ProductCar
           {product.description ? (
             <p className="line-clamp-2 text-sm text-stone-600">{product.description}</p>
           ) : null}
-          <div className="flex items-center justify-between pt-2">
+          <div className="flex flex-wrap items-center justify-between gap-2 pt-2">
             <span className="font-semibold text-stone-900">{formatPrice(product.price)}</span>
             <span className="text-xs text-stone-500">Stok: {product.stock}</span>
           </div>

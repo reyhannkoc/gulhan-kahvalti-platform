@@ -137,14 +137,14 @@ export function AdminProductsPage() {
   return (
     <section className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold text-stone-950">Urun Yonetimi</h1>
+        <h1 className="text-xl font-bold text-stone-950 sm:text-2xl">Urun Yonetimi</h1>
         <p className="mt-1 text-sm text-stone-600">Admin urun ekleme, duzenleme ve silme.</p>
       </div>
 
       {message ? <p className="rounded-lg bg-emerald-50 p-3 text-sm text-emerald-800">{message}</p> : null}
       {error ? <p className="rounded-lg bg-red-50 p-3 text-sm text-red-700">{error}</p> : null}
 
-      <form className="grid gap-4 rounded-lg border border-stone-200 bg-stone-50 p-4 lg:grid-cols-2" onSubmit={handleSubmit}>
+      <form className="grid gap-4 rounded-lg border border-stone-200 bg-stone-50 p-3 sm:p-4 lg:grid-cols-2" onSubmit={handleSubmit}>
         <FormField htmlFor="productName" label="Urun adi">
           <Input
             id="productName"
@@ -215,12 +215,12 @@ export function AdminProductsPage() {
             />
           </FormField>
         </div>
-        <div className="flex flex-wrap gap-2 lg:col-span-2">
-          <Button disabled={saving || categories.length === 0} type="submit">
+        <div className="grid gap-2 sm:flex sm:flex-wrap lg:col-span-2">
+          <Button className="w-full sm:w-auto" disabled={saving || categories.length === 0} type="submit">
             {saving ? 'Kaydediliyor' : isEditing ? 'Urunu guncelle' : 'Urun ekle'}
           </Button>
           {isEditing ? (
-            <Button onClick={resetForm} variant="ghost">
+            <Button className="w-full sm:w-auto" onClick={resetForm} variant="ghost">
               Vazgec
             </Button>
           ) : null}
@@ -231,7 +231,7 @@ export function AdminProductsPage() {
       {!loading && products.length === 0 ? <EmptyState title="Henuz urun yok" /> : null}
       {!loading && products.length > 0 ? (
         <div className="overflow-hidden rounded-lg border border-stone-200">
-          <div className="hidden grid-cols-[1fr_120px_100px_160px] bg-stone-100 px-4 py-3 text-sm font-semibold text-stone-700 md:grid">
+          <div className="hidden grid-cols-[minmax(0,1fr)_120px_100px_160px] bg-stone-100 px-4 py-3 text-sm font-semibold text-stone-700 md:grid">
             <span>Urun</span>
             <span>Fiyat</span>
             <span>Stok</span>
@@ -239,18 +239,18 @@ export function AdminProductsPage() {
           </div>
           <div className="divide-y divide-stone-200 bg-white">
             {products.map((product) => (
-              <article className="grid gap-3 px-4 py-4 md:grid-cols-[1fr_120px_100px_160px] md:items-center" key={product.id}>
-                <div>
+              <article className="grid gap-3 px-4 py-4 md:grid-cols-[minmax(0,1fr)_120px_100px_160px] md:items-center" key={product.id}>
+                <div className="min-w-0">
                   <h2 className="font-semibold text-stone-900">{product.name}</h2>
                   <p className="text-sm text-stone-600">{product.categoryName || 'Kategori yok'}</p>
                 </div>
                 <span className="text-sm text-stone-700">{formatPrice(product.price)}</span>
                 <span className="text-sm text-stone-700">{product.stock}</span>
-                <div className="flex gap-2 md:justify-end">
-                  <Button onClick={() => editProduct(product)} variant="ghost">
+                <div className="grid gap-2 sm:flex md:justify-end">
+                  <Button className="w-full sm:w-auto" onClick={() => editProduct(product)} variant="ghost">
                     Duzenle
                   </Button>
-                  <Button onClick={() => deleteProduct(product)} variant="danger">
+                  <Button className="w-full sm:w-auto" onClick={() => deleteProduct(product)} variant="danger">
                     Sil
                   </Button>
                 </div>

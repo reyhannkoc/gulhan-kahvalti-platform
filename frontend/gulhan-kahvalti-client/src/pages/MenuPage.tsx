@@ -68,7 +68,7 @@ export function MenuPage() {
   return (
     <section className="space-y-6">
       <div>
-        <h1 className="text-3xl font-bold text-stone-950">Menu</h1>
+        <h1 className="text-2xl font-bold text-stone-950 sm:text-3xl">Menu</h1>
         <p className="mt-2 text-stone-600">Backend API'den gelen urun listesi.</p>
       </div>
 
@@ -87,7 +87,7 @@ export function MenuPage() {
       ) : null}
 
       {!loading && !error && products.length > 0 ? (
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {products.map((product) => (
             <ProductCard
               adding={addingProductId === product.id}

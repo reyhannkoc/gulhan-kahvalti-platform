@@ -90,7 +90,7 @@ export function ProductDetailPage() {
   }
 
   return (
-    <section className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
+    <section className="grid gap-6 lg:grid-cols-[0.9fr_1.1fr] lg:gap-8">
       <div className="aspect-[4/3] overflow-hidden rounded-lg bg-stone-100">
         {product.imageUrl ? (
           <img alt={product.name} className="h-full w-full object-cover" src={product.imageUrl} />
@@ -104,9 +104,9 @@ export function ProductDetailPage() {
         </Link>
         <div>
           <p className="text-sm font-medium uppercase tracking-wide text-emerald-700">{product.categoryName || 'Kategori'}</p>
-          <h1 className="mt-2 text-3xl font-bold text-stone-950">{product.name}</h1>
+          <h1 className="mt-2 text-2xl font-bold text-stone-950 sm:text-3xl">{product.name}</h1>
         </div>
-        <p className="text-2xl font-bold text-stone-900">{formatPrice(product.price)}</p>
+        <p className="text-xl font-bold text-stone-900 sm:text-2xl">{formatPrice(product.price)}</p>
         <p className="leading-7 text-stone-600">{product.description || 'Bu urun icin aciklama henuz eklenmedi.'}</p>
         <p className={product.stock > 0 ? 'text-sm text-emerald-700' : 'text-sm text-red-700'}>
           {product.stock > 0 ? `Stokta ${product.stock} adet var` : 'Stokta yok'}

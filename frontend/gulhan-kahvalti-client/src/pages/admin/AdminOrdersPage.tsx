@@ -52,7 +52,7 @@ export function AdminOrdersPage() {
   return (
     <section className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold text-stone-950">Siparis Yonetimi</h1>
+        <h1 className="text-xl font-bold text-stone-950 sm:text-2xl">Siparis Yonetimi</h1>
         <p className="mt-1 text-sm text-stone-600">Tum siparisleri goruntuleyin ve durumlarini guncelleyin.</p>
       </div>
 
@@ -65,25 +65,25 @@ export function AdminOrdersPage() {
       {!loading && orders.length > 0 ? (
         <div className="grid gap-4">
           {orders.map((order) => (
-            <article className="rounded-lg border border-stone-200 bg-white p-5 shadow-sm" key={order.id}>
-              <div className="grid gap-4 lg:grid-cols-[1fr_180px] lg:items-start">
+            <article className="rounded-lg border border-stone-200 bg-white p-4 shadow-sm sm:p-5" key={order.id}>
+              <div className="grid min-w-0 gap-4 lg:grid-cols-[minmax(0,1fr)_180px] lg:items-start">
                 <div className="space-y-3">
-                  <div>
+                  <div className="min-w-0">
                     <h2 className="font-semibold text-stone-950">Siparis #{order.id}</h2>
                     <p className="text-sm text-stone-600">{order.customerName} - {order.customerPhone}</p>
                     <p className="text-sm text-stone-500">{order.customerAddress}</p>
                   </div>
                   <div className="space-y-2">
                     {order.items.map((item) => (
-                      <div className="flex justify-between gap-3 text-sm" key={item.id}>
-                        <span className="text-stone-700">{item.productName} x {item.quantity}</span>
+                      <div className="flex flex-wrap justify-between gap-3 text-sm" key={item.id}>
+                        <span className="min-w-0 text-stone-700">{item.productName} x {item.quantity}</span>
                         <span className="font-medium text-stone-900">{formatPrice(item.lineTotal)}</span>
                       </div>
                     ))}
                   </div>
                 </div>
                 <div className="space-y-3">
-                  <p className="text-right text-lg font-bold text-stone-950">{formatPrice(order.totalPrice)}</p>
+                  <p className="text-left text-lg font-bold text-stone-950 lg:text-right">{formatPrice(order.totalPrice)}</p>
                   <select
                     className="w-full rounded-lg border border-stone-300 bg-white px-3 py-2 text-sm outline-none focus:border-emerald-700 focus:ring-2 focus:ring-emerald-100"
                     disabled={updatingId === order.id}
@@ -96,7 +96,7 @@ export function AdminOrdersPage() {
                       </option>
                     ))}
                   </select>
-                  <p className="text-right text-xs text-stone-500">{new Date(order.createdAt).toLocaleString('tr-TR')}</p>
+                  <p className="text-left text-xs text-stone-500 lg:text-right">{new Date(order.createdAt).toLocaleString('tr-TR')}</p>
                 </div>
               </div>
             </article>

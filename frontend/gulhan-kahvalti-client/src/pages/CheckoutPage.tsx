@@ -98,10 +98,10 @@ export function CheckoutPage() {
   }
 
   return (
-    <section className="grid gap-6 lg:grid-cols-[1fr_320px]">
-      <form className="space-y-4 rounded-lg border border-stone-200 bg-white p-5" onSubmit={handleSubmit}>
+    <section className="grid min-w-0 gap-5 lg:grid-cols-[minmax(0,1fr)_320px] lg:gap-6">
+      <form className="space-y-4 rounded-lg border border-stone-200 bg-white p-4 sm:p-5" onSubmit={handleSubmit}>
         <div>
-          <h1 className="text-3xl font-bold text-stone-950">Checkout</h1>
+          <h1 className="text-2xl font-bold text-stone-950 sm:text-3xl">Checkout</h1>
           <p className="mt-2 text-stone-600">Demo siparis icin teslimat bilgilerini girin.</p>
         </div>
 
@@ -130,12 +130,12 @@ export function CheckoutPage() {
         </Button>
       </form>
 
-      <aside className="h-fit rounded-lg border border-stone-200 bg-white p-5">
+      <aside className="h-fit rounded-lg border border-stone-200 bg-white p-4 sm:p-5 lg:sticky lg:top-24">
         <h2 className="text-lg font-semibold text-stone-950">Siparis ozeti</h2>
         <div className="mt-4 space-y-3">
           {cartItems.map((item) => (
-            <div className="flex justify-between gap-3 text-sm" key={item.id}>
-              <span className="text-stone-600">{item.productName} x {item.quantity}</span>
+            <div className="flex flex-wrap justify-between gap-3 text-sm" key={item.id}>
+              <span className="min-w-0 text-stone-600">{item.productName} x {item.quantity}</span>
               <span className="font-medium text-stone-900">{formatPrice(item.lineTotal)}</span>
             </div>
           ))}

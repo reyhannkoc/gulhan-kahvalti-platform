@@ -84,7 +84,7 @@ export function CartPage() {
   return (
     <section className="space-y-6">
       <div>
-        <h1 className="text-3xl font-bold text-stone-950">Sepet</h1>
+        <h1 className="text-2xl font-bold text-stone-950 sm:text-3xl">Sepet</h1>
         <p className="mt-2 text-stone-600">Sepet urunlerinizi yonetin.</p>
       </div>
 
@@ -105,10 +105,10 @@ export function CartPage() {
       ) : null}
 
       {!loading && cartItems.length > 0 ? (
-        <div className="grid gap-6 lg:grid-cols-[1fr_320px]">
+        <div className="grid min-w-0 gap-5 lg:grid-cols-[minmax(0,1fr)_320px] lg:gap-6">
           <div className="space-y-3">
             {cartItems.map((item) => (
-              <article className="flex flex-col gap-4 rounded-lg border border-stone-200 bg-white p-4 sm:flex-row sm:items-center" key={item.id}>
+              <article className="grid gap-4 rounded-lg border border-stone-200 bg-white p-4 sm:grid-cols-[80px_minmax(0,1fr)] sm:items-center lg:grid-cols-[80px_minmax(0,1fr)_auto_auto_auto]" key={item.id}>
                 <div className="h-20 w-20 shrink-0 overflow-hidden rounded-lg bg-stone-100">
                   {item.productImageUrl ? (
                     <img alt={item.productName} className="h-full w-full object-cover" src={item.productImageUrl} />
@@ -118,7 +118,7 @@ export function CartPage() {
                   <h2 className="font-semibold text-stone-900">{item.productName}</h2>
                   <p className="text-sm text-stone-600">{formatPrice(item.unitPrice)}</p>
                 </div>
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2 sm:col-start-2 lg:col-start-auto">
                   <Button disabled={updatingId === item.id} onClick={() => updateQuantity(item, item.quantity - 1)} variant="ghost">
                     -
                   </Button>
@@ -127,15 +127,15 @@ export function CartPage() {
                     +
                   </Button>
                 </div>
-                <div className="text-sm font-semibold text-stone-900">{formatPrice(item.lineTotal)}</div>
-                <Button disabled={updatingId === item.id} onClick={() => removeItem(item)} variant="danger">
+                <div className="text-sm font-semibold text-stone-900 sm:col-start-2 lg:col-start-auto">{formatPrice(item.lineTotal)}</div>
+                <Button className="w-full sm:col-start-2 sm:w-auto lg:col-start-auto" disabled={updatingId === item.id} onClick={() => removeItem(item)} variant="danger">
                   Sil
                 </Button>
               </article>
             ))}
           </div>
 
-          <aside className="h-fit rounded-lg border border-stone-200 bg-white p-5">
+          <aside className="h-fit rounded-lg border border-stone-200 bg-white p-4 sm:p-5 lg:sticky lg:top-24">
             <h2 className="text-lg font-semibold text-stone-950">Sepet ozeti</h2>
             <div className="mt-4 flex items-center justify-between text-sm">
               <span>Toplam</span>

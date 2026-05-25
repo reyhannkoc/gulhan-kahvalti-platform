@@ -4,10 +4,12 @@ import { Button } from '../../components/ui/Button'
 import { FormField } from '../../components/ui/FormField'
 import { Input } from '../../components/ui/Input'
 import { useAuth } from '../../hooks/useAuth'
+import { useLanguage } from '../../hooks/useLanguage'
 import { getApiErrorMessage } from '../../services/api'
 
 export function LoginPage() {
   const { isAdmin, isAuthenticated, loading, login } = useAuth()
+  const { t } = useLanguage()
   const navigate = useNavigate()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -29,19 +31,19 @@ export function LoginPage() {
       const nextPath = isNextAdmin ? '/admin' : isNextUser ? '/menu' : '/menu'
       navigate(nextPath, { replace: true })
     } catch (err) {
-      setError(getApiErrorMessage(err, 'Giris yapilamadi.'))
+      setError(getApiErrorMessage(err, t('loginFailed')))
     }
   }
 
   return (
     <section className="mx-auto max-w-md rounded-lg border border-stone-200 bg-white p-6 shadow-sm">
       <div className="mb-6">
-        <h1 className="text-2xl font-bold text-stone-950">Giris yap</h1>
-        <p className="mt-2 text-sm text-stone-600">Hesabiniza giris yaparak devam edin.</p>
+        <h1 className="text-2xl font-bold text-stone-950">{t('login')}</h1>
+        <p className="mt-2 text-sm text-stone-600">{t('loginDescription')}</p>
       </div>
 
       <form className="space-y-4" onSubmit={handleSubmit}>
-        <FormField htmlFor="email" label="E-posta">
+        <FormField htmlFor="email" label={t('email')}>
           <Input
             autoComplete="email"
             id="email"
@@ -52,7 +54,7 @@ export function LoginPage() {
           />
         </FormField>
 
-        <FormField htmlFor="password" label="Sifre">
+        <FormField htmlFor="password" label={t('password')}>
           <div className="relative">
             <Input
               autoComplete="current-password"
@@ -65,7 +67,7 @@ export function LoginPage() {
               value={password}
             />
             <button
-              aria-label={showPassword ? 'Sifreyi gizle' : 'Sifreyi goster'}
+              aria-label={showPassword ? t('hidePassword') : t('showPassword')}
               className="absolute inset-y-0 right-0 flex w-10 items-center justify-center text-stone-500 transition hover:text-stone-800"
               onClick={() => setShowPassword((current) => !current)}
               type="button"
@@ -78,14 +80,14 @@ export function LoginPage() {
         {error ? <p className="rounded-lg bg-red-50 p-3 text-sm text-red-700">{error}</p> : null}
 
         <Button disabled={loading} fullWidth type="submit">
-          {loading ? 'Giris yapiliyor' : 'Giris yap'}
+          {loading ? t('loggingIn') : t('login')}
         </Button>
       </form>
 
       <p className="mt-4 text-center text-sm text-stone-600">
-        Hesabiniz yok mu?{' '}
+        {t('noAccount')}{' '}
         <Link className="font-semibold text-emerald-700 hover:text-emerald-800" to="/register">
-          Kayit olun
+          {t('register')}
         </Link>
       </p>
     </section>
