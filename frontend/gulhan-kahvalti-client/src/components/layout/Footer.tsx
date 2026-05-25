@@ -25,6 +25,8 @@ export function Footer() {
             <a
               className="inline-flex min-h-11 items-center justify-center rounded-full bg-cyan-500 px-5 text-sm font-semibold text-slate-950 shadow-sm transition hover:bg-cyan-300 focus:outline-none focus:ring-2 focus:ring-cyan-200 focus:ring-offset-2 focus:ring-offset-slate-950"
               href={siteSettings.contact.phoneHref}
+              rel="noreferrer"
+              target="_blank"
             >
               Bizi Arayın
             </a>

@@ -9,7 +9,7 @@ export const siteSettings = {
   contact: {
     address: 'Lamos Otel Yanı, Ayaş, Atatürk Cd. No:87A, 33750 Erdemli/Mersin',
     phoneDisplay: '0539 290 39 09',
-    phoneHref: 'tel:+905392903909',
+    phoneHref: 'https://wa.me/905392903909',
     email: 'fgulhanergin@gmail.com',
     emailHref: 'mailto:fgulhanergin@gmail.com',
   },
