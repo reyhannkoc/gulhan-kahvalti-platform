@@ -9,7 +9,7 @@ const linkClass = ({ isActive }: { isActive: boolean }) =>
   ].join(' ')
 
 export function Navbar() {
-  const { isAuthenticated, logout, user } = useAuth()
+  const { isAdmin, isAuthenticated, isUser, logout } = useAuth()
 
   return (
     <header className="border-b border-stone-200 bg-white">
@@ -18,11 +18,28 @@ export function Navbar() {
           Gulhan Kahvalti
         </Link>
         <div className="flex flex-wrap items-center gap-2">
-          <NavLink className={linkClass} to="/menu">
-            Menu
-          </NavLink>
-          {isAuthenticated ? (
+          {!isAuthenticated ? (
             <>
+              <NavLink className={linkClass} to="/">
+                Ana Sayfa
+              </NavLink>
+              <NavLink className={linkClass} to="/menu">
+                Menu
+              </NavLink>
+              <NavLink className={linkClass} to="/login">
+                Giris
+              </NavLink>
+              <NavLink className={linkClass} to="/register">
+                Kayit
+              </NavLink>
+            </>
+          ) : null}
+
+          {isUser ? (
+            <>
+              <NavLink className={linkClass} to="/menu">
+                Menu
+              </NavLink>
               <NavLink className={linkClass} to="/cart">
                 Sepet
               </NavLink>
@@ -31,25 +48,29 @@ export function Navbar() {
               </NavLink>
             </>
           ) : null}
-          {user?.role === 'Admin' ? (
-            <NavLink className={linkClass} to="/admin">
-              Admin
-            </NavLink>
+
+          {isAdmin ? (
+            <>
+              <NavLink className={linkClass} end to="/admin">
+                Admin Dashboard
+              </NavLink>
+              <NavLink className={linkClass} to="/admin/products">
+                Urunler
+              </NavLink>
+              <NavLink className={linkClass} to="/admin/categories">
+                Kategoriler
+              </NavLink>
+              <NavLink className={linkClass} to="/admin/orders">
+                Siparisler
+              </NavLink>
+            </>
           ) : null}
+
           {isAuthenticated ? (
             <Button onClick={logout} variant="ghost">
               Cikis
             </Button>
-          ) : (
-            <>
-              <NavLink className={linkClass} to="/login">
-                Giris
-              </NavLink>
-              <NavLink className={linkClass} to="/register">
-                Kayit
-              </NavLink>
-            </>
-          )}
+          ) : null}
         </div>
       </nav>
     </header>

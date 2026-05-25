@@ -9,7 +9,7 @@ import { productService } from '../services/productService'
 import type { Product } from '../types'
 
 export function MenuPage() {
-  const { isAuthenticated } = useAuth()
+  const { isAdmin, isAuthenticated } = useAuth()
   const [products, setProducts] = useState<Product[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
@@ -92,7 +92,7 @@ export function MenuPage() {
             <ProductCard
               adding={addingProductId === product.id}
               key={product.id}
-              onAddToCart={addToCart}
+              onAddToCart={isAdmin ? undefined : addToCart}
               product={product}
             />
           ))}

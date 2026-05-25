@@ -6,11 +6,11 @@ import {
   useState,
   type ReactNode,
 } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { authService } from '../services/authService'
 import type { LoginRequest, RegisterRequest, User } from '../types'
 import {
-  clearStoredToken,
-  clearStoredUser,
+  clearStoredAuth,
   getStoredToken,
   getStoredUser,
   setStoredToken,
@@ -22,8 +22,10 @@ interface AuthContextValue {
   token: string | null
   loading: boolean
   isAuthenticated: boolean
-  login: (request: LoginRequest) => Promise<void>
-  register: (request: RegisterRequest) => Promise<void>
+  isAdmin: boolean
+  isUser: boolean
+  login: (request: LoginRequest) => Promise<User>
+  register: (request: RegisterRequest) => Promise<User>
   logout: () => void
 }
 
@@ -36,14 +38,15 @@ interface AuthProviderProps {
 export function AuthProvider({ children }: AuthProviderProps) {
   const [user, setUser] = useState<User | null>(() => getStoredUser())
   const [token, setToken] = useState<string | null>(() => getStoredToken())
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(() => Boolean(getStoredToken()))
+  const navigate = useNavigate()
 
   const logout = useCallback(() => {
-    clearStoredToken()
-    clearStoredUser()
+    clearStoredAuth()
     setToken(null)
     setUser(null)
-  }, [])
+    navigate('/login', { replace: true })
+  }, [navigate])
 
   useEffect(() => {
     window.addEventListener('gulhan:auth-expired', logout)
@@ -57,6 +60,54 @@ export function AuthProvider({ children }: AuthProviderProps) {
     setUser(nextUser)
   }, [])
 
+  useEffect(() => {
+    let isMounted = true
+
+    async function validateStoredSession() {
+      const storedToken = getStoredToken()
+
+      if (!storedToken) {
+        clearStoredAuth()
+        if (isMounted) {
+          setToken(null)
+          setUser(null)
+          setLoading(false)
+        }
+        return
+      }
+
+      try {
+        const currentUser = await authService.me()
+
+        if (!isMounted) {
+          return
+        }
+
+        setStoredUser(currentUser)
+        setToken(storedToken)
+        setUser(currentUser)
+      } catch {
+        clearStoredAuth()
+
+        if (isMounted) {
+          setToken(null)
+          setUser(null)
+          navigate('/login', { replace: true })
+        }
+      } finally {
+        if (isMounted) {
+          setLoading(false)
+        }
+      }
+    }
+
+    validateStoredSession()
+
+    return () => {
+      isMounted = false
+    }
+  }, [navigate])
+
   const login = useCallback(
     async (request: LoginRequest) => {
       setLoading(true)
@@ -64,6 +115,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
       try {
         const { auth, user: nextUser } = await authService.login(request)
         persistSession(auth.token, nextUser)
+        return nextUser
       } finally {
         setLoading(false)
       }
@@ -78,6 +130,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
       try {
         const { auth, user: nextUser } = await authService.register(request)
         persistSession(auth.token, nextUser)
+        return nextUser
       } finally {
         setLoading(false)
       }
@@ -85,17 +138,24 @@ export function AuthProvider({ children }: AuthProviderProps) {
     [persistSession],
   )
 
+  const normalizedRole = user?.role.toLowerCase()
+  const isAuthenticated = Boolean(token && user)
+  const isAdmin = isAuthenticated && normalizedRole === 'admin'
+  const isUser = isAuthenticated && normalizedRole === 'user'
+
   const value = useMemo<AuthContextValue>(
     () => ({
       user,
       token,
       loading,
-      isAuthenticated: Boolean(token && user),
+      isAuthenticated,
+      isAdmin,
+      isUser,
       login,
       register,
       logout,
     }),
-    [loading, login, logout, register, token, user],
+    [isAdmin, isAuthenticated, isUser, loading, login, logout, register, token, user],
   )
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>

@@ -7,7 +7,7 @@ import { useAuth } from '../../hooks/useAuth'
 import { getApiErrorMessage } from '../../services/api'
 
 export function RegisterPage() {
-  const { isAuthenticated, loading, register } = useAuth()
+  const { isAdmin, isAuthenticated, loading, register } = useAuth()
   const navigate = useNavigate()
   const [fullName, setFullName] = useState('')
   const [email, setEmail] = useState('')
@@ -15,7 +15,7 @@ export function RegisterPage() {
   const [error, setError] = useState<string | null>(null)
 
   if (isAuthenticated) {
-    return <Navigate replace to="/" />
+    return <Navigate replace to={isAdmin ? '/admin' : '/menu'} />
   }
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
@@ -24,7 +24,7 @@ export function RegisterPage() {
 
     try {
       await register({ fullName, email, password })
-      navigate('/', { replace: true })
+      navigate('/menu', { replace: true })
     } catch (err) {
       setError(getApiErrorMessage(err, 'Kayit olusturulamadi.'))
     }

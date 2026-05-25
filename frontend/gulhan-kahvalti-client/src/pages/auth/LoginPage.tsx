@@ -1,29 +1,20 @@
 import { type FormEvent, useState } from 'react'
-import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom'
+import { Link, Navigate, useNavigate } from 'react-router-dom'
 import { Button } from '../../components/ui/Button'
 import { FormField } from '../../components/ui/FormField'
 import { Input } from '../../components/ui/Input'
 import { useAuth } from '../../hooks/useAuth'
 import { getApiErrorMessage } from '../../services/api'
 
-interface LocationState {
-  from?: {
-    pathname?: string
-  }
-}
-
 export function LoginPage() {
-  const { isAuthenticated, loading, login } = useAuth()
-  const location = useLocation()
+  const { isAdmin, isAuthenticated, loading, login } = useAuth()
   const navigate = useNavigate()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState<string | null>(null)
 
-  const from = (location.state as LocationState | null)?.from?.pathname ?? '/'
-
   if (isAuthenticated) {
-    return <Navigate replace to={from} />
+    return <Navigate replace to={isAdmin ? '/admin' : '/menu'} />
   }
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
@@ -31,8 +22,11 @@ export function LoginPage() {
     setError(null)
 
     try {
-      await login({ email, password })
-      navigate(from, { replace: true })
+      const nextUser = await login({ email, password })
+      const isNextAdmin = nextUser.role.toLowerCase() === 'admin'
+      const isNextUser = nextUser.role.toLowerCase() === 'user'
+      const nextPath = isNextAdmin ? '/admin' : isNextUser ? '/menu' : '/menu'
+      navigate(nextPath, { replace: true })
     } catch (err) {
       setError(getApiErrorMessage(err, 'Giris yapilamadi.'))
     }

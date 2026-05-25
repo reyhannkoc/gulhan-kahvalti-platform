@@ -3,7 +3,7 @@ import { LoadingSpinner } from '../components/ui/LoadingSpinner'
 import { useAuth } from '../hooks/useAuth'
 
 export function AdminRoute() {
-  const { isAuthenticated, loading, user } = useAuth()
+  const { isAdmin, isAuthenticated, loading } = useAuth()
 
   if (loading) {
     return <LoadingSpinner label="Yetki kontrol ediliyor" />
@@ -13,8 +13,8 @@ export function AdminRoute() {
     return <Navigate replace to="/login" />
   }
 
-  if (user?.role !== 'Admin') {
-    return <Navigate replace to="/" />
+  if (!isAdmin) {
+    return <Navigate replace to="/menu" />
   }
 
   return <Outlet />

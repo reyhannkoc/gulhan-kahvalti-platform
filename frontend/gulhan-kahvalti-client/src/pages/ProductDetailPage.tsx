@@ -13,7 +13,7 @@ import { formatPrice } from '../utils/formatPrice'
 export function ProductDetailPage() {
   const { id } = useParams()
   const navigate = useNavigate()
-  const { isAuthenticated } = useAuth()
+  const { isAdmin, isAuthenticated } = useAuth()
   const [product, setProduct] = useState<Product | null>(null)
   const [loading, setLoading] = useState(true)
   const [adding, setAdding] = useState(false)
@@ -113,9 +113,15 @@ export function ProductDetailPage() {
         </p>
         {message ? <p className="rounded-lg bg-emerald-50 p-3 text-sm text-emerald-800">{message}</p> : null}
         {error ? <p className="rounded-lg bg-red-50 p-3 text-sm text-red-700">{error}</p> : null}
-        <Button disabled={adding || product.stock <= 0} onClick={addToCart}>
-          {product.stock <= 0 ? 'Stok yok' : adding ? 'Ekleniyor' : 'Sepete ekle'}
-        </Button>
+        {isAdmin ? (
+          <Link className="inline-flex rounded-lg bg-stone-900 px-4 py-2 text-sm font-semibold text-white transition hover:bg-stone-800" to="/admin">
+            Admin panele don
+          </Link>
+        ) : (
+          <Button disabled={adding || product.stock <= 0} onClick={addToCart}>
+            {product.stock <= 0 ? 'Stok yok' : adding ? 'Ekleniyor' : 'Sepete ekle'}
+          </Button>
+        )}
       </div>
     </section>
   )
