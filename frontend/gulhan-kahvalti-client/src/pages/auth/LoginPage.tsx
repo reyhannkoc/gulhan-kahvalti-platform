@@ -17,7 +17,7 @@ export function LoginPage() {
   const [error, setError] = useState<string | null>(null)
 
   if (isAuthenticated) {
-    return <Navigate replace to={isAdmin ? '/admin' : '/menu'} />
+    return <Navigate replace to={isAdmin ? '/admin' : '/products'} />
   }
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
@@ -28,7 +28,7 @@ export function LoginPage() {
       const nextUser = await login({ email, password })
       const isNextAdmin = nextUser.role.toLowerCase() === 'admin'
       const isNextUser = nextUser.role.toLowerCase() === 'user'
-      const nextPath = isNextAdmin ? '/admin' : isNextUser ? '/menu' : '/menu'
+      const nextPath = isNextAdmin ? '/admin' : isNextUser ? '/products' : '/products'
       navigate(nextPath, { replace: true })
     } catch (err) {
       setError(getApiErrorMessage(err, t('loginFailed')))

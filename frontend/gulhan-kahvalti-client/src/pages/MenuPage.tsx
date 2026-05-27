@@ -1,103 +1,45 @@
-import { useEffect, useState } from 'react'
-import { ProductCard } from '../components/product/ProductCard'
-import { EmptyState } from '../components/ui/EmptyState'
-import { LoadingSpinner } from '../components/ui/LoadingSpinner'
-import { useAuth } from '../hooks/useAuth'
-import { getApiErrorMessage } from '../services/api'
-import { cartService } from '../services/cartService'
-import { productService } from '../services/productService'
-import type { Product } from '../types'
+import { restaurantMenu } from '../config/restaurantMenu'
 
 export function MenuPage() {
-  const { isAdmin, isAuthenticated } = useAuth()
-  const [products, setProducts] = useState<Product[]>([])
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState<string | null>(null)
-  const [message, setMessage] = useState<string | null>(null)
-  const [addingProductId, setAddingProductId] = useState<number | null>(null)
-
-  useEffect(() => {
-    let isMounted = true
-
-    async function loadProducts() {
-      try {
-        setLoading(true)
-        setError(null)
-        const nextProducts = await productService.getAll()
-
-        if (isMounted) {
-          setProducts(nextProducts)
-        }
-      } catch (err) {
-        if (isMounted) {
-          setError(getApiErrorMessage(err, 'Ürünler yüklenemedi.'))
-        }
-      } finally {
-        if (isMounted) {
-          setLoading(false)
-        }
-      }
-    }
-
-    loadProducts()
-
-    return () => {
-      isMounted = false
-    }
-  }, [])
-
-  async function addToCart(product: Product) {
-    if (!isAuthenticated) {
-      setError('Sepete eklemek için giriş yapmalısınız.')
-      return
-    }
-
-    try {
-      setAddingProductId(product.id)
-      setError(null)
-      setMessage(null)
-      await cartService.addItem({ productId: product.id, quantity: 1 })
-      setMessage(`${product.name} sepete eklendi.`)
-    } catch (err) {
-      setError(getApiErrorMessage(err, 'Ürün sepete eklenemedi.'))
-    } finally {
-      setAddingProductId(null)
-    }
-  }
-
   return (
-    <section className="space-y-6">
-      <div>
-        <h1 className="text-2xl font-bold text-stone-950 sm:text-3xl">Menü</h1>
-        <p className="mt-2 text-stone-600">Backend API'den gelen ürün listesi.</p>
+    <section className="space-y-8">
+      <div className="overflow-hidden rounded-3xl bg-slate-950 text-white">
+        <div className="grid gap-6 px-5 py-8 sm:px-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:px-10 lg:py-12">
+          <div>
+            <p className="text-sm font-semibold uppercase tracking-[0.24em] text-cyan-200">Restoran menüsü</p>
+            <h1 className="mt-3 text-3xl font-bold sm:text-5xl">Gülhan Kahvaltı Menü</h1>
+            <p className="mt-4 max-w-2xl text-base leading-7 text-slate-300">
+              Kahvaltı, sıcak içecekler, soğuk içecekler ve ekstralar için bilgilendirme menüsü.
+              Bu sayfadaki ürünler sepete eklenmez.
+            </p>
+          </div>
+          <div className="rounded-3xl border border-cyan-300/30 bg-white/10 p-5">
+            <p className="text-sm text-cyan-100">Güncel sipariş verilebilir ürünler için Ürünlerimiz sayfasını kullanabilirsiniz.</p>
+          </div>
+        </div>
       </div>
 
-      {loading ? <LoadingSpinner label="Ürünler yükleniyor" /> : null}
-
-      {error ? (
-        <EmptyState description={error} title="Ürünler getirilemedi" />
-      ) : null}
-      {message ? <p className="rounded-lg bg-emerald-50 p-3 text-sm text-emerald-800">{message}</p> : null}
-
-      {!loading && !error && products.length === 0 ? (
-        <EmptyState
-          description="Admin panelinden ürün eklendiğinde burada listelenecek."
-          title="Henüz ürün yok"
-        />
-      ) : null}
-
-      {!loading && !error && products.length > 0 ? (
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          {products.map((product) => (
-            <ProductCard
-              adding={addingProductId === product.id}
-              key={product.id}
-              onAddToCart={isAdmin ? undefined : addToCart}
-              product={product}
-            />
-          ))}
-        </div>
-      ) : null}
+      <div className="grid gap-5 lg:grid-cols-2">
+        {restaurantMenu.map((section) => (
+          <article className="rounded-2xl border border-cyan-100 bg-white p-5 shadow-sm sm:p-6" key={section.category}>
+            <div className="border-b border-stone-100 pb-4">
+              <h2 className="text-xl font-bold text-slate-950">{section.category}</h2>
+              <p className="mt-2 text-sm leading-6 text-slate-600">{section.description}</p>
+            </div>
+            <div className="mt-5 space-y-4">
+              {section.items.map((item) => (
+                <div className="grid gap-2 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-start" key={item.name}>
+                  <div className="min-w-0">
+                    <h3 className="font-semibold text-slate-900">{item.name}</h3>
+                    <p className="mt-1 text-sm leading-6 text-slate-600">{item.description}</p>
+                  </div>
+                  <p className="rounded-full bg-cyan-50 px-3 py-1 text-sm font-bold text-cyan-800">{item.price}</p>
+                </div>
+              ))}
+            </div>
+          </article>
+        ))}
+      </div>
     </section>
   )
 }

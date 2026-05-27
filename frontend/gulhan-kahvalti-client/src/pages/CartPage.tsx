@@ -95,8 +95,8 @@ export function CartPage() {
       {!loading && cartItems.length === 0 ? (
         <EmptyState
           action={
-            <Link to="/menu">
-              <Button>Menüye git</Button>
+            <Link to="/products">
+              <Button>Ürünlerimize git</Button>
             </Link>
           }
           description="Sepete ürün eklediğinizde burada görünecek."

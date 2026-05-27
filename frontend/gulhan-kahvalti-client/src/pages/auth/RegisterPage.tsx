@@ -18,7 +18,7 @@ export function RegisterPage() {
   const [error, setError] = useState<string | null>(null)
 
   if (isAuthenticated) {
-    return <Navigate replace to={isAdmin ? '/admin' : '/menu'} />
+    return <Navigate replace to={isAdmin ? '/admin' : '/products'} />
   }
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
@@ -27,7 +27,7 @@ export function RegisterPage() {
 
     try {
       await register({ fullName, email, password })
-      navigate('/menu', { replace: true })
+      navigate('/products', { replace: true })
     } catch (err) {
       setError(getApiErrorMessage(err, t('registerFailed')))
     }

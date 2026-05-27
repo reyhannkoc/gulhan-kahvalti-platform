@@ -28,7 +28,7 @@ export function Footer() {
               rel="noreferrer"
               target="_blank"
             >
-              Bizi Arayın
+              WhatsApp
             </a>
             <a
               className="inline-flex min-h-11 items-center justify-center rounded-full border border-cyan-300/70 px-5 text-sm font-semibold text-cyan-50 transition hover:bg-cyan-400/10 focus:outline-none focus:ring-2 focus:ring-cyan-200 focus:ring-offset-2 focus:ring-offset-slate-950"
@@ -53,8 +53,11 @@ export function Footer() {
           </div>
 
           <div>
-            <h2 className="text-sm font-semibold uppercase tracking-wide text-cyan-200">Ürünlerimiz</h2>
+            <h2 className="text-sm font-semibold uppercase tracking-wide text-cyan-200">Menü & Ürünler</h2>
             <nav className="mt-4 flex flex-col gap-3 text-sm text-slate-300" aria-label="Ürün bağlantıları">
+              <Link className="transition hover:text-cyan-200" to="/products">
+                Ürünlerimiz
+              </Link>
               <Link className="transition hover:text-cyan-200" to="/menu">
                 Menü
               </Link>

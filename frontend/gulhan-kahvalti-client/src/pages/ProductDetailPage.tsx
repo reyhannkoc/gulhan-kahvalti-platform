@@ -99,8 +99,8 @@ export function ProductDetailPage() {
         )}
       </div>
       <div className="space-y-5">
-        <Link className="text-sm font-semibold text-emerald-700 hover:text-emerald-800" to="/menu">
-          Menüye dön
+        <Link className="text-sm font-semibold text-emerald-700 hover:text-emerald-800" to="/products">
+          Ürünlerimize dön
         </Link>
         <div>
           <p className="text-sm font-medium uppercase tracking-wide text-emerald-700">{product.categoryName || 'Kategori'}</p>

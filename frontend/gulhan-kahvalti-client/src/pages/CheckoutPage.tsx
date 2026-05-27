@@ -73,8 +73,8 @@ export function CheckoutPage() {
     return (
       <EmptyState
         action={
-          <Link to="/menu">
-            <Button>Menüye dön</Button>
+          <Link to="/products">
+            <Button>Ürünlerimize dön</Button>
           </Link>
         }
         description={`Sipariş #${order.id} oluşturuldu. Durum: ${order.status}`}
@@ -87,8 +87,8 @@ export function CheckoutPage() {
     return (
       <EmptyState
         action={
-          <Link to="/menu">
-            <Button>Menüye git</Button>
+          <Link to="/products">
+            <Button>Ürünlerimize git</Button>
           </Link>
         }
         description="Ödeme için önce sepete ürün ekleyin."

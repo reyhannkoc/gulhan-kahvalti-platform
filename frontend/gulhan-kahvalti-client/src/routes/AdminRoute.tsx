@@ -14,7 +14,7 @@ export function AdminRoute() {
   }
 
   if (!isAdmin) {
-    return <Navigate replace to="/menu" />
+    return <Navigate replace to="/products" />
   }
 
   return <Outlet />

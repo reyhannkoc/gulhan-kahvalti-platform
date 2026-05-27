@@ -15,6 +15,7 @@ import { MenuPage } from '../pages/MenuPage'
 import { MyOrdersPage } from '../pages/MyOrdersPage'
 import { NotFoundPage } from '../pages/NotFoundPage'
 import { ProductDetailPage } from '../pages/ProductDetailPage'
+import { ProductsPage } from '../pages/ProductsPage'
 import { SettingsPage } from '../pages/SettingsPage'
 import { AdminRoute } from './AdminRoute'
 import { ProtectedRoute } from './ProtectedRoute'
@@ -25,6 +26,7 @@ export function AppRoutes() {
       <Route element={<MainLayout />}>
         <Route element={<HomePage />} index />
         <Route element={<MenuPage />} path="menu" />
+        <Route element={<ProductsPage />} path="products" />
         <Route element={<ProductDetailPage />} path="products/:id" />
         <Route element={<LoginPage />} path="login" />
         <Route element={<RegisterPage />} path="register" />
