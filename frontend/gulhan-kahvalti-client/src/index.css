@@ -2,28 +2,45 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer components {
-  .footer-button-primary {
-    @apply inline-flex min-h-11 items-center justify-center rounded-full bg-cyan-400 px-5 text-sm font-semibold text-slate-950 shadow-sm transition hover:bg-brand-accent focus:outline-none focus:ring-2 focus:ring-cyan-200 focus:ring-offset-2 focus:ring-offset-slate-950;
+/* ── Base Typography & Font Application ─────────────────────────────────── */
+@layer base {
+  /* Inter as the universal UI font — applies to everything */
+  html {
+    font-family: 'Inter', system-ui, sans-serif;
+    font-feature-settings: 'cv11', 'ss01';
+    font-variation-settings: normal;
   }
 
-  .footer-button-secondary {
-    @apply inline-flex min-h-11 items-center justify-center rounded-full border border-cyan-300/70 px-5 text-sm font-semibold text-cyan-50 transition hover:bg-cyan-400/10 focus:outline-none focus:ring-2 focus:ring-cyan-200 focus:ring-offset-2 focus:ring-offset-slate-950;
+  /* Playfair Display on all headings — the luxury signal */
+  h1, h2, h3 {
+    font-family: 'Playfair Display', Georgia, serif;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
   }
 
-  .social-button {
-    @apply inline-flex min-h-11 items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 text-sm font-semibold text-white transition hover:border-cyan-300 hover:bg-cyan-400/10 focus:outline-none focus:ring-2 focus:ring-cyan-200 focus:ring-offset-2 focus:ring-offset-slate-950;
-  }
-
-  .contact-action-primary {
-    @apply inline-flex min-h-11 items-center justify-center rounded-full bg-brand-turquoise px-4 text-sm font-semibold text-white transition hover:bg-cyan-700 dark:bg-cyan-400 dark:text-slate-950 dark:hover:bg-cyan-300;
-  }
-
-  .contact-action-secondary {
-    @apply inline-flex min-h-11 items-center justify-center rounded-full border border-cyan-200 px-4 text-sm font-semibold text-cyan-800 transition hover:bg-brand-light dark:border-white/15 dark:text-cyan-100 dark:hover:bg-white/10;
+  /* h4–h6 stay Inter but with tighter tracking */
+  h4, h5, h6 {
+    font-family: 'Inter', system-ui, sans-serif;
+    letter-spacing: -0.01em;
   }
 }
 
+/* ── Reusable Component Classes ──────────────────────────────────────────── */
+@layer components {
+  .footer-button-primary {
+    @apply inline-flex min-h-11 items-center justify-center rounded-full bg-cyan-400 px-5 text-sm font-semibold text-slate-950 shadow-sm transition duration-250 hover:bg-cyan-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-200 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950;
+  }
+
+  .footer-button-secondary {
+    @apply inline-flex min-h-11 items-center justify-center rounded-full border border-cyan-300/70 px-5 text-sm font-semibold text-cyan-50 transition duration-250 hover:bg-cyan-400/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-200 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950;
+  }
+
+  .social-button {
+    @apply inline-flex min-h-11 items-center gap-2 rounded-full border border-white/15 bg-white/5 px-5 text-sm font-semibold text-white transition duration-250 hover:border-cyan-300 hover:bg-cyan-400/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-200 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950;
+  }
+}
+
+/* ── Global Layout & Color ───────────────────────────────────────────────── */
 html,
 body,
 #root {
@@ -36,6 +53,7 @@ body {
   background: #f5f7fa;
   color: #1f2933;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
 }
 
@@ -44,42 +62,10 @@ body {
   color: #edfafa;
 }
 
+/* ── Selection & Box Model ───────────────────────────────────────────────── */
 ::selection {
   background: #00a6a6;
   color: #ffffff;
-}
-
-.dark .bg-white {
-  background-color: #0f172a;
-}
-
-.dark .bg-stone-50,
-.dark .bg-stone-100 {
-  background-color: #111827;
-}
-
-.dark .border-stone-100,
-.dark .border-stone-200,
-.dark .border-stone-300 {
-  border-color: rgba(255, 255, 255, 0.12);
-}
-
-.dark .text-stone-950,
-.dark .text-stone-900,
-.dark .text-brand-text {
-  color: #ffffff;
-}
-
-.dark .text-stone-800,
-.dark .text-stone-700,
-.dark .text-stone-600,
-.dark .text-slate-600 {
-  color: #cbd5e1;
-}
-
-.dark .text-stone-500,
-.dark .text-slate-500 {
-  color: #94a3b8;
 }
 
 * {

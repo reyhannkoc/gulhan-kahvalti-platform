@@ -26,7 +26,7 @@ export function Button({
   return (
     <button
       className={[
-        'inline-flex min-h-10 items-center justify-center rounded-full px-4 py-2 text-sm font-semibold transition disabled:cursor-not-allowed disabled:opacity-60',
+        'inline-flex min-h-11 items-center justify-center rounded-full px-5 text-sm font-semibold transition duration-250 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-turquoise focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-60',
         variants[variant],
         fullWidth ? 'w-full' : '',
         className,
