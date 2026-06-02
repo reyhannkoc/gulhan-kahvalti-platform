@@ -16,7 +16,7 @@ const desktopLink = ({ isActive }: { isActive: boolean }) =>
     'px-3 py-1.5 rounded-full text-sm font-medium transition duration-200 whitespace-nowrap',
     isActive
       ? 'bg-brand-turquoise text-white shadow-sm'
-      : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900 dark:text-slate-300 dark:hover:bg-white/10 dark:hover:text-white',
+      : 'text-slate-700 hover:bg-slate-100 hover:text-slate-950 dark:text-slate-200 dark:hover:bg-white/10 dark:hover:text-white',
   ].join(' ')
 
 // Mobile drawer row link
@@ -30,7 +30,7 @@ const drawerLink = ({ isActive }: { isActive: boolean }) =>
 
 // Shared icon button (theme/lang/cart)
 const iconBtn =
-  'relative inline-flex h-9 w-9 items-center justify-center rounded-full text-slate-600 transition duration-200 hover:bg-slate-100 hover:text-slate-900 dark:text-slate-300 dark:hover:bg-white/10 dark:hover:text-white shrink-0'
+  'relative inline-flex h-9 w-9 items-center justify-center rounded-full text-slate-700 transition duration-200 hover:bg-slate-100 hover:text-slate-950 dark:text-slate-200 dark:hover:bg-white/10 dark:hover:text-white shrink-0'
 
 // ── Component ──────────────────────────────────────────────────────────────────
 
@@ -65,10 +65,10 @@ export function Navbar() {
     <>
       <header
         className={[
-          'sticky top-0 z-40 border-b bg-white/92 backdrop-blur-xl transition-all duration-300 dark:bg-slate-950/92',
+          'sticky top-0 z-40 border-b border-slate-200/70 bg-white/95 shadow-[0_10px_30px_rgba(15,23,42,0.08)] backdrop-blur-2xl backdrop-saturate-150 transition-all duration-300 dark:border-white/10 dark:bg-slate-950/90 dark:shadow-[0_10px_30px_rgba(0,0,0,0.35)]',
           scrolled
-            ? 'border-slate-200/70 shadow-card dark:border-white/8'
-            : 'border-slate-200/40 dark:border-white/6',
+            ? 'shadow-[0_14px_36px_rgba(15,23,42,0.12)] dark:shadow-[0_14px_36px_rgba(0,0,0,0.45)]'
+            : 'shadow-[0_8px_24px_rgba(15,23,42,0.07)] dark:shadow-[0_8px_24px_rgba(0,0,0,0.32)]',
         ].join(' ')}
       >
         <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-4 sm:px-6">
