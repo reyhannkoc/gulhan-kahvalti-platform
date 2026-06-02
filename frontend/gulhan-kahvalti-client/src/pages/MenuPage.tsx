@@ -167,10 +167,10 @@ function MenuHeroPanel() {
         loading="eager"
         src={menuHeroImage}
       />
-      <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/35 to-slate-950/20" />
-      <div className="absolute inset-0 bg-gradient-to-r from-slate-950/45 via-transparent to-slate-950/10" />
+      <div className="absolute inset-0 bg-gradient-to-b from-slate-950/65 via-slate-950/15 to-slate-950/20" />
+      <div className="absolute left-0 top-0 h-1/2 w-full bg-gradient-to-br from-slate-950/72 via-slate-950/30 to-transparent" />
 
-      <div className="relative flex min-h-[22rem] flex-col justify-end p-5 sm:min-h-[26rem] sm:p-6 lg:min-h-[30rem]">
+      <div className="relative flex min-h-[22rem] flex-col items-start justify-start p-5 pt-6 sm:min-h-[26rem] sm:p-6 sm:pt-8 lg:min-h-[30rem] lg:p-8">
         <h2 className="max-w-sm font-display text-2xl font-bold text-white drop-shadow-sm sm:text-3xl">
           Deniz Esintili Menü
         </h2>
