@@ -14,7 +14,7 @@ export function HomePage() {
       <section className="relative overflow-hidden rounded-[2rem] bg-slate-950 text-white shadow-brand">
         {brandImages.heroSeaDrink ? (
           <img
-            alt="Deniz kenarında Gülhan Kahvaltı içecek ve kahvaltı atmosferi"
+            alt="Gülhan Kahvaltı deniz kenarı kahvaltı atmosferi"
             className="absolute inset-0 h-full w-full object-cover"
             src={brandImages.heroSeaDrink}
           />
@@ -35,9 +35,7 @@ export function HomePage() {
               </p>
             </div>
             <div className="grid gap-3 sm:flex sm:flex-wrap">
-              <Link to="/menu">
-                <Button>Menüye Göz At</Button>
-              </Link>
+              <Link to="/menu"><Button>Menüye Göz At</Button></Link>
               <Link to="/products">
                 <span className="inline-flex min-h-10 items-center justify-center rounded-full border border-cyan-200 px-4 py-2 text-sm font-semibold text-cyan-50 transition hover:bg-white/10">
                   Ürünlerimizi İncele
@@ -62,7 +60,7 @@ export function HomePage() {
         </div>
       </section>
 
-      <section className="grid gap-3 sm:grid-cols-3">
+      <section className="grid gap-4 md:grid-cols-3">
         {[
           ['Deniz Kenarı Atmosfer', 'Ayaş’ta ferah, sakin ve aile dostu kahvaltı deneyimi.'],
           ['Ev Yapımı Lezzetler', 'Reçeller, turşular ve doğal ürünlerle sıcak yerel tatlar.'],
@@ -77,9 +75,9 @@ export function HomePage() {
 
       <section className="grid gap-6 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
         <VisualPanel
-          alt="Bitkilerle sıcak Gülhan Kahvaltı giriş ve mekan atmosferi"
+          alt="Gülhan Kahvaltı mekan atmosferi"
           image={brandImages.entrancePlants || brandImages.corridorPlace}
-          label="Sıcak, doğal ve yerel bir mekan hissi"
+          label="Sıcak, doğal ve yerel mekan görseli"
           tone="cream"
         />
         <div className="rounded-3xl border border-cyan-100 bg-white p-6 shadow-sm sm:p-8 dark:border-white/10 dark:bg-slate-900">
@@ -89,8 +87,29 @@ export function HomePage() {
           </h2>
           <p className="mt-4 text-base leading-8 text-slate-600 dark:text-slate-300">
             Gülhan Kahvaltı, Ayaş’ın sakin atmosferinde ailece oturulabilecek sıcak bir kahvaltı deneyimi sunar.
-            Menü sayfası restoran menüsünü tanıtır; Ürünlerimiz sayfası ise sipariş verilebilir ürünleri ve sepet akışını taşır.
+            Hikayemiz, kahvaltı kültürünü doğal ürünler ve yerel sıcaklıkla yaşatmaya dayanır.
           </p>
+          <Link className="mt-5 inline-flex" to="/about">
+            <Button variant="ghost">Hakkımızda</Button>
+          </Link>
+        </div>
+      </section>
+
+      <section className="space-y-5">
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <p className="text-sm font-semibold uppercase tracking-wide text-brand-turquoise">Lezzetlerimizi keşfedin</p>
+            <h2 className="mt-2 text-2xl font-bold text-brand-text dark:text-white">Menü ve ürün keşfi</h2>
+          </div>
+          <Link to="/products"><Button>Ürünlerimiz</Button></Link>
+        </div>
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {menuPreview.map((section) => (
+            <article className="rounded-3xl border border-cyan-100 bg-white p-5 shadow-sm dark:border-white/10 dark:bg-slate-900" key={section.category}>
+              <h3 className="font-bold text-brand-text dark:text-white">{section.category}</h3>
+              <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-300">{section.description}</p>
+            </article>
+          ))}
         </div>
       </section>
 
@@ -103,53 +122,25 @@ export function HomePage() {
           <p className="mt-4 text-base leading-8 text-slate-600 dark:text-slate-300">
             Kavanozlarda hazırlanan ev yapımı ürünler, kahvaltı sofrasını tamamlayan doğal ve güvenilir tatlar sunar.
           </p>
-          <Link className="mt-5 inline-flex" to="/products">
-            <Button>Ürünlerimizi İncele</Button>
-          </Link>
+          <Link className="mt-5 inline-flex" to="/products"><Button>Ürünlerimizi İncele</Button></Link>
         </div>
         <VisualPanel
-          alt="Gülhan Kahvaltı ev yapımı reçel ve kavanoz ürünleri"
+          alt="Gülhan Kahvaltı ev yapımı kavanoz ürünleri"
           image={brandImages.homemadeJars || brandImages.jarLabel}
           label="Ev yapımı ürün görseli"
           tone="warm"
         />
       </section>
 
-      <section className="space-y-5">
-        <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
-          <div>
-            <p className="text-sm font-semibold uppercase tracking-wide text-brand-turquoise">Menü önizleme</p>
-            <h2 className="mt-2 text-2xl font-bold text-brand-text dark:text-white">Restoran menüsü ve fiyatlar</h2>
-          </div>
-          <Link to="/menu">
-            <Button variant="ghost">Menüye Göz At</Button>
-          </Link>
-        </div>
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {menuPreview.map((section) => (
-            <article className="rounded-3xl border border-cyan-100 bg-white p-5 shadow-sm dark:border-white/10 dark:bg-slate-900" key={section.category}>
-              <h3 className="font-bold text-brand-text dark:text-white">{section.category}</h3>
-              <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-300">{section.description}</p>
-            </article>
-          ))}
-        </div>
-      </section>
-
       <section className="grid gap-6 rounded-[2rem] border border-cyan-100 bg-white p-6 shadow-sm lg:grid-cols-[1fr_0.9fr] lg:items-center dark:border-white/10 dark:bg-slate-900">
         <div>
-          <p className="text-sm font-semibold uppercase tracking-wide text-brand-turquoise">Konum & iletişim</p>
+          <p className="text-sm font-semibold uppercase tracking-wide text-brand-turquoise">İletişim</p>
           <h2 className="mt-2 text-2xl font-bold text-brand-text dark:text-white">Ayaş’ta denize yakın sıcak kahvaltı durağı</h2>
           <p className="mt-3 text-slate-600 dark:text-slate-300">{siteSettings.contact.address}</p>
           <div className="mt-5 grid gap-3 sm:flex sm:flex-wrap">
-            <a className="inline-flex min-h-11 items-center justify-center rounded-full bg-brand-turquoise px-4 text-sm font-semibold text-white transition hover:bg-cyan-700" href={siteSettings.contact.mapsHref} rel="noreferrer" target="_blank">
-              Haritada Aç
-            </a>
-            <a className="inline-flex min-h-11 items-center justify-center rounded-full border border-cyan-200 px-4 text-sm font-semibold text-cyan-800 transition hover:bg-brand-light dark:text-cyan-100 dark:hover:bg-white/10" href={siteSettings.contact.phoneHref} rel="noreferrer" target="_blank">
-              WhatsApp
-            </a>
-            <a className="inline-flex min-h-11 items-center justify-center rounded-full border border-cyan-200 px-4 text-sm font-semibold text-cyan-800 transition hover:bg-brand-light dark:text-cyan-100 dark:hover:bg-white/10" href={siteSettings.contact.emailHref}>
-              E-posta
-            </a>
+            <a className="contact-action-primary" href={siteSettings.contact.mapsHref} rel="noreferrer" target="_blank">Haritada Aç</a>
+            <a className="contact-action-secondary" href={siteSettings.contact.phoneHref} rel="noreferrer" target="_blank">WhatsApp</a>
+            <Link className="contact-action-secondary" to="/contact">İletişim</Link>
           </div>
         </div>
         <div className="min-h-64 rounded-3xl bg-gradient-to-br from-brand-light via-white to-[#FFF8EC] p-5 dark:from-cyan-400/10 dark:via-slate-950 dark:to-slate-900">

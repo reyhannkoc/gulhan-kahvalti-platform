@@ -6,6 +6,7 @@ export const translations = {
   tr: {
     account: 'Hesap',
     accountDescription: 'Hesap bilgilerinizi görüntüleyin.',
+    about: 'Hakkımızda',
     adminDashboard: 'Yönetici Paneli',
     adminDashboardDescription: 'Geçiş yapmak istediğiniz yönetim alanını seçin.',
     adminPanel: 'Yönetici Paneli',
@@ -62,6 +63,7 @@ export const translations = {
   en: {
     account: 'Account',
     accountDescription: 'View your account information.',
+    about: 'About',
     adminDashboard: 'Admin Dashboard',
     adminDashboardDescription: 'Choose the management area you want to open.',
     adminPanel: 'Admin Panel',

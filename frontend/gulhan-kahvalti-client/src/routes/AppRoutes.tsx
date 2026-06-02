@@ -19,12 +19,16 @@ import { ProductsPage } from '../pages/ProductsPage'
 import { SettingsPage } from '../pages/SettingsPage'
 import { AdminRoute } from './AdminRoute'
 import { ProtectedRoute } from './ProtectedRoute'
+import { AboutPage } from '../pages/AboutPage'
+import { ContactPage } from '../pages/ContactPage'
 
 export function AppRoutes() {
   return (
     <Routes>
       <Route element={<MainLayout />}>
         <Route element={<HomePage />} index />
+        <Route element={<AboutPage />} path="about" />
+        <Route element={<ContactPage />} path="contact" />
         <Route element={<MenuPage />} path="menu" />
         <Route element={<ProductsPage />} path="products" />
         <Route element={<ProductDetailPage />} path="products/:id" />

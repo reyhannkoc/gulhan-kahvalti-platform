@@ -36,19 +36,15 @@ export function Footer() {
 
         <section className="grid gap-7 sm:grid-cols-2 md:pt-2">
           <div>
-            <h2 className="text-sm font-semibold uppercase tracking-wide text-cyan-200">İletişim</h2>
-            <nav className="mt-4 flex flex-col gap-3 text-sm text-slate-300" aria-label="İletişim bağlantıları">
-              <a className="transition hover:text-cyan-200" href={siteSettings.contact.phoneHref} rel="noreferrer" target="_blank">
-                {siteSettings.contact.phoneDisplay}
-              </a>
-              <a className="transition hover:text-cyan-200" href={siteSettings.contact.emailHref}>
-                {siteSettings.contact.email}
-              </a>
+            <h2 className="text-sm font-semibold uppercase tracking-wide text-cyan-200">Kurumsal</h2>
+            <nav className="mt-4 flex flex-col gap-3 text-sm text-slate-300" aria-label="Kurumsal bağlantılar">
+              <Link className="transition hover:text-cyan-200" to="/about">Hakkımızda</Link>
+              <Link className="transition hover:text-cyan-200" to="/contact">İletişim</Link>
             </nav>
           </div>
 
           <div>
-            <h2 className="text-sm font-semibold uppercase tracking-wide text-cyan-200">Menü / Ürünlerimiz</h2>
+            <h2 className="text-sm font-semibold uppercase tracking-wide text-cyan-200">Ürünlerimiz</h2>
             <nav className="mt-4 flex flex-col gap-3 text-sm text-slate-300" aria-label="Menü ve ürün bağlantıları">
               <Link className="transition hover:text-cyan-200" to="/menu">Menü</Link>
               <Link className="transition hover:text-cyan-200" to="/products">Ürünlerimiz</Link>

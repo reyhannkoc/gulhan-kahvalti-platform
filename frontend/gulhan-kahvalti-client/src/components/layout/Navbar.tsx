@@ -14,6 +14,14 @@ const linkClass = ({ isActive }: { isActive: boolean }) =>
       : 'text-slate-700 hover:bg-brand-light hover:text-cyan-800 dark:text-slate-200 dark:hover:bg-white/10 dark:hover:text-cyan-100',
   ].join(' ')
 
+const menuCtaClass = ({ isActive }: { isActive: boolean }) =>
+  [
+    'inline-flex w-full items-center justify-center rounded-full border px-4 py-2 text-sm font-bold transition lg:w-auto',
+    isActive
+      ? 'border-brand-turquoise bg-brand-turquoise text-white'
+      : 'border-brand-turquoise bg-white text-cyan-800 hover:bg-brand-turquoise hover:text-white dark:bg-slate-950 dark:text-cyan-100 dark:hover:bg-brand-turquoise dark:hover:text-white',
+  ].join(' ')
+
 const iconButtonClass =
   'inline-flex h-10 w-10 items-center justify-center rounded-full border border-cyan-200 text-cyan-800 transition hover:bg-brand-light dark:border-white/15 dark:text-cyan-100 dark:hover:bg-white/10'
 
@@ -67,9 +75,10 @@ export function Navbar() {
             {!isAuthenticated ? (
               <>
                 <NavLink className={linkClass} onClick={closeMenu} to="/">{t('home')}</NavLink>
-                <NavLink className={linkClass} onClick={closeMenu} to="/menu">{t('menu')}</NavLink>
+                <NavLink className={menuCtaClass} onClick={closeMenu} to="/menu">{t('menu')}</NavLink>
                 <NavLink className={linkClass} onClick={closeMenu} to="/products">{t('ourProducts')}</NavLink>
-                <Link className={linkClass({ isActive: false })} onClick={closeMenu} to="/">{t('contact')}</Link>
+                <NavLink className={linkClass} onClick={closeMenu} to="/about">{t('about')}</NavLink>
+                <NavLink className={linkClass} onClick={closeMenu} to="/contact">{t('contact')}</NavLink>
                 <NavLink className={linkClass} onClick={closeMenu} to="/login">{t('login')}</NavLink>
                 <NavLink className={linkClass} onClick={closeMenu} to="/register">{t('register')}</NavLink>
               </>
@@ -78,7 +87,7 @@ export function Navbar() {
             {isUser ? (
               <>
                 <NavLink className={linkClass} onClick={closeMenu} to="/">{t('home')}</NavLink>
-                <NavLink className={linkClass} onClick={closeMenu} to="/menu">{t('menu')}</NavLink>
+                <NavLink className={menuCtaClass} onClick={closeMenu} to="/menu">{t('menu')}</NavLink>
                 <NavLink className={linkClass} onClick={closeMenu} to="/products">{t('ourProducts')}</NavLink>
                 <NavLink className={linkClass} onClick={closeMenu} to="/cart">{t('cart')}</NavLink>
                 <NavLink className={linkClass} onClick={closeMenu} to="/my-orders">{t('myOrders')}</NavLink>
