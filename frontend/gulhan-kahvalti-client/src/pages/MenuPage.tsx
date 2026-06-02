@@ -1,4 +1,5 @@
-import { brandImages } from '../config/brandImages'
+import { Link } from 'react-router-dom'
+import { Button } from '../components/ui/Button'
 import { restaurantMenu } from '../config/restaurantMenu'
 
 export function MenuPage() {
@@ -13,27 +14,23 @@ export function MenuPage() {
               Kahvaltılar, sıkmalar, gözlemeler, yumurta çeşitleri ve içecekler için bilgilendirme menüsü.
               Bu sayfada sepete ekleme veya ödeme akışı bulunmaz.
             </p>
+            <div className="mt-6">
+              <Link to="/products">
+                <Button>Sipariş İçin Ürünlerimiz</Button>
+              </Link>
+            </div>
           </div>
-          <div className="overflow-hidden rounded-3xl border border-cyan-300/30 bg-white/10 p-4">
-            {brandImages.menuPhoto ? (
-              <img
-                alt="Gülhan Kahvaltı fiziksel menü fotoğrafı"
-                className="h-64 w-full rounded-2xl object-cover"
-                loading="lazy"
-                src={brandImages.menuPhoto}
-              />
-            ) : (
-              <div className="flex h-64 items-center justify-center rounded-2xl border border-dashed border-cyan-200/50 bg-white/5 p-5 text-center text-sm text-cyan-100">
-                Fiziksel menü fotoğrafı için placeholder
-              </div>
-            )}
-          </div>
+
+          <CoastalMenuPanel />
         </div>
       </div>
 
-      <p className="rounded-3xl border border-cyan-100 bg-brand-light p-4 text-sm font-semibold text-cyan-900 dark:border-white/10 dark:bg-cyan-400/10 dark:text-cyan-100">
-        Menü içerikleri bilgilendirme amaçlıdır. Sipariş için Ürünlerimiz sayfasını ziyaret edebilirsiniz.
-      </p>
+      <div className="flex flex-col gap-3 rounded-3xl border border-cyan-100 bg-brand-light p-4 text-sm font-semibold text-cyan-900 sm:flex-row sm:items-center sm:justify-between dark:border-white/10 dark:bg-cyan-400/10 dark:text-cyan-100">
+        <p>Menü içerikleri bilgilendirme amaçlıdır. Sipariş vermek için Ürünlerimiz sayfasını ziyaret edin.</p>
+        <Link className="shrink-0 text-cyan-800 underline-offset-4 hover:underline dark:text-cyan-100" to="/products">
+          Ürünlerimiz
+        </Link>
+      </div>
 
       <div className="grid gap-5 lg:grid-cols-2">
         {restaurantMenu.map((section) => (
@@ -62,5 +59,33 @@ export function MenuPage() {
         ))}
       </div>
     </section>
+  )
+}
+
+function CoastalMenuPanel() {
+  return (
+    <div className="relative min-h-72 overflow-hidden rounded-3xl border border-cyan-300/30 bg-gradient-to-br from-cyan-300/25 via-white/10 to-brand-accent/20 p-5">
+      <div className="absolute -right-10 -top-10 h-32 w-32 rounded-full bg-cyan-300/30 blur-2xl" />
+      <div className="absolute -bottom-12 left-6 h-36 w-36 rounded-full bg-brand-accent/25 blur-2xl" />
+      <div className="absolute inset-x-8 top-10 h-20 rounded-full border border-white/15" />
+
+      <div className="relative flex min-h-64 flex-col justify-between rounded-2xl border border-white/20 bg-white/10 p-5 backdrop-blur-sm">
+        <div>
+          <p className="text-xs font-semibold uppercase tracking-[0.28em] text-cyan-100">Gülhan Kahvaltı</p>
+          <h2 className="mt-3 text-2xl font-bold text-white">Deniz Esintili Menü</h2>
+          <p className="mt-3 text-sm leading-6 text-slate-200">
+            Kahvaltı sofraları, ev yapımı lezzetler ve sıcak içecekler tek sayfada.
+          </p>
+        </div>
+
+        <div className="mt-6 grid gap-3 sm:grid-cols-3">
+          {['Kahvaltılar', 'Sıkmalar', 'İçecekler'].map((item) => (
+            <div className="rounded-2xl bg-white/10 p-3 text-center text-sm font-semibold text-cyan-50" key={item}>
+              {item}
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
   )
 }
