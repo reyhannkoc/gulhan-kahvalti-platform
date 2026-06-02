@@ -3,6 +3,8 @@
 export const siteSettings = {
   businessName: 'Gülhan Kahvaltı',
   slogan: 'Güne Lezzetle Başla',
+  description:
+    'Deniz kokusu, ev yapımı lezzetler ve sıcak kahvaltı sofralarıyla Ayaş’ta güne güzel bir başlangıç.',
   logo: {
     imageUrl: null as string | null,
     alt: 'Gülhan Kahvaltı',
@@ -12,7 +14,9 @@ export const siteSettings = {
     phoneDisplay: '0539 290 39 09',
     phoneHref: 'https://wa.me/905392903909',
     email: 'fgulhanergin@gmail.com',
-    emailHref: 'mailto:fgulhanergin@gmail.com?subject=G%C3%BClhan%20Kahvalt%C4%B1%20%C4%B0leti%C5%9Fim',
+    emailHref: 'mailto:fgulhanergin@gmail.com?subject=Gülhan%20Kahvaltı%20İletişim',
+    mapsHref:
+      'https://www.google.com/maps/search/?api=1&query=Lamos%20Otel%20Yan%C4%B1%2C%20Aya%C5%9F%2C%20Atat%C3%BCrk%20Cd.%20No%3A87A%2C%2033750%20Erdemli%2FMersin',
   },
   social: {
     facebook: 'https://www.facebook.com/share/1MDpJ1LRdt/?mibextid=wwXIfr',
