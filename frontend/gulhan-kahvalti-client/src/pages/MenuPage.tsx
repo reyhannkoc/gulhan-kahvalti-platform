@@ -2,6 +2,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Button } from '../components/ui/Button'
+import menuHeroImage from '../assets/brand/sea/menu-hero.jpg'
 import { brandImages } from '../config/brandImages'
 import { restaurantMenu } from '../config/restaurantMenu'
 
@@ -159,36 +160,23 @@ export function MenuPage() {
 
 function MenuHeroPanel() {
   return (
-    <div className="relative min-h-72 overflow-hidden rounded-3xl">
+    <div className="relative min-h-[22rem] overflow-hidden rounded-3xl border border-white/15 shadow-brand-md ring-1 ring-white/10 sm:min-h-[26rem] lg:min-h-[30rem]">
       <img
-        alt="Ayaş deniz manzarası"
+        alt="Gülhan Kahvaltı menü görseli"
         className="absolute inset-0 h-full w-full object-cover"
-        loading="lazy"
-        src={brandImages.seaView}
+        loading="eager"
+        src={menuHeroImage}
       />
-      <div className="absolute inset-0 bg-slate-950/55" />
+      <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/35 to-slate-950/20" />
+      <div className="absolute inset-0 bg-gradient-to-r from-slate-950/45 via-transparent to-slate-950/10" />
 
-      <div className="relative flex min-h-64 flex-col justify-between p-5">
-        <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.28em] text-cyan-200">
-            Gülhan Kahvaltı
-          </p>
-          <h2 className="mt-3 font-display text-2xl font-bold text-white">Deniz Esintili Menü</h2>
-          <p className="mt-3 text-sm leading-6 text-slate-200">
-            Kahvaltı sofraları, ev yapımı lezzetler ve sıcak içecekler tek sayfada.
-          </p>
-        </div>
-
-        <div className="mt-6 grid grid-cols-3 gap-2">
-          {['Kahvaltılar', 'Sıkmalar', 'İçecekler'].map((item) => (
-            <div
-              key={item}
-              className="rounded-2xl border border-white/20 bg-white/10 p-3 text-center text-sm font-semibold text-cyan-50 backdrop-blur-sm"
-            >
-              {item}
-            </div>
-          ))}
-        </div>
+      <div className="relative flex min-h-[22rem] flex-col justify-end p-5 sm:min-h-[26rem] sm:p-6 lg:min-h-[30rem]">
+        <h2 className="max-w-sm font-display text-2xl font-bold text-white drop-shadow-sm sm:text-3xl">
+          Deniz Esintili Menü
+        </h2>
+        <p className="mt-3 max-w-sm text-sm leading-6 text-slate-100 drop-shadow-sm sm:text-base">
+          Kahvaltı sofraları, ev yapımı lezzetler ve sıcak içecekler tek sayfada.
+        </p>
       </div>
     </div>
   )
