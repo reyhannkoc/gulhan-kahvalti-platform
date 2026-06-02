@@ -32,6 +32,15 @@ const productionLocalhostMessage =
     ? 'API adresi production ortamında localhost olarak ayarlanmış. Render frontend ortam değişkeninde VITE_API_BASE_URL değerini deployed backend URL’i olarak güncelleyin.'
     : null
 
+const debugApiRequests = import.meta.env.PROD || import.meta.env.DEV
+
+if (debugApiRequests) {
+  console.info('[Gulhan API] Axios baseURL', {
+    rawBaseURL: rawApiBaseUrl,
+    finalBaseURL: apiBaseUrl,
+  })
+}
+
 export const api = axios.create({
   baseURL: apiBaseUrl,
   timeout: requestTimeoutMs,
@@ -49,6 +58,14 @@ api.interceptors.request.use((config) => {
 
   if (token) {
     config.headers.Authorization = `Bearer ${token}`
+  }
+
+  if (debugApiRequests) {
+    console.info('[Gulhan API]', {
+      baseURL: config.baseURL,
+      method: config.method?.toUpperCase() ?? 'GET',
+      url: config.url,
+    })
   }
 
   return config

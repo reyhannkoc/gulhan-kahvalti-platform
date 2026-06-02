@@ -16,7 +16,7 @@ export const siteSettings = {
     email: 'fgulhanergin@gmail.com',
     emailHref: 'mailto:fgulhanergin@gmail.com?subject=Gülhan%20Kahvaltı%20İletişim',
     mapsHref:
-      'https://www.google.com/maps/search/?api=1&query=Lamos%20Otel%20Yan%C4%B1%2C%20Aya%C5%9F%2C%20Atat%C3%BCrk%20Cd.%20No%3A87A%2C%2033750%20Erdemli%2FMersin',
+      'https://www.google.com/maps/place/G%C3%BClhan+Kahvalt%C4%B1+Salonu/@36.5060489,34.197262,17z/data=!4m6!3m5!1s0x14d88ded265a587f:0x39989cd3e39f268b!8m2!3d36.5055284!4d34.196303!16s%2Fg%2F11k866n15h?entry=ttu&g_ep=EgoyMDI2MDUzMS4wIKXMDSoASAFQAw%3D%3D',
   },
   social: {
     facebook: 'https://www.facebook.com/share/1MDpJ1LRdt/?mibextid=wwXIfr',
