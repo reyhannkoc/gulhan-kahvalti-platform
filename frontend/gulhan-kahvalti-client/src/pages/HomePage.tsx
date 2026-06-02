@@ -345,15 +345,15 @@ function HomemadeProductsSection() {
       </motion.div>
 
       <motion.div
-        className="overflow-hidden rounded-3xl shadow-warm-lg"
+        className="overflow-hidden rounded-3xl border border-amber-100/80 bg-white p-2 shadow-warm-lg ring-1 ring-white/70 dark:border-amber-400/10 dark:bg-slate-900 dark:ring-white/10"
         initial={{ opacity: 0, x: 36 }}
         transition={{ delay: 0.12, duration: 0.85, ease: [0.25, 0.46, 0.45, 0.94] }}
         viewport={{ margin: '-80px', once: true }}
         whileInView={{ opacity: 1, x: 0 }}
       >
         <img
-          alt="Gülhan Kahvaltı ev yapımı kavanoz ürünleri"
-          className="h-full min-h-72 w-full object-cover"
+          alt="Gerçek Gülhan Kahvaltı ev yapımı reçelleri, turşuları ve kahvaltılık ürünleri"
+          className="h-[520px] w-full rounded-[1.35rem] bg-brand-cream object-contain object-center sm:h-[620px] lg:h-[680px] dark:bg-slate-950"
           loading="lazy"
           src={brandImages.homemadeJars}
         />
