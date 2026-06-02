@@ -1,12 +1,19 @@
 import axios, { AxiosError } from 'axios'
 import { clearStoredToken, clearStoredUser, getStoredToken } from '../utils/authStorage'
 
-const apiBaseUrl = import.meta.env.VITE_API_BASE_URL
+const rawApiBaseUrl = import.meta.env.VITE_API_BASE_URL
 const requestTimeoutMs = 15000
 
-if (!apiBaseUrl) {
+if (!rawApiBaseUrl) {
   throw new Error('VITE_API_BASE_URL is not configured.')
 }
+
+function normalizeApiBaseUrl(url: string) {
+  const trimmedUrl = url.trim().replace(/\/+$/, '')
+  return /\/api$/i.test(trimmedUrl) ? trimmedUrl : `${trimmedUrl}/api`
+}
+
+const apiBaseUrl = normalizeApiBaseUrl(rawApiBaseUrl)
 
 function isLocalApiUrl(url: string) {
   return /https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?/i.test(url)
