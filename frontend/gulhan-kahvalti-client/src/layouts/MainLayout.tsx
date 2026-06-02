@@ -7,7 +7,7 @@ export function MainLayout() {
   const location = useLocation()
 
   return (
-    <div className="flex min-h-screen flex-col bg-stone-50">
+    <div className="flex min-h-screen flex-col bg-brand-gray text-brand-text transition-colors dark:bg-slate-950 dark:text-slate-100">
       <Navbar />
       <main className="mx-auto w-full max-w-6xl flex-1 px-3 py-5 sm:px-4 sm:py-8">
         <motion.div

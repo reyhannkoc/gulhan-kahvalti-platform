@@ -2,6 +2,7 @@
 // when the backend site_settings infrastructure is implemented.
 export const siteSettings = {
   businessName: 'Gülhan Kahvaltı',
+  slogan: 'Güne Lezzetle Başla',
   logo: {
     imageUrl: null as string | null,
     alt: 'Gülhan Kahvaltı',

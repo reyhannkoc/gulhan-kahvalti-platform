@@ -78,7 +78,7 @@ export function ProductDetailPage() {
   }
 
   if (loading) {
-    return <LoadingSpinner label="Ürün yükleniyor" />
+    return <LoadingSpinner label="Ürün yükleniyor. Servis uyanıyorsa bu işlem kısa sürebilir." />
   }
 
   if (error && !product) {
@@ -91,30 +91,30 @@ export function ProductDetailPage() {
 
   return (
     <section className="grid gap-6 lg:grid-cols-[0.9fr_1.1fr] lg:gap-8">
-      <div className="aspect-[4/3] overflow-hidden rounded-lg bg-stone-100">
+      <div className="aspect-[4/3] overflow-hidden rounded-3xl border border-cyan-100 bg-brand-light shadow-sm dark:border-white/10 dark:bg-slate-900">
         {product.imageUrl ? (
           <img alt={product.name} className="h-full w-full object-cover" src={product.imageUrl} />
         ) : (
-          <div className="flex h-full items-center justify-center text-stone-500">Ürün görseli</div>
+          <div className="flex h-full items-center justify-center text-slate-500 dark:text-slate-300">Ürün görseli</div>
         )}
       </div>
-      <div className="space-y-5">
-        <Link className="text-sm font-semibold text-emerald-700 hover:text-emerald-800" to="/products">
+      <div className="space-y-5 rounded-3xl border border-cyan-100 bg-white p-5 shadow-sm sm:p-6 dark:border-white/10 dark:bg-slate-900">
+        <Link className="text-sm font-semibold text-brand-turquoise hover:text-cyan-700 dark:text-cyan-200" to="/products">
           Ürünlerimize dön
         </Link>
         <div>
-          <p className="text-sm font-medium uppercase tracking-wide text-emerald-700">{product.categoryName || 'Kategori'}</p>
-          <h1 className="mt-2 text-2xl font-bold text-stone-950 sm:text-3xl">{product.name}</h1>
+          <p className="text-sm font-bold uppercase tracking-wide text-brand-turquoise">{product.categoryName || 'Kategori'}</p>
+          <h1 className="mt-2 text-2xl font-bold text-brand-text sm:text-3xl dark:text-white">{product.name}</h1>
         </div>
-        <p className="text-xl font-bold text-stone-900 sm:text-2xl">{formatPrice(product.price)}</p>
-        <p className="leading-7 text-stone-600">{product.description || 'Bu ürün için açıklama henüz eklenmedi.'}</p>
-        <p className={product.stock > 0 ? 'text-sm text-emerald-700' : 'text-sm text-red-700'}>
+        <p className="text-2xl font-bold text-brand-text dark:text-white">{formatPrice(product.price)}</p>
+        <p className="leading-7 text-slate-600 dark:text-slate-300">{product.description || 'Bu ürün için açıklama henüz eklenmedi.'}</p>
+        <p className={product.stock > 0 ? 'text-sm font-semibold text-cyan-700 dark:text-cyan-200' : 'text-sm font-semibold text-red-700 dark:text-red-300'}>
           {product.stock > 0 ? `Stokta ${product.stock} adet var` : 'Stokta yok'}
         </p>
-        {message ? <p className="rounded-lg bg-emerald-50 p-3 text-sm text-emerald-800">{message}</p> : null}
-        {error ? <p className="rounded-lg bg-red-50 p-3 text-sm text-red-700">{error}</p> : null}
+        {message ? <p className="rounded-xl bg-cyan-50 p-3 text-sm text-cyan-800 dark:bg-cyan-400/10 dark:text-cyan-100">{message}</p> : null}
+        {error ? <p className="rounded-xl bg-red-50 p-3 text-sm text-red-700 dark:bg-red-400/10 dark:text-red-200">{error}</p> : null}
         {isAdmin ? (
-          <Link className="inline-flex rounded-lg bg-stone-900 px-4 py-2 text-sm font-semibold text-white transition hover:bg-stone-800" to="/admin">
+          <Link className="inline-flex rounded-full bg-slate-900 px-4 py-2 text-sm font-semibold text-white transition hover:bg-slate-800 dark:bg-white dark:text-slate-950" to="/admin">
             Admin panele dön
           </Link>
         ) : (

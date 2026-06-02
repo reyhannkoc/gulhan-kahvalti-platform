@@ -21,19 +21,19 @@ export function MenuPage() {
 
       <div className="grid gap-5 lg:grid-cols-2">
         {restaurantMenu.map((section) => (
-          <article className="rounded-2xl border border-cyan-100 bg-white p-5 shadow-sm sm:p-6" key={section.category}>
+          <article className="rounded-3xl border border-cyan-100 bg-white p-5 shadow-sm transition hover:shadow-brand sm:p-6 dark:border-white/10 dark:bg-slate-900" key={section.category}>
             <div className="border-b border-stone-100 pb-4">
-              <h2 className="text-xl font-bold text-slate-950">{section.category}</h2>
-              <p className="mt-2 text-sm leading-6 text-slate-600">{section.description}</p>
+              <h2 className="text-xl font-bold text-slate-950 dark:text-white">{section.category}</h2>
+              <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-300">{section.description}</p>
             </div>
             <div className="mt-5 space-y-4">
               {section.items.map((item) => (
                 <div className="grid gap-2 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-start" key={item.name}>
                   <div className="min-w-0">
-                    <h3 className="font-semibold text-slate-900">{item.name}</h3>
-                    <p className="mt-1 text-sm leading-6 text-slate-600">{item.description}</p>
+                    <h3 className="font-semibold text-slate-900 dark:text-white">{item.name}</h3>
+                    <p className="mt-1 text-sm leading-6 text-slate-600 dark:text-slate-300">{item.description}</p>
                   </div>
-                  <p className="rounded-full bg-cyan-50 px-3 py-1 text-sm font-bold text-cyan-800">{item.price}</p>
+                  <p className="rounded-full bg-brand-light px-3 py-1 text-sm font-bold text-cyan-800 dark:bg-cyan-400/10 dark:text-cyan-100">{item.price}</p>
                 </div>
               ))}
             </div>

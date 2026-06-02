@@ -13,7 +13,7 @@ export function Footer() {
             />
             <div>
               <p className="text-lg font-semibold text-white">{siteSettings.businessName}</p>
-              <p className="text-sm text-cyan-100">Kahvaltı & yöresel lezzetler</p>
+              <p className="text-sm text-cyan-100">{siteSettings.slogan}</p>
             </div>
           </div>
 
@@ -23,7 +23,7 @@ export function Footer() {
 
           <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
             <a
-              className="inline-flex min-h-11 items-center justify-center rounded-full bg-cyan-500 px-5 text-sm font-semibold text-slate-950 shadow-sm transition hover:bg-cyan-300 focus:outline-none focus:ring-2 focus:ring-cyan-200 focus:ring-offset-2 focus:ring-offset-slate-950"
+              className="inline-flex min-h-11 items-center justify-center rounded-full bg-cyan-400 px-5 text-sm font-semibold text-slate-950 shadow-sm transition hover:bg-brand-accent focus:outline-none focus:ring-2 focus:ring-cyan-200 focus:ring-offset-2 focus:ring-offset-slate-950"
               href={siteSettings.contact.phoneHref}
               rel="noreferrer"
               target="_blank"
@@ -34,7 +34,7 @@ export function Footer() {
               className="inline-flex min-h-11 items-center justify-center rounded-full border border-cyan-300/70 px-5 text-sm font-semibold text-cyan-50 transition hover:bg-cyan-400/10 focus:outline-none focus:ring-2 focus:ring-cyan-200 focus:ring-offset-2 focus:ring-offset-slate-950"
               href={siteSettings.contact.emailHref}
             >
-              E-Mail
+              E-posta
             </a>
           </div>
         </section>
@@ -55,11 +55,11 @@ export function Footer() {
           <div>
             <h2 className="text-sm font-semibold uppercase tracking-wide text-cyan-200">Menü & Ürünler</h2>
             <nav className="mt-4 flex flex-col gap-3 text-sm text-slate-300" aria-label="Ürün bağlantıları">
-              <Link className="transition hover:text-cyan-200" to="/products">
-                Ürünlerimiz
-              </Link>
               <Link className="transition hover:text-cyan-200" to="/menu">
                 Menü
+              </Link>
+              <Link className="transition hover:text-cyan-200" to="/products">
+                Ürünlerimiz
               </Link>
             </nav>
           </div>
@@ -103,7 +103,7 @@ export function Footer() {
       <div className="border-t border-white/10">
         <div className="mx-auto flex max-w-6xl flex-col gap-2 px-4 py-5 text-sm text-slate-400 sm:flex-row sm:items-center sm:justify-between sm:px-6">
           <p>© {new Date().getFullYear()} {siteSettings.businessName}</p>
-          <p>Turkuaz ve beyaz marka yönü için hazırlanmış MVP footer.</p>
+          <p>Turkuaz, beyaz ve sıcak yerel marka deneyimi.</p>
         </div>
       </div>
     </footer>

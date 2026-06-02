@@ -83,13 +83,13 @@ export function CartPage() {
 
   return (
     <section className="space-y-6">
-      <div>
+      <div className="rounded-3xl border border-cyan-100 bg-white p-5 shadow-sm dark:border-white/10 dark:bg-slate-900">
         <h1 className="text-2xl font-bold text-stone-950 sm:text-3xl">Sepet</h1>
-        <p className="mt-2 text-stone-600">Sepet ürünlerinizi yönetin.</p>
+        <p className="mt-2 text-stone-600">Sepet ürünlerinizi yönetin ve ödeme adımına geçin.</p>
       </div>
 
-      {message ? <p className="rounded-lg bg-emerald-50 p-3 text-sm text-emerald-800">{message}</p> : null}
-      {error ? <p className="rounded-lg bg-red-50 p-3 text-sm text-red-700">{error}</p> : null}
+      {message ? <p className="rounded-xl bg-cyan-50 p-3 text-sm text-cyan-800 dark:bg-cyan-400/10 dark:text-cyan-100">{message}</p> : null}
+      {error ? <p className="rounded-xl bg-red-50 p-3 text-sm text-red-700 dark:bg-red-400/10 dark:text-red-200">{error}</p> : null}
       {loading ? <LoadingSpinner label="Sepet yükleniyor" /> : null}
 
       {!loading && cartItems.length === 0 ? (
@@ -108,8 +108,8 @@ export function CartPage() {
         <div className="grid min-w-0 gap-5 lg:grid-cols-[minmax(0,1fr)_320px] lg:gap-6">
           <div className="space-y-3">
             {cartItems.map((item) => (
-              <article className="grid gap-4 rounded-lg border border-stone-200 bg-white p-4 sm:grid-cols-[80px_minmax(0,1fr)] sm:items-center lg:grid-cols-[80px_minmax(0,1fr)_auto_auto_auto]" key={item.id}>
-                <div className="h-20 w-20 shrink-0 overflow-hidden rounded-lg bg-stone-100">
+              <article className="grid gap-4 rounded-2xl border border-cyan-100 bg-white p-4 shadow-sm sm:grid-cols-[80px_minmax(0,1fr)] sm:items-center lg:grid-cols-[80px_minmax(0,1fr)_auto_auto_auto] dark:border-white/10 dark:bg-slate-900" key={item.id}>
+                <div className="h-20 w-20 shrink-0 overflow-hidden rounded-2xl bg-brand-light dark:bg-slate-800">
                   {item.productImageUrl ? (
                     <img alt={item.productName} className="h-full w-full object-cover" src={item.productImageUrl} />
                   ) : null}
@@ -135,7 +135,7 @@ export function CartPage() {
             ))}
           </div>
 
-          <aside className="h-fit rounded-lg border border-stone-200 bg-white p-4 sm:p-5 lg:sticky lg:top-24">
+          <aside className="h-fit rounded-2xl border border-cyan-100 bg-white p-4 shadow-sm sm:p-5 lg:sticky lg:top-24 dark:border-white/10 dark:bg-slate-900">
             <h2 className="text-lg font-semibold text-stone-950">Sepet özeti</h2>
             <div className="mt-4 flex items-center justify-between text-sm">
               <span>Toplam</span>

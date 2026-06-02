@@ -11,8 +11,53 @@ body,
 body {
   margin: 0;
   overflow-x: hidden;
+  background: #f5f7fa;
+  color: #1f2933;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+}
+
+.dark body {
+  background: #071a1f;
+  color: #edfafa;
+}
+
+::selection {
+  background: #00a6a6;
+  color: #ffffff;
+}
+
+.dark .bg-white {
+  background-color: #0f172a;
+}
+
+.dark .bg-stone-50,
+.dark .bg-stone-100 {
+  background-color: #111827;
+}
+
+.dark .border-stone-100,
+.dark .border-stone-200,
+.dark .border-stone-300 {
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+.dark .text-stone-950,
+.dark .text-stone-900,
+.dark .text-brand-text {
+  color: #ffffff;
+}
+
+.dark .text-stone-800,
+.dark .text-stone-700,
+.dark .text-stone-600,
+.dark .text-slate-600 {
+  color: #cbd5e1;
+}
+
+.dark .text-stone-500,
+.dark .text-slate-500 {
+  color: #94a3b8;
 }
 
 * {

@@ -34,9 +34,10 @@ export function RegisterPage() {
   }
 
   return (
-    <section className="mx-auto max-w-md rounded-lg border border-stone-200 bg-white p-6 shadow-sm">
+    <section className="mx-auto max-w-md rounded-3xl border border-cyan-100 bg-white p-6 shadow-brand dark:border-white/10 dark:bg-slate-900">
       <div className="mb-6">
-        <h1 className="text-2xl font-bold text-stone-950">{t('register')}</h1>
+        <p className="text-sm font-semibold uppercase tracking-wide text-brand-turquoise">Gülhan Kahvaltı</p>
+        <h1 className="mt-2 text-2xl font-bold text-stone-950">{t('register')}</h1>
         <p className="mt-2 text-sm text-stone-600">{t('registerDescription')}</p>
       </div>
 
@@ -77,7 +78,7 @@ export function RegisterPage() {
             />
             <button
               aria-label={showPassword ? t('hidePassword') : t('showPassword')}
-              className="absolute inset-y-0 right-0 flex w-10 items-center justify-center text-stone-500 transition hover:text-stone-800"
+              className="absolute inset-y-0 right-0 flex w-10 items-center justify-center text-stone-500 transition hover:text-brand-turquoise dark:text-slate-300"
               onClick={() => setShowPassword((current) => !current)}
               type="button"
             >
@@ -95,7 +96,7 @@ export function RegisterPage() {
 
       <p className="mt-4 text-center text-sm text-stone-600">
         {t('alreadyHaveAccount')}{' '}
-        <Link className="font-semibold text-emerald-700 hover:text-emerald-800" to="/login">
+        <Link className="font-semibold text-brand-turquoise hover:text-cyan-700 dark:text-cyan-200" to="/login">
           {t('login')}
         </Link>
       </p>

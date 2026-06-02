@@ -67,15 +67,15 @@ export function ProductsPage() {
 
   return (
     <section className="space-y-6">
-      <div className="rounded-2xl bg-cyan-50 px-4 py-6 sm:px-6">
-        <p className="text-sm font-semibold uppercase tracking-wide text-cyan-700">Online sipariş</p>
+      <div className="rounded-3xl border border-cyan-100 bg-brand-light px-4 py-6 shadow-sm sm:px-6 dark:border-white/10 dark:bg-cyan-400/10">
+        <p className="text-sm font-semibold uppercase tracking-wide text-cyan-700 dark:text-cyan-200">Online sipariş</p>
         <h1 className="mt-2 text-2xl font-bold text-slate-950 sm:text-3xl">Ürünlerimiz</h1>
-        <p className="mt-2 max-w-2xl text-slate-600">
+        <p className="mt-2 max-w-2xl text-slate-600 dark:text-slate-300">
           Sepete ekleyebileceğiniz ürünler burada listelenir. Menü sayfası ise yalnızca restoran menüsü ve fiyat bilgilendirmesi içindir.
         </p>
       </div>
 
-      {loading ? <LoadingSpinner label="Ürünler yükleniyor" /> : null}
+      {loading ? <LoadingSpinner label="Ürünler yükleniyor. Render servisi uyanıyorsa bu işlem kısa sürebilir." /> : null}
 
       {error ? <EmptyState description={error} title="Ürünler getirilemedi" /> : null}
       {message ? <p className="rounded-lg bg-emerald-50 p-3 text-sm text-emerald-800">{message}</p> : null}

@@ -99,13 +99,13 @@ export function CheckoutPage() {
 
   return (
     <section className="grid min-w-0 gap-5 lg:grid-cols-[minmax(0,1fr)_320px] lg:gap-6">
-      <form className="space-y-4 rounded-lg border border-stone-200 bg-white p-4 sm:p-5" onSubmit={handleSubmit}>
+      <form className="space-y-4 rounded-3xl border border-cyan-100 bg-white p-4 shadow-sm sm:p-5 dark:border-white/10 dark:bg-slate-900" onSubmit={handleSubmit}>
         <div>
           <h1 className="text-2xl font-bold text-stone-950 sm:text-3xl">Ödeme</h1>
           <p className="mt-2 text-stone-600">Demo sipariş için teslimat bilgilerini girin.</p>
         </div>
 
-        {error ? <p className="rounded-lg bg-red-50 p-3 text-sm text-red-700">{error}</p> : null}
+        {error ? <p className="rounded-xl bg-red-50 p-3 text-sm text-red-700 dark:bg-red-400/10 dark:text-red-200">{error}</p> : null}
 
         <FormField htmlFor="customerName" label="Ad soyad">
           <Input id="customerName" onChange={(event) => setCustomerName(event.target.value)} required value={customerName} />
@@ -115,7 +115,7 @@ export function CheckoutPage() {
         </FormField>
         <FormField htmlFor="customerAddress" label="Adres">
           <textarea
-            className="min-h-24 w-full rounded-lg border border-stone-300 bg-white px-3 py-2 text-sm text-stone-900 outline-none focus:border-emerald-700 focus:ring-2 focus:ring-emerald-100"
+            className="min-h-24 w-full rounded-xl border border-cyan-100 bg-white px-3 py-2 text-sm text-brand-text outline-none transition focus:border-brand-turquoise focus:ring-2 focus:ring-cyan-100 dark:border-white/15 dark:bg-slate-950 dark:text-white dark:focus:ring-cyan-400/20"
             id="customerAddress"
             onChange={(event) => setCustomerAddress(event.target.value)}
             required
@@ -130,7 +130,7 @@ export function CheckoutPage() {
         </Button>
       </form>
 
-      <aside className="h-fit rounded-lg border border-stone-200 bg-white p-4 sm:p-5 lg:sticky lg:top-24">
+      <aside className="h-fit rounded-3xl border border-cyan-100 bg-white p-4 shadow-sm sm:p-5 lg:sticky lg:top-24 dark:border-white/10 dark:bg-slate-900">
         <h2 className="text-lg font-semibold text-stone-950">Sipariş özeti</h2>
         <div className="mt-4 space-y-3">
           {cartItems.map((item) => (
@@ -140,7 +140,7 @@ export function CheckoutPage() {
             </div>
           ))}
         </div>
-        <div className="mt-5 border-t border-stone-200 pt-4">
+        <div className="mt-5 border-t border-cyan-100 pt-4 dark:border-white/10">
           <div className="flex justify-between">
             <span>Toplam</span>
             <span className="font-bold">{formatPrice(total)}</span>

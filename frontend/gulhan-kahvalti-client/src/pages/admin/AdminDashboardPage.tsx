@@ -25,7 +25,7 @@ export function AdminDashboardPage() {
 
   return (
     <section className="space-y-6">
-      <div>
+      <div className="rounded-3xl border border-cyan-100 bg-brand-light p-5 dark:border-white/10 dark:bg-cyan-400/10">
         <h1 className="text-2xl font-bold text-stone-950">{t('adminDashboard')}</h1>
         <p className="mt-2 text-stone-600">
           {t('adminDashboardDescription')}
@@ -35,7 +35,7 @@ export function AdminDashboardPage() {
       <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
         {quickLinks.map((link) => (
           <Link
-            className="rounded-lg border border-stone-200 bg-stone-50 p-4 transition hover:border-emerald-300 hover:bg-emerald-50"
+            className="rounded-2xl border border-cyan-100 bg-white p-4 shadow-sm transition hover:-translate-y-0.5 hover:border-cyan-200 hover:shadow-brand dark:border-white/10 dark:bg-slate-950"
             key={link.to}
             to={link.to}
           >

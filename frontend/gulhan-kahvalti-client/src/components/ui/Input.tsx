@@ -8,10 +8,10 @@ export function Input({ className = '', hasError = false, ...props }: InputProps
   return (
     <input
       className={[
-        'w-full rounded-lg border bg-white px-3 py-2 text-sm text-stone-900 outline-none transition placeholder:text-stone-400 focus:ring-2',
+        'w-full rounded-xl border bg-white px-3 py-2 text-sm text-brand-text outline-none transition placeholder:text-slate-400 focus:ring-2 dark:bg-slate-950 dark:text-white dark:placeholder:text-slate-500',
         hasError
           ? 'border-red-300 focus:border-red-500 focus:ring-red-100'
-          : 'border-stone-300 focus:border-emerald-700 focus:ring-emerald-100',
+          : 'border-cyan-100 focus:border-brand-turquoise focus:ring-cyan-100 dark:border-white/15 dark:focus:border-cyan-300 dark:focus:ring-cyan-400/20',
         className,
       ].join(' ')}
       {...props}
