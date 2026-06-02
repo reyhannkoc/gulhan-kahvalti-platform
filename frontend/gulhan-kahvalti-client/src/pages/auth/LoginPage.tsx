@@ -15,6 +15,8 @@ export function LoginPage() {
   const [password, setPassword] = useState('')
   const [showPassword, setShowPassword] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const [submitting, setSubmitting] = useState(false)
+  const [slowRequest, setSlowRequest] = useState(false)
 
   if (isAuthenticated) {
     return <Navigate replace to={isAdmin ? '/admin' : '/products'} />
@@ -23,6 +25,12 @@ export function LoginPage() {
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
     setError(null)
+    setSubmitting(true)
+    setSlowRequest(false)
+
+    const slowTimer = window.setTimeout(() => {
+      setSlowRequest(true)
+    }, 3000)
 
     try {
       const nextUser = await login({ email, password })
@@ -32,6 +40,10 @@ export function LoginPage() {
       navigate(nextPath, { replace: true })
     } catch (err) {
       setError(getApiErrorMessage(err, t('loginFailed')))
+    } finally {
+      window.clearTimeout(slowTimer)
+      setSlowRequest(false)
+      setSubmitting(false)
     }
   }
 
@@ -78,10 +90,27 @@ export function LoginPage() {
           </div>
         </FormField>
 
+        {submitting ? (
+          <div
+            aria-live="polite"
+            className="rounded-2xl border border-cyan-100 bg-brand-light/70 p-3 text-sm text-cyan-900 dark:border-cyan-400/20 dark:bg-cyan-400/10 dark:text-cyan-100"
+          >
+            <div className="flex items-center gap-3">
+              <span className="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-brand-turquoise dark:border-white/20 dark:border-t-cyan-300" />
+              <span>{t('loggingIn')}</span>
+            </div>
+            {slowRequest ? (
+              <p className="mt-2 text-xs text-cyan-800/80 dark:text-cyan-100/80">
+                Sunucu hazırlanıyor olabilir. Lütfen birkaç saniye daha bekleyin.
+              </p>
+            ) : null}
+          </div>
+        ) : null}
+
         {error ? <p className="rounded-lg bg-red-50 p-3 text-sm text-red-700">{error}</p> : null}
 
-        <Button disabled={loading} fullWidth type="submit">
-          {loading ? t('loggingIn') : t('login')}
+        <Button disabled={loading || submitting} fullWidth type="submit">
+          {submitting ? t('loggingIn') : t('login')}
         </Button>
       </form>
 

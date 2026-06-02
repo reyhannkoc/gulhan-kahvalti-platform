@@ -1,6 +1,7 @@
 import { AnimatePresence, motion } from 'framer-motion'
-import { useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import { ProductCard } from '../components/product/ProductCard'
+import { Button } from '../components/ui/Button'
 import { EmptyState } from '../components/ui/EmptyState'
 import { LoadingSpinner } from '../components/ui/LoadingSpinner'
 import { useAuth } from '../hooks/useAuth'
@@ -16,6 +17,7 @@ export function ProductsPage() {
   const [products, setProducts] = useState<Product[]>([])
   const [selectedCategory, setSelectedCategory] = useState(allCategories)
   const [loading, setLoading] = useState(true)
+  const [loadingSlow, setLoadingSlow] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [message, setMessage] = useState<string | null>(null)
   const [addingProductId, setAddingProductId] = useState<number | null>(null)
@@ -36,8 +38,10 @@ export function ProductsPage() {
 
   const categoryCounts = useMemo(() => {
     const counts: Record<string, number> = { [allCategories]: products.length }
-    for (const p of products) {
-      if (p.categoryName) counts[p.categoryName] = (counts[p.categoryName] ?? 0) + 1
+    for (const product of products) {
+      if (product.categoryName) {
+        counts[product.categoryName] = (counts[product.categoryName] ?? 0) + 1
+      }
     }
     return counts
   }, [products])
@@ -50,35 +54,30 @@ export function ProductsPage() {
     [products, selectedCategory],
   )
 
-  useEffect(() => {
-    let isMounted = true
+  const loadProducts = useCallback(async () => {
+    setLoading(true)
+    setLoadingSlow(false)
+    setError(null)
 
-    async function loadProducts() {
-      try {
-        setLoading(true)
-        setError(null)
-        const nextProducts = await productService.getAll()
+    const slowTimer = window.setTimeout(() => {
+      setLoadingSlow(true)
+    }, 3000)
 
-        if (isMounted) {
-          setProducts(nextProducts)
-        }
-      } catch (err) {
-        if (isMounted) {
-          setError(getApiErrorMessage(err, 'Ürünler yüklenemedi.'))
-        }
-      } finally {
-        if (isMounted) {
-          setLoading(false)
-        }
-      }
-    }
-
-    loadProducts()
-
-    return () => {
-      isMounted = false
+    try {
+      const nextProducts = await productService.getAll()
+      setProducts(nextProducts)
+    } catch (err) {
+      setError(getApiErrorMessage(err, 'Ürünler yüklenemedi.'))
+    } finally {
+      window.clearTimeout(slowTimer)
+      setLoading(false)
+      setLoadingSlow(false)
     }
   }, [])
+
+  useEffect(() => {
+    loadProducts()
+  }, [loadProducts])
 
   async function addToCart(product: Product) {
     if (!isAuthenticated) {
@@ -101,7 +100,6 @@ export function ProductsPage() {
 
   return (
     <section className="space-y-6">
-      {/* Hero header */}
       <motion.div
         animate={{ opacity: 1, y: 0 }}
         className="overflow-hidden rounded-[2rem] border border-brand-turquoise/25 bg-gradient-to-br from-brand-light via-white to-white px-5 py-8 shadow-brand-sm sm:px-8 sm:py-10 dark:border-cyan-400/15 dark:from-cyan-400/10 dark:via-slate-900 dark:to-slate-900"
@@ -120,43 +118,64 @@ export function ProductsPage() {
         </p>
       </motion.div>
 
-      {loading ? <LoadingSpinner label="Ürünler yükleniyor, sistem hazırlanıyor..." /> : null}
+      {loading ? (
+        <div className="space-y-4">
+          <LoadingSpinner label="Ürünler yükleniyor, sistem hazırlanıyor..." />
+          {loadingSlow ? (
+            <p className="rounded-2xl border border-cyan-100 bg-white/90 px-4 py-3 text-sm text-slate-600 shadow-sm dark:border-white/10 dark:bg-slate-900 dark:text-slate-300">
+              Backend Render üzerinde uyanıyor olabilir. Bu işlem ilk açılışta birkaç saniye
+              sürebilir.
+            </p>
+          ) : null}
+          <ProductSkeletonGrid />
+        </div>
+      ) : null}
 
-      {error ? <EmptyState description={error} title="Ürünler getirilemedi" /> : null}
+      {error ? (
+        <EmptyState
+          action={
+            <Button disabled={loading} onClick={loadProducts}>
+              Tekrar Dene
+            </Button>
+          }
+          description={error}
+          title="Ürünler getirilemedi"
+        />
+      ) : null}
+
       {message ? (
         <p className="rounded-xl bg-brand-light p-3 text-sm text-cyan-800 dark:bg-cyan-400/10 dark:text-cyan-100">
           {message}
         </p>
       ) : null}
 
-      {/* Category filter with count badges */}
       {!loading && !error && products.length > 0 ? (
         <div className="flex gap-2 overflow-x-auto pb-1">
           {categories.map((category) => (
-              <button
+            <button
+              className={[
+                'inline-flex shrink-0 items-center gap-2 rounded-full border px-4 py-2 text-sm font-semibold transition duration-250',
+                selectedCategory === category
+                  ? 'border-brand-turquoise bg-brand-turquoise text-white shadow-brand-sm'
+                  : 'border-cyan-100 bg-white text-slate-700 hover:border-brand-turquoise/40 hover:bg-brand-light dark:border-white/10 dark:bg-slate-900 dark:text-slate-300 dark:hover:bg-white/10',
+              ].join(' ')}
+              key={category}
+              onClick={() => setSelectedCategory(category)}
+              type="button"
+            >
+              {category}
+              <span
                 className={[
-                  'shrink-0 inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-semibold transition duration-250',
+                  'rounded-full px-1.5 py-0.5 text-xs font-bold',
                   selectedCategory === category
-                    ? 'border-brand-turquoise bg-brand-turquoise text-white shadow-brand-sm'
-                    : 'border-cyan-100 bg-white text-slate-700 hover:border-brand-turquoise/40 hover:bg-brand-light dark:border-white/10 dark:bg-slate-900 dark:text-slate-300 dark:hover:bg-white/10',
+                    ? 'bg-white/20 text-white'
+                    : 'bg-slate-100 text-slate-500 dark:bg-white/10 dark:text-slate-400',
                 ].join(' ')}
-                key={category}
-                onClick={() => setSelectedCategory(category)}
-                type="button"
               >
-                {category}
-                <span
-                  className={[
-                    'rounded-full px-1.5 py-0.5 text-xs font-bold',
-                    selectedCategory === category
-                      ? 'bg-white/20 text-white'
-                      : 'bg-slate-100 text-slate-500 dark:bg-white/10 dark:text-slate-400',
-                  ].join(' ')}
-                >
-                  {categoryCounts[category] ?? 0}
-                </span>
-              </button>
-            ))}
+                {categoryCounts[category] ?? 0}
+              </span>
+            </button>
+          ))}
         </div>
       ) : null}
 
@@ -171,7 +190,6 @@ export function ProductsPage() {
         <EmptyState title="Bu kategoride ürün yok" />
       ) : null}
 
-      {/* Product grid — animates when category changes */}
       {!loading && !error && visibleProducts.length > 0 ? (
         <AnimatePresence mode="wait">
           <motion.div
@@ -194,5 +212,31 @@ export function ProductsPage() {
         </AnimatePresence>
       ) : null}
     </section>
+  )
+}
+
+function ProductSkeletonGrid() {
+  return (
+    <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3" aria-hidden="true">
+      {Array.from({ length: 6 }).map((_, index) => (
+        <motion.div
+          animate={{ opacity: 1, y: 0 }}
+          className="overflow-hidden rounded-3xl border border-cyan-100 bg-white shadow-card dark:border-white/10 dark:bg-slate-900"
+          initial={{ opacity: 0, y: 10 }}
+          key={index}
+          transition={{ delay: index * 0.04, duration: 0.25 }}
+        >
+          <div className="relative aspect-[4/3] overflow-hidden bg-gradient-to-br from-brand-light via-white to-cyan-50 dark:from-cyan-400/10 dark:via-slate-800 dark:to-slate-900">
+            <div className="absolute inset-0 animate-pulse bg-gradient-to-r from-transparent via-white/70 to-transparent dark:via-white/10" />
+          </div>
+          <div className="space-y-3 p-4">
+            <div className="h-4 w-3/4 animate-pulse rounded-full bg-cyan-100 dark:bg-white/10" />
+            <div className="h-3 w-full animate-pulse rounded-full bg-slate-100 dark:bg-white/10" />
+            <div className="h-3 w-2/3 animate-pulse rounded-full bg-slate-100 dark:bg-white/10" />
+            <div className="h-6 w-24 animate-pulse rounded-full bg-cyan-100 dark:bg-white/10" />
+          </div>
+        </motion.div>
+      ))}
+    </div>
   )
 }

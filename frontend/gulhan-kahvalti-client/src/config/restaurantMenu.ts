@@ -63,4 +63,22 @@ export const restaurantMenu = [
       { name: 'Izgara Seçenekleri', description: 'Mevcut günlük seçenekler için bilgi alınız.', price: 'Sorunuz' },
     ],
   },
+  {
+    category: 'Reçeller',
+    description: 'Ev yapımı, katkısız ve mevsimlik meyvelerden hazırlanan reçeller.',
+    items: [
+      { name: 'Ev Yapımı Çilek Reçeli', description: 'Taze çileklerden yapılan katkısız reçel.', price: '₺120' },
+      { name: 'Ev Yapımı Vişne Reçeli', description: 'Ekşi-tatlı dengesiyle hazırlanan vişne reçeli.', price: '₺120' },
+      { name: 'Ev Yapımı İncir Reçeli', description: 'Ege incirinden yapılan doğal reçel.', price: '₺130' },
+      { name: 'Ev Yapımı Portakal Reçeli', description: 'Aromalı ve taze portakaldan hazırlanan reçel.', price: '₺120' },
+    ],
+  },
+  {
+    category: 'Turşular',
+    description: 'Kendi ekşisinde olgunlaşan, doğal fermente ev yapımı turşular.',
+    items: [
+      { name: 'Ev Yapımı Salatalık Turşusu', description: 'Klasik ve çıtır ev turşusu.', price: '₺90' },
+      { name: 'Ev Yapımı Karışık Sebze Turşusu', description: 'Mevsim sebzelerinden hazırlanan karışık turşu.', price: '₺100' },
+    ],
+  },
 ] as const

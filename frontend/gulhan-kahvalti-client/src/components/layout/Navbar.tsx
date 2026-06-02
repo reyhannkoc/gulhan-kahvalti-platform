@@ -6,6 +6,7 @@ import { useAuth } from '../../hooks/useAuth'
 import { useCartCount } from '../../hooks/useCartCount'
 import { useLanguage } from '../../hooks/useLanguage'
 import { useTheme } from '../../hooks/useTheme'
+import { GulhanLogo } from '../ui/GulhanLogo'
 
 // ── Class factories ────────────────────────────────────────────────────────────
 
@@ -16,15 +17,6 @@ const desktopLink = ({ isActive }: { isActive: boolean }) =>
     isActive
       ? 'bg-brand-turquoise text-white shadow-sm'
       : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900 dark:text-slate-300 dark:hover:bg-white/10 dark:hover:text-white',
-  ].join(' ')
-
-// Desktop bordered Menu CTA
-const desktopMenuCta = ({ isActive }: { isActive: boolean }) =>
-  [
-    'px-4 py-1.5 rounded-full text-sm font-semibold border transition duration-200 whitespace-nowrap',
-    isActive
-      ? 'border-brand-turquoise bg-brand-turquoise text-white'
-      : 'border-brand-turquoise text-brand-turquoise hover:bg-brand-turquoise hover:text-white dark:text-cyan-300 dark:border-cyan-400 dark:hover:bg-cyan-400 dark:hover:text-slate-950',
   ].join(' ')
 
 // Mobile drawer row link
@@ -83,7 +75,7 @@ export function Navbar() {
 
           {/* ── Brand logo ── */}
           <Link className="flex shrink-0 items-center gap-2.5" onClick={close} to="/">
-            <BrandMark />
+            <GulhanLogo className="h-10 w-auto shrink-0 text-slate-900 dark:text-white" />
             <span className="hidden min-w-0 flex-col leading-none sm:flex">
               <span className="truncate font-display text-[15px] font-bold text-slate-900 dark:text-white">
                 {t('brand')}
@@ -99,7 +91,7 @@ export function Navbar() {
             {!isAuthenticated && (
               <>
                 <NavLink className={desktopLink} end onClick={close} to="/">{t('home')}</NavLink>
-                <NavLink className={desktopMenuCta} onClick={close} to="/menu">{t('menu')}</NavLink>
+                <NavLink className={desktopLink} onClick={close} to="/menu">{t('menu')}</NavLink>
                 <NavLink className={desktopLink} onClick={close} to="/products">{t('ourProducts')}</NavLink>
                 <NavLink className={desktopLink} onClick={close} to="/about">{t('about')}</NavLink>
                 <NavLink className={desktopLink} onClick={close} to="/contact">{t('contact')}</NavLink>
@@ -108,7 +100,7 @@ export function Navbar() {
             {isUser && (
               <>
                 <NavLink className={desktopLink} end onClick={close} to="/">{t('home')}</NavLink>
-                <NavLink className={desktopMenuCta} onClick={close} to="/menu">{t('menu')}</NavLink>
+                <NavLink className={desktopLink} onClick={close} to="/menu">{t('menu')}</NavLink>
                 <NavLink className={desktopLink} onClick={close} to="/products">{t('ourProducts')}</NavLink>
                 <NavLink className={desktopLink} onClick={close} to="/my-orders">{t('myOrders')}</NavLink>
                 <NavLink className={desktopLink} onClick={close} to="/account">{t('account')}</NavLink>
@@ -367,35 +359,6 @@ export function Navbar() {
 }
 
 // ── Sub-components ─────────────────────────────────────────────────────────────
-
-function BrandMark() {
-  return (
-    <svg
-      aria-hidden="true"
-      className="h-9 w-9 shrink-0"
-      fill="none"
-      viewBox="0 0 36 36"
-    >
-      <rect fill="url(#bm-grad)" height="36" rx="9" width="36" />
-      {/* Sun */}
-      <circle cx="18" cy="12" fill="white" opacity="0.95" r="3.5" />
-      {/* Wave */}
-      <path
-        d="M7 23 Q10.5 18.5, 14 23 Q17.5 27.5, 21 23 Q24.5 18.5, 28 23"
-        fill="none"
-        stroke="white"
-        strokeLinecap="round"
-        strokeWidth="2.2"
-      />
-      <defs>
-        <linearGradient gradientUnits="userSpaceOnUse" id="bm-grad" x1="0" x2="36" y1="0" y2="36">
-          <stop offset="0%" stopColor="#00A6A6" />
-          <stop offset="100%" stopColor="#007C7C" />
-        </linearGradient>
-      </defs>
-    </svg>
-  )
-}
 
 function CartBadge({ count }: { count: number }) {
   return (

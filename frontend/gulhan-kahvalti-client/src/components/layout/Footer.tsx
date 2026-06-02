@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { siteSettings } from '../../config/siteSettings'
+import { GulhanLogo } from '../ui/GulhanLogo'
 
 export function Footer() {
   return (
@@ -7,7 +8,7 @@ export function Footer() {
       <div className="mx-auto grid max-w-6xl gap-8 px-4 py-10 sm:px-6 md:grid-cols-2 lg:grid-cols-3 lg:gap-10">
         <section className="space-y-5">
           <div className="flex items-center gap-4">
-            <FooterBrandMark />
+            <GulhanLogo className="h-14 w-auto shrink-0 text-cyan-300" />
             <div>
               <p className="text-lg font-semibold text-white">{siteSettings.businessName}</p>
               <p className="text-sm text-cyan-300/80">{siteSettings.slogan}</p>
@@ -107,39 +108,6 @@ export function Footer() {
         </div>
       </div>
     </footer>
-  )
-}
-
-function FooterBrandMark() {
-  return (
-    <svg
-      aria-hidden="true"
-      className="h-14 w-14 shrink-0"
-      fill="none"
-      viewBox="0 0 56 56"
-    >
-      <defs>
-        <linearGradient id="footer-brand-grad" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stopColor="#22d3ee" />
-          <stop offset="100%" stopColor="#0891b2" />
-        </linearGradient>
-      </defs>
-      <rect fill="url(#footer-brand-grad)" height="56" opacity="0.18" rx="14" width="56" />
-      <circle cx="28" cy="21" r="7" stroke="#22d3ee" strokeWidth="1.75" />
-      <path
-        d="M12 34c2.5-3 5-3 7.5 0s5 3 7.5 0 5-3 7.5 0 5 3 7.5 0"
-        stroke="#22d3ee"
-        strokeLinecap="round"
-        strokeWidth="1.75"
-      />
-      <path
-        d="M12 41c2.5-3 5-3 7.5 0s5 3 7.5 0 5-3 7.5 0 5 3 7.5 0"
-        opacity="0.45"
-        stroke="#22d3ee"
-        strokeLinecap="round"
-        strokeWidth="1.5"
-      />
-    </svg>
   )
 }
 
