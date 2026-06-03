@@ -17,7 +17,6 @@ const languageStorageKey = 'gulhan_language'
 interface LanguageContextValue {
   language: Language
   setLanguage: (language: Language) => void
-  toggleLanguage: () => void
   t: (key: TranslationKey) => string
 }
 
@@ -28,8 +27,8 @@ interface LanguageProviderProps {
 }
 
 function getStoredLanguage(): Language {
-  const storedLanguage = localStorage.getItem(languageStorageKey)
-  return storedLanguage === 'en' || storedLanguage === 'tr' ? storedLanguage : defaultLanguage
+  localStorage.setItem(languageStorageKey, defaultLanguage)
+  return defaultLanguage
 }
 
 export function LanguageProvider({ children }: LanguageProviderProps) {
@@ -40,10 +39,6 @@ export function LanguageProvider({ children }: LanguageProviderProps) {
     setLanguageState(nextLanguage)
   }, [])
 
-  const toggleLanguage = useCallback(() => {
-    setLanguage(language === 'tr' ? 'en' : 'tr')
-  }, [language, setLanguage])
-
   const t = useCallback(
     (key: TranslationKey) => translations[language][key],
     [language],
@@ -53,10 +48,9 @@ export function LanguageProvider({ children }: LanguageProviderProps) {
     () => ({
       language,
       setLanguage,
-      toggleLanguage,
       t,
     }),
-    [language, setLanguage, t, toggleLanguage],
+    [language, setLanguage, t],
   )
 
   return <LanguageContext.Provider value={value}>{children}</LanguageContext.Provider>

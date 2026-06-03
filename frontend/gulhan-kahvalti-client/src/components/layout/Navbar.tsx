@@ -36,7 +36,7 @@ const iconBtn =
 
 export function Navbar() {
   const { isAdmin, isAuthenticated, isUser, logout } = useAuth()
-  const { language, t, toggleLanguage } = useLanguage()
+  const { t } = useLanguage()
   const { isDark, toggleTheme } = useTheme()
   const cartCount = useCartCount(isUser)
   const [isOpen, setIsOpen] = useState(false)
@@ -171,14 +171,6 @@ export function Navbar() {
                 )}
               </NavLink>
             )}
-
-            <button
-              aria-label={language === 'tr' ? 'Switch to English' : 'Türkçeye geç'}
-              className={iconBtn}
-              onClick={toggleLanguage}
-            >
-              <span className="text-[11px] font-bold">{language === 'tr' ? 'EN' : 'TR'}</span>
-            </button>
 
             <button
               aria-label={isDark ? 'Açık temaya geç' : 'Koyu temaya geç'}
@@ -317,13 +309,6 @@ export function Navbar() {
                   )}
 
                   <div className="flex items-center gap-1">
-                    <button
-                      aria-label={language === 'tr' ? 'Switch to English' : 'Türkçeye geç'}
-                      className={iconBtn}
-                      onClick={toggleLanguage}
-                    >
-                      <span className="text-[11px] font-bold">{language === 'tr' ? 'EN' : 'TR'}</span>
-                    </button>
                     <button
                       aria-label={isDark ? 'Açık temaya geç' : 'Koyu temaya geç'}
                       className={iconBtn}

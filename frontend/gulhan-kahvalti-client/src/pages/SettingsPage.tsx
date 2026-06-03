@@ -2,7 +2,7 @@ import { useLanguage } from '../hooks/useLanguage'
 import { useTheme } from '../hooks/useTheme'
 
 export function SettingsPage() {
-  const { language, setLanguage, t } = useLanguage()
+  const { language, t } = useLanguage()
   const { theme, setTheme } = useTheme()
 
   return (
@@ -21,30 +21,9 @@ export function SettingsPage() {
               {t('selectedLanguage')}: {language.toUpperCase()}
             </p>
           </div>
-          <div className="grid grid-cols-2 gap-2 sm:flex">
-            <button
-              className={`rounded-full border px-4 py-2 text-sm font-semibold transition ${
-                language === 'tr'
-                  ? 'border-brand-turquoise bg-brand-light text-cyan-800'
-                  : 'border-cyan-100 text-stone-700 hover:bg-brand-light dark:border-white/15 dark:text-slate-200 dark:hover:bg-white/10'
-              }`}
-              onClick={() => setLanguage('tr')}
-              type="button"
-            >
-              TR
-            </button>
-            <button
-              className={`rounded-full border px-4 py-2 text-sm font-semibold transition ${
-                language === 'en'
-                  ? 'border-brand-turquoise bg-brand-light text-cyan-800'
-                  : 'border-cyan-100 text-stone-700 hover:bg-brand-light dark:border-white/15 dark:text-slate-200 dark:hover:bg-white/10'
-              }`}
-              onClick={() => setLanguage('en')}
-              type="button"
-            >
-              EN
-            </button>
-          </div>
+          <span className="rounded-full border border-brand-turquoise bg-brand-light px-4 py-2 text-sm font-semibold text-cyan-800">
+            Türkçe
+          </span>
         </div>
         <div className="mt-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <div>
