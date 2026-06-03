@@ -137,14 +137,14 @@ export function AdminProductsPage() {
   return (
     <section className="space-y-6">
       <div>
-        <h1 className="text-xl font-bold text-stone-950 sm:text-2xl">Ürün Yönetimi</h1>
-        <p className="mt-1 text-sm text-stone-600">Admin ürün ekleme, düzenleme ve silme.</p>
+        <h1 className="text-xl font-bold text-stone-950 sm:text-2xl dark:text-white">Ürün Yönetimi</h1>
+        <p className="mt-1 text-sm text-stone-600 dark:text-slate-300">Admin ürün ekleme, düzenleme ve silme.</p>
       </div>
 
-      {message ? <p className="rounded-lg bg-emerald-50 p-3 text-sm text-emerald-800">{message}</p> : null}
-      {error ? <p className="rounded-lg bg-red-50 p-3 text-sm text-red-700">{error}</p> : null}
+      {message ? <p className="rounded-lg bg-emerald-50 p-3 text-sm text-emerald-800 dark:bg-emerald-400/10 dark:text-emerald-200">{message}</p> : null}
+      {error ? <p className="rounded-lg bg-red-50 p-3 text-sm text-red-700 dark:bg-red-400/10 dark:text-red-200">{error}</p> : null}
 
-      <form className="grid gap-4 rounded-lg border border-stone-200 bg-stone-50 p-3 sm:p-4 lg:grid-cols-2" onSubmit={handleSubmit}>
+      <form className="grid gap-4 rounded-lg border border-stone-200 bg-stone-50 p-3 sm:p-4 lg:grid-cols-2 dark:border-white/10 dark:bg-slate-950/60" onSubmit={handleSubmit}>
         <FormField htmlFor="productName" label="Ürün adı">
           <Input
             id="productName"
@@ -155,7 +155,7 @@ export function AdminProductsPage() {
         </FormField>
         <FormField htmlFor="categoryId" label="Kategori">
           <select
-            className="w-full rounded-lg border border-stone-300 bg-white px-3 py-2 text-sm text-stone-900 outline-none focus:border-emerald-700 focus:ring-2 focus:ring-emerald-100"
+            className="w-full rounded-lg border border-stone-300 bg-white px-3 py-2 text-sm text-stone-900 outline-none focus:border-emerald-700 focus:ring-2 focus:ring-emerald-100 dark:border-white/15 dark:bg-slate-950 dark:text-white dark:focus:border-cyan-300 dark:focus:ring-cyan-400/20"
             id="categoryId"
             onChange={(event) => setForm((current) => ({ ...current, categoryId: event.target.value }))}
             required
@@ -197,7 +197,7 @@ export function AdminProductsPage() {
             value={form.imageUrl}
           />
         </FormField>
-        <label className="flex items-center gap-2 pt-7 text-sm text-stone-700">
+        <label className="flex items-center gap-2 pt-7 text-sm text-stone-700 dark:text-slate-200">
           <input
             checked={form.isActive}
             onChange={(event) => setForm((current) => ({ ...current, isActive: event.target.checked }))}
@@ -208,7 +208,7 @@ export function AdminProductsPage() {
         <div className="lg:col-span-2">
           <FormField htmlFor="description" label="Açıklama">
             <textarea
-              className="min-h-24 w-full rounded-lg border border-stone-300 bg-white px-3 py-2 text-sm text-stone-900 outline-none focus:border-emerald-700 focus:ring-2 focus:ring-emerald-100"
+              className="min-h-24 w-full rounded-lg border border-stone-300 bg-white px-3 py-2 text-sm text-stone-900 outline-none focus:border-emerald-700 focus:ring-2 focus:ring-emerald-100 dark:border-white/15 dark:bg-slate-950 dark:text-white dark:placeholder:text-slate-500 dark:focus:border-cyan-300 dark:focus:ring-cyan-400/20"
               id="description"
               onChange={(event) => setForm((current) => ({ ...current, description: event.target.value }))}
               value={form.description}
@@ -230,22 +230,22 @@ export function AdminProductsPage() {
       {loading ? <LoadingSpinner label="Ürünler yükleniyor" /> : null}
       {!loading && products.length === 0 ? <EmptyState title="Henüz ürün yok" /> : null}
       {!loading && products.length > 0 ? (
-        <div className="overflow-hidden rounded-lg border border-stone-200">
-          <div className="hidden grid-cols-[minmax(0,1fr)_120px_100px_160px] bg-stone-100 px-4 py-3 text-sm font-semibold text-stone-700 md:grid">
+        <div className="overflow-hidden rounded-lg border border-stone-200 dark:border-white/10">
+          <div className="hidden grid-cols-[minmax(0,1fr)_120px_100px_160px] bg-stone-100 px-4 py-3 text-sm font-semibold text-stone-700 md:grid dark:bg-slate-950 dark:text-slate-200">
             <span>Ürün</span>
             <span>Fiyat</span>
             <span>Stok</span>
             <span className="text-right">İşlem</span>
           </div>
-          <div className="divide-y divide-stone-200 bg-white">
+          <div className="divide-y divide-stone-200 bg-white dark:divide-white/10 dark:bg-slate-900">
             {products.map((product) => (
               <article className="grid gap-3 px-4 py-4 md:grid-cols-[minmax(0,1fr)_120px_100px_160px] md:items-center" key={product.id}>
                 <div className="min-w-0">
-                  <h2 className="font-semibold text-stone-900">{product.name}</h2>
-                  <p className="text-sm text-stone-600">{product.categoryName || 'Kategori yok'}</p>
+                  <h2 className="font-semibold text-stone-900 dark:text-white">{product.name}</h2>
+                  <p className="text-sm text-stone-600 dark:text-slate-300">{product.categoryName || 'Kategori yok'}</p>
                 </div>
-                <span className="text-sm text-stone-700">{formatPrice(product.price)}</span>
-                <span className="text-sm text-stone-700">{product.stock}</span>
+                <span className="text-sm text-stone-700 dark:text-slate-200">{formatPrice(product.price)}</span>
+                <span className="text-sm text-stone-700 dark:text-slate-200">{product.stock}</span>
                 <div className="grid gap-2 sm:flex md:justify-end">
                   <Button className="w-full sm:w-auto" onClick={() => editProduct(product)} variant="ghost">
                     Düzenle

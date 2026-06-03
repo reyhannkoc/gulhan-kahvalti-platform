@@ -109,14 +109,14 @@ export function AdminCategoriesPage() {
   return (
     <section className="space-y-6">
       <div>
-        <h1 className="text-xl font-bold text-stone-950 sm:text-2xl">Kategori Yönetimi</h1>
-        <p className="mt-1 text-sm text-stone-600">Kategori ekleme, düzenleme ve silme.</p>
+        <h1 className="text-xl font-bold text-stone-950 sm:text-2xl dark:text-white">Kategori Yönetimi</h1>
+        <p className="mt-1 text-sm text-stone-600 dark:text-slate-300">Kategori ekleme, düzenleme ve silme.</p>
       </div>
 
-      {message ? <p className="rounded-lg bg-emerald-50 p-3 text-sm text-emerald-800">{message}</p> : null}
-      {error ? <p className="rounded-lg bg-red-50 p-3 text-sm text-red-700">{error}</p> : null}
+      {message ? <p className="rounded-lg bg-emerald-50 p-3 text-sm text-emerald-800 dark:bg-emerald-400/10 dark:text-emerald-200">{message}</p> : null}
+      {error ? <p className="rounded-lg bg-red-50 p-3 text-sm text-red-700 dark:bg-red-400/10 dark:text-red-200">{error}</p> : null}
 
-      <form className="grid gap-4 rounded-lg border border-stone-200 bg-stone-50 p-3 sm:p-4 md:grid-cols-2" onSubmit={handleSubmit}>
+      <form className="grid gap-4 rounded-lg border border-stone-200 bg-stone-50 p-3 sm:p-4 md:grid-cols-2 dark:border-white/10 dark:bg-slate-950/60" onSubmit={handleSubmit}>
         <FormField htmlFor="categoryName" label="Kategori adı">
           <Input
             id="categoryName"
@@ -149,10 +149,10 @@ export function AdminCategoriesPage() {
       {!loading && categories.length > 0 ? (
         <div className="grid gap-3">
           {categories.map((category) => (
-            <article className="flex flex-col gap-3 rounded-lg border border-stone-200 bg-white p-4 sm:flex-row sm:items-center sm:justify-between" key={category.id}>
+            <article className="flex flex-col gap-3 rounded-lg border border-stone-200 bg-white p-4 sm:flex-row sm:items-center sm:justify-between dark:border-white/10 dark:bg-slate-900" key={category.id}>
               <div className="min-w-0">
-                <h2 className="font-semibold text-stone-900">{category.name}</h2>
-                <p className="text-sm text-stone-600">{category.description || 'Açıklama yok'}</p>
+                <h2 className="font-semibold text-stone-900 dark:text-white">{category.name}</h2>
+                <p className="text-sm text-stone-600 dark:text-slate-300">{category.description || 'Açıklama yok'}</p>
               </div>
               <div className="grid gap-2 sm:flex">
                 <Button className="w-full sm:w-auto" onClick={() => editCategory(category)} variant="ghost">

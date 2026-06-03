@@ -84,8 +84,8 @@ export function CartPage() {
   return (
     <section className="space-y-6">
       <div className="rounded-3xl border border-cyan-100 bg-white p-5 shadow-sm dark:border-white/10 dark:bg-slate-900">
-        <h1 className="text-2xl font-bold text-stone-950 sm:text-3xl">Sepet</h1>
-        <p className="mt-2 text-stone-600">Sepet ürünlerinizi yönetin ve ödeme adımına geçin.</p>
+        <h1 className="text-2xl font-bold text-stone-950 sm:text-3xl dark:text-white">Sepet</h1>
+        <p className="mt-2 text-stone-600 dark:text-slate-300">Sepet ürünlerinizi yönetin ve ödeme adımına geçin.</p>
       </div>
 
       {message ? <p className="rounded-xl bg-cyan-50 p-3 text-sm text-cyan-800 dark:bg-cyan-400/10 dark:text-cyan-100">{message}</p> : null}
@@ -115,19 +115,19 @@ export function CartPage() {
                   ) : null}
                 </div>
                 <div className="min-w-0 flex-1">
-                  <h2 className="font-semibold text-stone-900">{item.productName}</h2>
-                  <p className="text-sm text-stone-600">{formatPrice(item.unitPrice)}</p>
+                  <h2 className="font-semibold text-stone-900 dark:text-white">{item.productName}</h2>
+                  <p className="text-sm text-stone-600 dark:text-slate-300">{formatPrice(item.unitPrice)}</p>
                 </div>
                 <div className="flex items-center gap-2 sm:col-start-2 lg:col-start-auto">
                   <Button disabled={updatingId === item.id} onClick={() => updateQuantity(item, item.quantity - 1)} variant="ghost">
                     -
                   </Button>
-                  <span className="w-8 text-center text-sm font-semibold">{item.quantity}</span>
+                  <span className="w-8 text-center text-sm font-semibold text-stone-900 dark:text-white">{item.quantity}</span>
                   <Button disabled={updatingId === item.id} onClick={() => updateQuantity(item, item.quantity + 1)} variant="ghost">
                     +
                   </Button>
                 </div>
-                <div className="text-sm font-semibold text-stone-900 sm:col-start-2 lg:col-start-auto">{formatPrice(item.lineTotal)}</div>
+                <div className="text-sm font-semibold text-stone-900 sm:col-start-2 lg:col-start-auto dark:text-white">{formatPrice(item.lineTotal)}</div>
                 <Button className="w-full sm:col-start-2 sm:w-auto lg:col-start-auto" disabled={updatingId === item.id} onClick={() => removeItem(item)} variant="danger">
                   Sil
                 </Button>
@@ -136,10 +136,10 @@ export function CartPage() {
           </div>
 
           <aside className="h-fit rounded-2xl border border-cyan-100 bg-white p-4 shadow-sm sm:p-5 lg:sticky lg:top-24 dark:border-white/10 dark:bg-slate-900">
-            <h2 className="text-lg font-semibold text-stone-950">Sepet özeti</h2>
+            <h2 className="text-lg font-semibold text-stone-950 dark:text-white">Sepet özeti</h2>
             <div className="mt-4 flex items-center justify-between text-sm">
-              <span>Toplam</span>
-              <span className="text-lg font-bold">{formatPrice(total)}</span>
+              <span className="text-stone-600 dark:text-slate-300">Toplam</span>
+              <span className="text-lg font-bold text-stone-950 dark:text-white">{formatPrice(total)}</span>
             </div>
             <div className="mt-5 grid gap-2">
               <Link to="/checkout">

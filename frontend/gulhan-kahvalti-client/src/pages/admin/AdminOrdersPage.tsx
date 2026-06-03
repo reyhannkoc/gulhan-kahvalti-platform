@@ -52,8 +52,8 @@ export function AdminOrdersPage() {
   return (
     <section className="space-y-6">
       <div>
-        <h1 className="text-xl font-bold text-stone-950 sm:text-2xl">Sipariş Yönetimi</h1>
-        <p className="mt-1 text-sm text-stone-600">Tüm siparişleri görüntüleyin ve durumlarını güncelleyin.</p>
+        <h1 className="text-xl font-bold text-stone-950 sm:text-2xl dark:text-white">Sipariş Yönetimi</h1>
+        <p className="mt-1 text-sm text-stone-600 dark:text-slate-300">Tüm siparişleri görüntüleyin ve durumlarını güncelleyin.</p>
       </div>
 
       {message ? <Toast message={message} type="success" /> : null}
@@ -65,27 +65,27 @@ export function AdminOrdersPage() {
       {!loading && orders.length > 0 ? (
         <div className="grid gap-4">
           {orders.map((order) => (
-            <article className="rounded-lg border border-stone-200 bg-white p-4 shadow-sm sm:p-5" key={order.id}>
+            <article className="rounded-lg border border-stone-200 bg-white p-4 shadow-sm sm:p-5 dark:border-white/10 dark:bg-slate-900" key={order.id}>
               <div className="grid min-w-0 gap-4 lg:grid-cols-[minmax(0,1fr)_180px] lg:items-start">
                 <div className="space-y-3">
                   <div className="min-w-0">
-                    <h2 className="font-semibold text-stone-950">Sipariş #{order.id}</h2>
-                    <p className="text-sm text-stone-600">{order.customerName} - {order.customerPhone}</p>
-                    <p className="text-sm text-stone-500">{order.customerAddress}</p>
+                    <h2 className="font-semibold text-stone-950 dark:text-white">Sipariş #{order.id}</h2>
+                    <p className="text-sm text-stone-600 dark:text-slate-300">{order.customerName} - {order.customerPhone}</p>
+                    <p className="text-sm text-stone-500 dark:text-slate-400">{order.customerAddress}</p>
                   </div>
                   <div className="space-y-2">
                     {order.items.map((item) => (
                       <div className="flex flex-wrap justify-between gap-3 text-sm" key={item.id}>
-                        <span className="min-w-0 text-stone-700">{item.productName} x {item.quantity}</span>
-                        <span className="font-medium text-stone-900">{formatPrice(item.lineTotal)}</span>
+                        <span className="min-w-0 text-stone-700 dark:text-slate-200">{item.productName} x {item.quantity}</span>
+                        <span className="font-medium text-stone-900 dark:text-white">{formatPrice(item.lineTotal)}</span>
                       </div>
                     ))}
                   </div>
                 </div>
                 <div className="space-y-3">
-                  <p className="text-left text-lg font-bold text-stone-950 lg:text-right">{formatPrice(order.totalPrice)}</p>
+                  <p className="text-left text-lg font-bold text-stone-950 lg:text-right dark:text-white">{formatPrice(order.totalPrice)}</p>
                   <select
-                    className="w-full rounded-lg border border-stone-300 bg-white px-3 py-2 text-sm outline-none focus:border-emerald-700 focus:ring-2 focus:ring-emerald-100"
+                    className="w-full rounded-lg border border-stone-300 bg-white px-3 py-2 text-sm text-stone-900 outline-none focus:border-emerald-700 focus:ring-2 focus:ring-emerald-100 dark:border-white/15 dark:bg-slate-950 dark:text-white dark:focus:border-cyan-300 dark:focus:ring-cyan-400/20"
                     disabled={updatingId === order.id}
                     onChange={(event) => updateStatus(order, event.target.value as OrderStatus)}
                     value={order.status}
@@ -96,7 +96,7 @@ export function AdminOrdersPage() {
                       </option>
                     ))}
                   </select>
-                  <p className="text-left text-xs text-stone-500 lg:text-right">{new Date(order.createdAt).toLocaleString('tr-TR')}</p>
+                  <p className="text-left text-xs text-stone-500 lg:text-right dark:text-slate-400">{new Date(order.createdAt).toLocaleString('tr-TR')}</p>
                 </div>
               </div>
             </article>

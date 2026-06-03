@@ -51,8 +51,8 @@ export function LoginPage() {
     <section className="mx-auto max-w-md rounded-3xl border border-cyan-100 bg-white p-6 shadow-brand dark:border-white/10 dark:bg-slate-900">
       <div className="mb-6">
         <p className="text-sm font-semibold uppercase tracking-wide text-brand-turquoise">Gülhan Kahvaltı</p>
-        <h1 className="mt-2 text-2xl font-bold text-stone-950">{t('login')}</h1>
-        <p className="mt-2 text-sm text-stone-600">{t('loginDescription')}</p>
+        <h1 className="mt-2 text-2xl font-bold text-stone-950 dark:text-white">{t('login')}</h1>
+        <p className="mt-2 text-sm text-stone-600 dark:text-slate-300">{t('loginDescription')}</p>
       </div>
 
       <form className="space-y-4" onSubmit={handleSubmit}>
@@ -107,14 +107,14 @@ export function LoginPage() {
           </div>
         ) : null}
 
-        {error ? <p className="rounded-lg bg-red-50 p-3 text-sm text-red-700">{error}</p> : null}
+        {error ? <p className="rounded-lg bg-red-50 p-3 text-sm text-red-700 dark:bg-red-400/10 dark:text-red-200">{error}</p> : null}
 
         <Button disabled={loading || submitting} fullWidth type="submit">
           {submitting ? t('loggingIn') : t('login')}
         </Button>
       </form>
 
-      <p className="mt-4 text-center text-sm text-stone-600">
+      <p className="mt-4 text-center text-sm text-stone-600 dark:text-slate-300">
         {t('noAccount')}{' '}
         <Link className="font-semibold text-brand-turquoise hover:text-cyan-700 dark:text-cyan-200" to="/register">
           {t('register')}

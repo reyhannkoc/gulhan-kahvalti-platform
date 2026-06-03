@@ -46,7 +46,7 @@ export function ProductCard({ adding = false, onAddToCart, product }: ProductCar
           {/* Out-of-stock overlay */}
           {outOfStock ? (
             <div className="absolute inset-0 flex items-center justify-center bg-slate-950/55">
-              <span className="rounded-full bg-white/92 px-3 py-1 text-xs font-bold text-slate-700">
+              <span className="rounded-full bg-white/92 px-3 py-1 text-xs font-bold text-slate-700 dark:bg-slate-950/90 dark:text-slate-200">
                 Stok Yok
               </span>
             </div>

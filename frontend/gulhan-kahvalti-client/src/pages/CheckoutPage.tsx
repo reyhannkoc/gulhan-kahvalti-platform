@@ -101,8 +101,8 @@ export function CheckoutPage() {
     <section className="grid min-w-0 gap-5 lg:grid-cols-[minmax(0,1fr)_320px] lg:gap-6">
       <form className="space-y-4 rounded-3xl border border-cyan-100 bg-white p-4 shadow-sm sm:p-5 dark:border-white/10 dark:bg-slate-900" onSubmit={handleSubmit}>
         <div>
-          <h1 className="text-2xl font-bold text-stone-950 sm:text-3xl">Ödeme</h1>
-          <p className="mt-2 text-stone-600">Demo sipariş için teslimat bilgilerini girin.</p>
+          <h1 className="text-2xl font-bold text-stone-950 sm:text-3xl dark:text-white">Ödeme</h1>
+          <p className="mt-2 text-stone-600 dark:text-slate-300">Demo sipariş için teslimat bilgilerini girin.</p>
         </div>
 
         {error ? <p className="rounded-xl bg-red-50 p-3 text-sm text-red-700 dark:bg-red-400/10 dark:text-red-200">{error}</p> : null}
@@ -131,19 +131,19 @@ export function CheckoutPage() {
       </form>
 
       <aside className="h-fit rounded-3xl border border-cyan-100 bg-white p-4 shadow-sm sm:p-5 lg:sticky lg:top-24 dark:border-white/10 dark:bg-slate-900">
-        <h2 className="text-lg font-semibold text-stone-950">Sipariş özeti</h2>
+        <h2 className="text-lg font-semibold text-stone-950 dark:text-white">Sipariş özeti</h2>
         <div className="mt-4 space-y-3">
           {cartItems.map((item) => (
             <div className="flex flex-wrap justify-between gap-3 text-sm" key={item.id}>
-              <span className="min-w-0 text-stone-600">{item.productName} x {item.quantity}</span>
-              <span className="font-medium text-stone-900">{formatPrice(item.lineTotal)}</span>
+              <span className="min-w-0 text-stone-600 dark:text-slate-300">{item.productName} x {item.quantity}</span>
+              <span className="font-medium text-stone-900 dark:text-white">{formatPrice(item.lineTotal)}</span>
             </div>
           ))}
         </div>
         <div className="mt-5 border-t border-cyan-100 pt-4 dark:border-white/10">
           <div className="flex justify-between">
-            <span>Toplam</span>
-            <span className="font-bold">{formatPrice(total)}</span>
+            <span className="text-stone-600 dark:text-slate-300">Toplam</span>
+            <span className="font-bold text-stone-950 dark:text-white">{formatPrice(total)}</span>
           </div>
         </div>
       </aside>

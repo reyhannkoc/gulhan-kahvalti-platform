@@ -14,7 +14,7 @@ export function FormField({ label, htmlFor, error, children }: FormFieldProps) {
         {label}
       </label>
       {children}
-      {error ? <p className="text-sm text-red-600">{error}</p> : null}
+      {error ? <p className="text-sm text-red-600 dark:text-red-300">{error}</p> : null}
     </div>
   )
 }
