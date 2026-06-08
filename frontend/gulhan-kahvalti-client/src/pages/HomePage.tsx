@@ -446,15 +446,6 @@ function ContactSection() {
         </p>
         <div className="flex flex-wrap gap-3">
           <a
-            className="inline-flex items-center gap-1.5 rounded-full bg-brand-turquoise px-5 py-2.5 text-sm font-semibold text-white transition duration-250 hover:bg-brand-deep"
-            href={siteSettings.contact.mapsHref}
-            rel="noreferrer"
-            target="_blank"
-          >
-            <MapPinMiniIcon />
-            Haritada Aç
-          </a>
-          <a
             className="inline-flex items-center gap-1.5 rounded-full border border-emerald-300 px-5 py-2.5 text-sm font-semibold text-emerald-700 transition duration-250 hover:bg-emerald-50 dark:border-emerald-400/30 dark:text-emerald-400 dark:hover:bg-emerald-400/10"
             href={siteSettings.contact.phoneHref}
             rel="noreferrer"
@@ -702,26 +693,6 @@ function LocationPinIcon() {
       fill="none"
       stroke="currentColor"
       strokeWidth={1.75}
-      viewBox="0 0 24 24"
-    >
-      <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"
-      />
-    </svg>
-  )
-}
-
-function MapPinMiniIcon() {
-  return (
-    <svg
-      aria-hidden="true"
-      className="h-3.5 w-3.5 shrink-0"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth={2}
       viewBox="0 0 24 24"
     >
       <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />

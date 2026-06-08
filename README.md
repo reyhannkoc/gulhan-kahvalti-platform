@@ -1,15 +1,35 @@
-# Gulhan Kahvalti MVP
+# Gülhan Kahvaltı
 
-Full-stack restaurant showcase and demo e-commerce/order MVP for Gulhan Kahvalti.
+Gülhan Kahvaltı için geliştirilen modern tanıtım, menü gösterimi ve MVP e-ticaret/sipariş uygulaması.
 
-`gulhan.md` is the source of truth for architecture and scope. This project intentionally stays MVP-focused: product/category management, JWT authentication, cart, checkout without payment, stock reduction, order history, and admin order management.
+Proje; sahil atmosferini, ev yapımı ürünleri ve kahvaltı menüsünü tanıtan public bir restoran sitesi ile kullanıcıların ürünleri sepete ekleyip ödeme entegrasyonu olmadan sipariş oluşturabildiği temel bir sipariş akışını birleştirir. Admin kullanıcıları ürün, kategori ve sipariş yönetimi yapabilir.
 
-## Architecture
+`gulhan.md` proje mimarisi ve kapsamı için ana teknik referanstır.
+
+## Öne Çıkan Özellikler
+
+- React + TypeScript + Vite frontend
+- ASP.NET Core Web API backend
+- Neon PostgreSQL veritabanı
+- Entity Framework Core migration yapısı
+- JWT login/register
+- Admin/User rol tabanlı yetkilendirme
+- Ürün ve kategori CRUD
+- Sepet, checkout ve sipariş geçmişi
+- Admin sipariş yönetimi ve sipariş durumu güncelleme
+- Checkout sırasında stok azaltma
+- Türkçe/İngilizce dil desteği
+- Light/Dark tema desteği
+- Render uyumlu HashRouter routing
+- Render + Neon production deployment hazırlığı
+- Responsive sahil/restoran temalı public UI
+
+## Mimari
 
 ```text
-React + TypeScript frontend
+React + TypeScript Frontend
         |
-        | Axios HTTP requests
+        | Axios
         v
 ASP.NET Core Web API
         |
@@ -18,46 +38,166 @@ ASP.NET Core Web API
 Neon PostgreSQL
 ```
 
-## Tech Stack
+## Teknoloji Stack
 
 Backend:
 
-- ASP.NET Core Web API (.NET 8)
+- .NET 8
+- ASP.NET Core Web API
 - Entity Framework Core
-- PostgreSQL / Neon
-- JWT authentication
-- Role-based authorization
-- Repository and service layers
-- Swagger in Development only
+- Npgsql PostgreSQL Provider
+- JWT Bearer Authentication
+- BCrypt password hashing
+- Repository + Service katmanları
+- Swagger, yalnızca Development ortamında
 
 Frontend:
 
-- React
+- React 19
 - TypeScript
 - Vite
 - TailwindCSS
-- Framer Motion
 - React Router
 - Axios
+- Framer Motion
+- Context API
 
-Deployment target:
+Deployment:
 
 - Backend: Render Web Service
-- Frontend: Render Static Site or Vercel
+- Frontend: Render Static Site
 - Database: Neon PostgreSQL
 
-## Project Structure
+## Proje Yapısı
 
 ```text
-backend/GulhanKahvalti.API      ASP.NET Core API
-frontend/gulhan-kahvalti-client React client
-docs/                           Setup, smoke test, QA, and deployment docs
-gulhan.md                       Technical reference
+.
+├── backend/
+│   └── GulhanKahvalti.API/
+│       ├── Controllers/
+│       ├── Data/
+│       ├── DTOs/
+│       ├── Helpers/
+│       ├── Middleware/
+│       ├── Models/
+│       ├── Repositories/
+│       ├── Services/
+│       ├── Migrations/
+│       ├── Program.cs
+│       └── Dockerfile
+│
+├── frontend/
+│   └── gulhan-kahvalti-client/
+│       ├── src/
+│       │   ├── assets/
+│       │   ├── components/
+│       │   ├── config/
+│       │   ├── context/
+│       │   ├── hooks/
+│       │   ├── layouts/
+│       │   ├── pages/
+│       │   ├── routes/
+│       │   ├── services/
+│       │   ├── types/
+│       │   └── utils/
+│       └── package.json
+│
+├── docs/
+├── gulhan.md
+└── README.md
 ```
 
-## Local Setup
+## Public Site Yapısı
 
-### Backend
+HashRouter kullanıldığı için production URL’leri `/#/` formatındadır.
+
+- `/#/` Ana sayfa
+- `/#/menu` Bilgilendirici restoran menüsü, sepete ekleme yok
+- `/#/products` Sipariş verilebilir ürünler
+- `/#/products/:id` Ürün detay sayfası
+- `/#/about` Hakkımızda
+- `/#/contact` İletişim
+- `/#/login` Giriş
+- `/#/register` Kayıt
+
+Menü ve Ürünlerimiz bilinçli olarak ayrılmıştır:
+
+- Menü: restorandaki menü ve fiyatları tanıtan bilgilendirici sayfa
+- Ürünlerimiz: backend ürünlerinden gelen sipariş/e-ticaret akışı
+
+## Kullanıcı Sayfaları
+
+Giriş yapan normal kullanıcılar:
+
+- `/#/cart`
+- `/#/checkout`
+- `/#/my-orders`
+- `/#/account`
+- `/#/settings`
+
+Admin kullanıcıları bu kullanıcı akışlarına yönlendirilmez; admin paneline yönlendirilir.
+
+## Admin Sayfaları
+
+Admin rolü gerektirir:
+
+- `/#/admin`
+- `/#/admin/products`
+- `/#/admin/categories`
+- `/#/admin/orders`
+
+Admin panelde ürün, kategori ve sipariş yönetimi yapılır. Sipariş durumları MVP kapsamında şu değerlerle yönetilir:
+
+- `Pending`
+- `Preparing`
+- `Completed`
+- `Cancelled`
+
+## Backend API Özeti
+
+Public:
+
+```text
+POST   /api/Auth/register
+POST   /api/Auth/login
+GET    /api/Categories
+GET    /api/Products
+GET    /api/Products/{id}
+GET    /health
+```
+
+Authenticated User:
+
+```text
+GET    /api/Auth/me
+GET    /api/Cart
+POST   /api/Cart/add
+PUT    /api/Cart/update/{id}
+DELETE /api/Cart/remove/{id}
+DELETE /api/Cart/clear
+POST   /api/Orders/checkout
+GET    /api/Orders/my-orders
+GET    /api/Orders/{id}
+```
+
+Admin:
+
+```text
+GET    /api/Admin/dashboard
+GET    /api/Admin/orders
+PUT    /api/Admin/orders/{id}/status
+GET    /api/health/config
+POST   /api/Categories
+PUT    /api/Categories/{id}
+DELETE /api/Categories/{id}
+POST   /api/Products
+PUT    /api/Products/{id}
+DELETE /api/Products/{id}
+```
+
+Not: Swagger sadece Development ortamında açıktır.
+
+## Lokal Backend Kurulumu
 
 ```bash
 cd backend/GulhanKahvalti.API
@@ -65,15 +205,15 @@ dotnet restore
 dotnet run
 ```
 
-Required local configuration is read from `appsettings.Development.json` or environment variables:
+Development için `backend/GulhanKahvalti.API/appsettings.Development.json` dosyasında veya environment variable olarak şu değerler gerekir:
 
 ```json
 {
   "ConnectionStrings": {
-    "GulhanDatabase": "<local or Neon PostgreSQL connection string>"
+    "GulhanDatabase": "<Neon veya lokal PostgreSQL connection string>"
   },
   "Jwt": {
-    "Key": "<local development JWT secret>",
+    "Key": "<en az 32 byte geliştirme secret değeri>",
     "Issuer": "GulhanKahvaltiAPI",
     "Audience": "GulhanKahvaltiClient"
   },
@@ -86,9 +226,9 @@ Required local configuration is read from `appsettings.Development.json` or envi
 }
 ```
 
-`appsettings.Development.json` is ignored by git because it may contain local database credentials.
+`appsettings.Development.json` gerçek credential içerebileceği için Git’e eklenmemelidir.
 
-Swagger is available only in Development:
+Swagger:
 
 ```text
 http://localhost:5064/swagger
@@ -97,10 +237,10 @@ http://localhost:5064/swagger
 Health check:
 
 ```text
-GET /health
+http://localhost:5064/health
 ```
 
-### Frontend
+## Lokal Frontend Kurulumu
 
 ```bash
 cd frontend/gulhan-kahvalti-client
@@ -108,210 +248,237 @@ npm install
 npm run dev
 ```
 
-Create `frontend/gulhan-kahvalti-client/.env`:
+`frontend/gulhan-kahvalti-client/.env`:
 
 ```text
 VITE_API_BASE_URL=http://localhost:5064/api
 ```
 
-## Neon Database Setup
+Frontend varsayılan olarak:
 
-Create a Neon PostgreSQL database and use the Npgsql connection string format:
+```text
+http://localhost:5173
+```
+
+## Veritabanı ve Migration
+
+Neon PostgreSQL connection string örneği:
 
 ```text
 Host=<host>;Database=<database>;Username=<user>;Password=<password>;SSL Mode=Require;Trust Server Certificate=true
 ```
 
-Run migrations:
+Migration çalıştırma:
 
 ```bash
 cd backend/GulhanKahvalti.API
 dotnet ef database update
 ```
 
-Current migration:
+Veritabanı kurulumu için detaylı doküman:
 
 ```text
-ProductionMvpReadiness
+docs/local-database-setup.md
 ```
-
-See [local-database-setup.md](docs/local-database-setup.md) for detailed local database setup.
 
 ## Demo Seed
 
-Development-only seed support creates:
+Demo seed yalnızca Development ortamında kullanılmalıdır.
 
-- Sample categories
-- Sample products
-- A development admin user
+Seed desteği:
 
-Enable locally only:
+- Demo kategoriler
+- Demo ürünler
+- Development admin kullanıcısı
 
-```json
-"DemoSeed": {
-  "Enabled": true,
-  "AdminEmail": "admin@gulhankahvalti.com",
-  "AdminPassword": "<local development password>"
-}
-```
-
-Production must use:
+Production ortamında:
 
 ```text
 DemoSeed__Enabled=false
 ```
 
-The seeded admin account is for local development/demo only. Do not publish real production admin credentials.
+Production admin credential bilgileri README veya GitHub üzerinde paylaşılmamalıdır.
 
-## API Overview
+## Environment Variables
 
-Public:
-
-- `POST /api/Auth/register`
-- `POST /api/Auth/login`
-- `GET /api/Categories`
-- `GET /api/Products`
-- `GET /api/Products/{id}`
-
-Authenticated user:
-
-- `GET /api/Auth/me`
-- `GET /api/Cart`
-- `POST /api/Cart/add`
-- `PUT /api/Cart/update/{id}`
-- `DELETE /api/Cart/remove/{id}`
-- `DELETE /api/Cart/clear`
-- `POST /api/Orders/checkout`
-- `GET /api/Orders/my-orders`
-- `GET /api/Orders/{id}`
-
-Admin:
-
-- `POST /api/Categories`
-- `PUT /api/Categories/{id}`
-- `DELETE /api/Categories/{id}`
-- `POST /api/Products`
-- `PUT /api/Products/{id}`
-- `DELETE /api/Products/{id}`
-- `GET /api/Admin/dashboard`
-- `GET /api/Admin/orders`
-- `PUT /api/Admin/orders/{id}/status`
-
-## Demo Flow
-
-1. Open the frontend home page.
-2. Register or login.
-3. Browse `/menu`.
-4. Open a product detail page.
-5. Add a product to cart.
-6. View `/cart`.
-7. Submit checkout without payment.
-8. View `/my-orders`.
-9. Login as a development admin.
-10. Manage products, categories, and order statuses in `/admin`.
-
-## Render Backend Deployment
-
-Recommended deployment path: Docker Web Service.
-
-- Root directory: `backend/GulhanKahvalti.API`
-- Dockerfile: `backend/GulhanKahvalti.API/Dockerfile`
-- Health check path: `/health`
-
-Required backend environment variables:
+Backend production:
 
 ```text
 ASPNETCORE_ENVIRONMENT=Production
 ASPNETCORE_URLS=http://+:10000
 ConnectionStrings__GulhanDatabase=<Neon PostgreSQL connection string>
-Jwt__Key=<strong random secret>
+Jwt__Key=<strong random secret, at least 32 bytes>
 Jwt__Issuer=GulhanKahvaltiAPI
 Jwt__Audience=GulhanKahvaltiClient
 Frontend__BaseUrl=https://<frontend-service>.onrender.com
 DemoSeed__Enabled=false
 ```
 
-Apply migrations before production traffic:
-
-```bash
-cd backend/GulhanKahvalti.API
-dotnet ef database update
-```
-
-See [render-backend-deployment.md](docs/render-backend-deployment.md).
-
-## Render Frontend Deployment
-
-Render Static Site settings:
-
-- Root directory: `frontend/gulhan-kahvalti-client`
-- Build command: `npm install && npm run build`
-- Publish directory: `dist`
-
-Required frontend environment variable:
+Frontend production:
 
 ```text
 VITE_API_BASE_URL=https://<backend-service>.onrender.com/api
 ```
 
-For React Router browser routes, configure a rewrite:
+Detaylı production env dokümanı:
 
 ```text
-/*  /index.html  200
+docs/production-env-vars.md
 ```
 
-See [render-frontend-deployment.md](docs/render-frontend-deployment.md).
+## Render Deployment
 
-## Environment Variables
+Backend Render Web Service:
 
-Production variables are documented in [production-env-vars.md](docs/production-env-vars.md).
+- Root directory: `backend/GulhanKahvalti.API`
+- Dockerfile: `backend/GulhanKahvalti.API/Dockerfile`
+- Health check path: `/health`
+- Environment: `Production`
 
-Never commit:
+Frontend Render Static Site:
 
-- Real Neon connection strings
-- Production JWT secrets
-- Production admin credentials
-- `.env`
-- `appsettings.Production.json`
+- Root directory: `frontend/gulhan-kahvalti-client`
+- Build command: `npm install && npm run build`
+- Publish directory: `dist`
+- Router: HashRouter, bu yüzden deep refresh için URL’ler `/#/route` formatındadır.
 
-## Validation
+Deployment dokümanları:
 
-Backend:
+```text
+docs/render-backend-deployment.md
+docs/render-frontend-deployment.md
+docs/final-deployment-checklist.md
+```
+
+## İşletme Bilgileri
+
+Gülhan Kahvaltı public UI’da kullanılan işletme bilgileri frontend tarafında yapılandırılmıştır:
+
+```text
+frontend/gulhan-kahvalti-client/src/config/siteSettings.ts
+```
+
+Mevcut bilgiler:
+
+- Adres: Lamos Otel Yanı, Ayaş, Atatürk Cd. No:87A, 33750 Erdemli/Mersin
+- WhatsApp: `https://wa.me/905392903909`
+- E-posta: `mailto:fgulhanergin@gmail.com?subject=Gülhan%20Kahvaltı%20İletişim`
+- Facebook: `https://www.facebook.com/share/1MDpJ1LRdt/?mibextid=wwXIfr`
+- Instagram: `https://www.instagram.com/gulhankahvalti/`
+- Google Maps: Gülhan Kahvaltı Salonu konum bağlantısı
+
+Bu alanlar ileride admin panel/API üzerinden yönetilebilir hale getirilebilir.
+
+## Güvenlik Notları
+
+- Şifreler BCrypt ile hashlenir.
+- Plain text şifre saklanmaz.
+- JWT token API isteklerinde `Authorization: Bearer <token>` olarak gönderilir.
+- Admin endpointleri rol kontrolü ile korunur.
+- Kullanıcı sadece kendi sepetini ve siparişlerini görebilir.
+- Production client response’ları genel hata mesajı döndürür; detaylar server loglarında tutulur.
+- Gerçek connection string, JWT secret ve production credential bilgileri commitlenmemelidir.
+
+## Doğrulama Komutları
+
+Backend build:
 
 ```bash
 cd backend/GulhanKahvalti.API
 dotnet build
 ```
 
-Frontend:
+Frontend build:
 
 ```bash
 cd frontend/gulhan-kahvalti-client
 npm run build
 ```
 
-Local QA status is documented in [local-qa-report.md](docs/local-qa-report.md).
+Frontend lint:
 
-## Current MVP Status
+```bash
+cd frontend/gulhan-kahvalti-client
+npm run lint
+```
 
-Implemented:
+## Manuel Test Akışı
 
-- JWT login/register
-- Admin/User role authorization
-- Product and category CRUD
-- Public product browsing
-- Cart add/update/remove/clear
-- Checkout without payment
-- Stock reduction during checkout
+Public:
+
+1. `/#/` ana sayfa açılır.
+2. `/#/menu` bilgilendirici menüde sepet butonu olmadığı kontrol edilir.
+3. `/#/products` backend ürünlerini yükler.
+4. `/#/products/:id` ürün detayını açar.
+5. Footer WhatsApp, e-posta, Facebook, Instagram ve Google Maps linkleri çalışır.
+
+Kullanıcı:
+
+1. Kayıt olunur veya giriş yapılır.
+2. Ürün sepete eklenir.
+3. Sepet miktarı güncellenir.
+4. Checkout formu gönderilir.
+5. `/#/my-orders` üzerinde sipariş görünür.
+
+Admin:
+
+1. Admin kullanıcı ile giriş yapılır.
+2. `/#/admin` dashboard açılır.
+3. Ürün oluşturma/güncelleme/silme test edilir.
+4. Kategori oluşturma/güncelleme/silme test edilir.
+5. Sipariş durumu güncellenir.
+
+UI:
+
+1. Mobil navbar açılıp kapanır.
+2. Tema butonu light/dark arasında geçiş yapar.
+3. TR/EN dil değişimi çalışır.
+4. 320px, 375px, 768px ve desktop genişliklerde yatay taşma olmadığı kontrol edilir.
+
+## Mevcut MVP Durumu
+
+Tamamlandı:
+
+- Backend domain modeli
+- EF Core DbContext ve migration yapısı
+- JWT auth
+- Admin/User authorization
+- Product CRUD
+- Category CRUD
+- Cart sistemi
+- Checkout MVP
+- Stock reduction
 - User order history
-- Admin order status management
-- Neon PostgreSQL + EF Core migrations
-- Render deployment foundation
+- Admin order management
+- Global exception middleware
+- Render/Neon deployment hazırlığı
+- Responsive public UI
+- HashRouter production routing
+- Türkçe/İngilizce dil desteği
+- Light/Dark tema desteği
 
-Out of scope:
+Kapsam dışı:
 
-- Real payment processing
-- Email notifications
-- Coupons
+- Gerçek ödeme entegrasyonu
+- E-posta bildirimi
+- Kupon sistemi
 - Analytics
-- SaaS multi-tenant architecture
+- SaaS/multi-tenant yapı
+- Gelişmiş stok/raporlama sistemi
+
+## Faydalı Dokümanlar
+
+```text
+docs/local-database-setup.md
+docs/backend-smoke-test.md
+docs/frontend-smoke-test.md
+docs/local-qa-report.md
+docs/render-backend-deployment.md
+docs/render-frontend-deployment.md
+docs/production-env-vars.md
+docs/final-deployment-checklist.md
+```
+
+## Lisans / Kullanım
+
+Bu proje Gülhan Kahvaltı MVP tanıtım ve sipariş sistemi için hazırlanmıştır. Gerçek production kullanımında gizli environment variable değerleri, admin credential bilgileri ve veritabanı bağlantıları repository dışında tutulmalıdır.
